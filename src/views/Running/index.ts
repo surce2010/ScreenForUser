@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { Component, Prop, Watch } from 'vue-property-decorator';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 import {State} from 'vuex-class';
 import WithRender from './running.html?style=./running.scss';
 import Card from '@components/Card';
@@ -16,7 +16,16 @@ import axios from '@utils/axios';
 
 @WithRender
 @Component({
-  components: { Card, PieChart: PieChartWithLegend, NumCardGroup, LineChart, IconItem, ProgressBarGroup, NoProblem, Rating }
+  components: {
+    Card,
+    PieChart: PieChartWithLegend,
+    NumCardGroup,
+    LineChart,
+    IconItem,
+    ProgressBarGroup,
+    NoProblem,
+    Rating
+  }
 })
 export default class Running extends Vue {
   date = new Date();
@@ -32,6 +41,8 @@ export default class Running extends Vue {
   tuv = 0;
   last30DaysAccessX = [];
   last30DaysAccess = [];
+  last30DaysAccessPC = [];
+  last30DaysAccessMobile = [];
   studentAppTop4 = [];
   teacherAppTop4 = [];
   todayTop5AppForS = [];
@@ -46,14 +57,18 @@ export default class Running extends Vue {
   loop = 0;
   loopList = [];
   color = ['#4BC969', '#3B8EF0'];
+  displayDevice = 'PC';
+  timer = null;
+
   get appCategoryTop10() {
     const top10 = this.appCatagoryStatisc.slice(0, 10);
     const arr = [];
-    for (let i=0; i<top10.length; i+=2) {
-      arr.push([top10[i], top10[i+1]])
+    for (let i = 0; i < top10.length; i += 2) {
+      arr.push([top10[i], top10[i + 1]])
     }
     return arr;
   }
+
   get appCategoryTopChart() {
     let sum = 0;
     this.appCatagoryStatisc.forEach(app => sum += app.app_num);
@@ -62,11 +77,12 @@ export default class Running extends Vue {
       name: data.app_catagory_name
     }))
   }
-  created () {
+
+  created() {
     const schoolId = this.$route.query.schoolCode;
     const token = this.$route.query.token;
     setInterval(() => {
-      if (this.loop === this.assessDetail.length - 1) {
+      if (this.displayDevice === 'PC') {
         this.hiscoreAppLoop();
       } else {
         this.loop = (this.loop + 1) % this.assessDetail.length;
@@ -77,6 +93,15 @@ export default class Running extends Vue {
       }
     }, 5000);
     this.hiscoreAppLoop();
+
+    this.timer = setTimeout(() => {
+      if (this.displayDevice === 'PC') {
+        this.toggleDieviceDisplay('Mobile')
+      } else {
+        this.toggleDieviceDisplay('PC')
+      }
+    }, 60000);
+
     create('http://116.62.162.198:8080/appsummary/endpoint')
       .subscribe(`/topic/schoolAppStatisc/${schoolId}`, {token}, json => {
         this.date = new Date();
@@ -100,20 +125,30 @@ export default class Running extends Vue {
         const x = [];
         const s = [];
         const t = [];
+        const s1 = [];
+        const t1 = [];
         last30DaysAccessStatisc.forEach(d => {
           x.push((d.statisc_date || '').substr(5));
           s.push(d.suv);
           t.push(d.tuv);
-        })
+          s1.push(d.suv + 100);
+          t1.push(d.tuv + 10000);
+        });
         this.last30DaysAccessX = x;
-        this.last30DaysAccess = [{
-            name: '学生', value: s
-          }, {
-            name: '老师', value: t
-          }];
+        this.last30DaysAccessPC = [{
+          name: '学生', value: s
+        }, {
+          name: '老师', value: t
+        }];
+        this.last30DaysAccessMobile = [{
+          name: '学生', value: s1
+        }, {
+          name: '老师', value: t1
+        }];
+        this.last30DaysAccess = this.last30DaysAccessPC;
 
         const studentAppTop4 = format(json.studentAppTop4)
-         this.studentAppTop4 = studentAppTop4.map(d => {
+        this.studentAppTop4 = studentAppTop4.map(d => {
           return {
             name: d.APP_NAME,
             url: `http://www.campusphere.cn/appcenter_2.2/umanager/getImg144?appID=${d.APP_ID}&version=${d.VERSION}&schoolID=${d.schoolid}`
@@ -132,12 +167,12 @@ export default class Running extends Vue {
         const todayTop5AppForS = format(json.todayTop5AppForS);
         const todayTop5AppForT = format(json.todayTop5AppForT);
 
-        for (let i=0; i<todayTop5AppForS.length; i++) {
+        for (let i = 0; i < todayTop5AppForS.length; i++) {
           if (todayTop5AppForS[i].pv > max) {
             max = todayTop5AppForS[i].pv
           }
         }
-        for (let i=0; i<todayTop5AppForT.length; i++) {
+        for (let i = 0; i < todayTop5AppForT.length; i++) {
           if (todayTop5AppForT[i].pv > max) {
             max = todayTop5AppForT[i].pv
           }
@@ -163,16 +198,21 @@ export default class Running extends Vue {
           this.loopList.shift();
           this.loopList.push(appAssessDetailList[0]);
         }
-        console.log(json)
+        // console.log(json)
       })
   }
+
   async queryHiscoreApp(rn = -1) {
-    const {data} = await axios.post('http://116.62.162.198:8080/data-open-web/do/api/realTimeQuery/call/queryAssess', {rn, schoolCode: this.$route.query.schoolCode});
+    const {data} = await axios.post('http://116.62.162.198:8080/data-open-web/do/api/realTimeQuery/call/queryAssess', {
+      rn,
+      schoolCode: this.$route.query.schoolCode
+    });
     if (data.dataSet && data.dataSet[0]) {
       return data.dataSet[0]
     }
     return null;
   }
+
   async queryCommetsByAppId(appId) {
     const {data} = await axios.post('http://116.62.162.198:8080/data-open-web/do/api/realTimeQuery/call/appAssessDetailList', {
       schoolCode: this.$route.query.schoolCode,
@@ -180,6 +220,7 @@ export default class Running extends Vue {
     });
     return data.dataSet;
   }
+
   async hiscoreAppLoop() {
     this.activeCommet++;
     const data = await this.queryHiscoreApp(this.activeCommet);
@@ -201,5 +242,25 @@ export default class Running extends Vue {
       this.loopList.shift();
       this.loopList.push(commets[0]);
     }
+  }
+
+  toggleDieviceDisplay(name: string) {
+    this.displayDevice = name;
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+    this.timer = setTimeout(() => {
+      if (this.displayDevice === 'PC') {
+        this.toggleDieviceDisplay('Mobile')
+      } else {
+        this.toggleDieviceDisplay('PC')
+      }
+    }, 60000);
+  };
+
+
+  @Watch('displayDevice')
+  onDisplayDeviceChange(nData: String) {
+    nData === 'PC' ? this.last30DaysAccess = this.last30DaysAccessPC : this.last30DaysAccess = this.last30DaysAccessMobile;
   }
 }

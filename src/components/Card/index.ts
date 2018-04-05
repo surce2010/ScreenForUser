@@ -20,9 +20,9 @@ export default class Card extends Vue {
       const h = date.getHours();
       const m = date.getMinutes();
       if (this.detail) {
-        return `更新时间: ${date.getFullYear()}.${M < 10 ? '0' + M : M}.${d < 10 ? '0' + d : d} ${h < 10 ? '0' + h : h}:${m < 10 ? '0' + m : m}`
+        return `更新: ${M < 10 ? '0' + M : M}.${d < 10 ? '0' + d : d} ${h < 10 ? '0' + h : h}:${m < 10 ? '0' + m : m}`
       }
-      return `更新时间: ${date.getFullYear()}.${M < 10 ? '0' + M : M}.${d < 10 ? '0' + d : d}`;
+      return '';
     }
     return this.date;
   }
