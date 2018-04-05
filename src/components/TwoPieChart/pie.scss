@@ -1,0 +1,17 @@
+.twopiechart {
+  .pies {
+    flex: 1;
+  }
+  .twopiechart__item {
+    height: 100%;
+    padding: 0 1em;
+    position: relative;
+    flex: 1;
+    .iconitem {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

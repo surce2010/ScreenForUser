@@ -1,0 +1,103 @@
+<div class="behavior height100" flex>
+  <aside class="behavior__leftaside" col="2" flex-column>
+    <Card class="behavior__activation" col="2" title="账号激活概况" :date="new Date" :row="false">
+      <div center flex>
+        <vLegend :data="[{
+          name: '未激活',
+          value: activeLegendColor[0]
+        }, {
+          name: '已激活',
+          value: activeLegendColor[1]
+        }]" />
+      </div>
+      <div flex>
+        <div col="1" style="padding: 0 4em 0 2em;">
+          <PercentBar :value="accountActive.student" :color="activeLegendColor" />
+        </div>
+        <div col="1" style="padding: 0 2em 0 4em;">
+          <PercentBar :value="accountActive.teacher" role="teacher" :color="activeLegendColor" />
+        </div>
+      </div>
+    </Card>
+    <Card class="behavior__online" col="3" title="账号在线时长" subtitle="（近30日）">
+      <TwoPieChart :outer="0.9" :inner="0.55" :legend="['< 0.5h', '0.5-1h', '1-2h', '2-3h', '> 3h']" :data="onlineStudent" :data2="onlineTeacher" />
+    </Card>
+    <Card class="behavior__type" col="3" title="账号登录类型" subtitle="（近30日）">
+      <TwoPieChart :outer="0.9" :inner="0.55" :legend="loginX" :data="loginStudent" :data2="loginTeacher" />
+    </Card>
+  </aside>
+  <main flex-column col="4">
+    <Card class="behavior__active" title="用户活跃分布" col="5" subtitle="（近30日）">
+      <div class="behavior__active-map">
+        <Chart :options="opts" />
+        <div class="visual-map">
+          <div class="visual-map__bar"></div>
+          <div class="visual-map__top num">{{opts.visualMap.max}}</div>
+          <div class="visual-map__bottom num">0</div>
+        </div>
+      </div>
+    </Card>
+    <div class="behavior__stuff" flex col="3">
+      <Card class="behavior__client" col="1" title="用户常用客户端" subtitle="（近30日）">
+        <TwoPieChart :outer="0.9" :inner="0.55" :color="['#9A7DD1', '#419EF8']" :legend="['PC', '移动']" :data="clientStudent" :data2="clientTeacher" />
+      </Card>
+      <Card class="behavior__browser" col="1" title="用户常用浏览器Top5" subtitle="（近30日）">
+        <div>
+          <IconItem role="student" :column="false" />
+          <ProgressBarGroup :data="browserTop5.student" :color="['#05C180', '#008E32']" />
+        </div>
+        <div>
+          <IconItem role="teacher" :column="false" />
+          <ProgressBarGroup :data="browserTop5.teacher" :color="['#5FF2F8', '#0979B9']" />
+        </div>
+      </Card>
+    </div>
+  </main>
+  <aside class="behavior__rightaside" flex-column col="2">
+    <Card class="behavior__history" col="2" title="历史数据" :row="false">
+      <div textcenter col="1">
+        今日系统为您拦截
+      </div>
+      <div col="2" flex-column spacearound>
+        <div flex spacebetween>
+          <div>
+            暴利密码拆解账号 (个)
+          </div>
+          <div class="num">{{history.guess}}</div>
+        </div>
+        <div flex spacebetween>
+          <div>
+            恶意认证IP(个)
+          </div>
+          <div class="num">{{history.ip}}</div>
+        </div>
+      </div>
+    </Card>
+    <Card class="behavior__secure" col="3" title="账号密码安全">
+      <div flex-column rowcenter>
+        <vLegend col="1" :data="[{
+          name: '强',
+          value: safeLegendColor[0]
+        }, {
+          name: '中',
+          value: safeLegendColor[1]
+        }, {
+          name: '弱',
+          value: safeLegendColor[2]
+        }, {
+          name: '无安全等级',
+          value: safeLegendColor[3]
+        }]" />
+        <div col="1">
+          <PercentBar :value="accountSafe.student" :color="safeLegendColor" />
+        </div>
+        <div col="1">
+          <PercentBar role="teacher" :value="accountSafe.teacher" :color="safeLegendColor" />
+        </div>
+      </div>
+    </Card>
+    <Card class="behavior__platform" col="3" title="运营商" subtitle="（近30日）">
+      <TwoPieChart :outer="0.9" :inner="0.55" :color="['#9A7DD1', '#419EF8', '#42c66c']" :legend="network.x" :data="network.student" :data2="network.teacher" />
+    </Card>
+  </aside>
+</div>

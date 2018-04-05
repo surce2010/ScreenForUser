@@ -1,0 +1,8 @@
+<div class="progressbar">
+  <div flex spacebetween class="progressbar__text">
+    <span>{{name}}</span><span class="num">{{value}}</span>
+  </div>
+  <div class="progressbar__bar">
+    <div class="progressbar__inner" :style="{width: percent + '%', 'background-image': 'linear-gradient(to right, '+color[0]+', '+color[1]+')'}"></div>
+  </div>
+</div>

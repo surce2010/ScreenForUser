@@ -1,0 +1,205 @@
+<div class="running height100" flex>
+  <aside class="running__leftaside" flex-column col="4">
+    <Card class="running__apps" col="3" title="校园应用统计" :date="date" :row="false">
+      <div col="2" textcenter flex-column center>
+        <div class="running__total num">
+          {{appNum}}
+        </div>
+        <div class="running__totaldesc">
+          应用总数(个)
+        </div>
+      </div>
+      <div col="3" flex-column class="running__count">
+        <div flex col="1">
+          <div col="1" class="running__count-item">
+            <div>
+              <img src="~@assets/images/active_app.png" alt="" />
+            </div>
+            <div>
+              <div class="total__count active__count num">{{active}}</div>
+              <div class="running__totaldesc">活跃应用 (个)</div>
+            </div>
+          </div>
+          <div col="1" class="running__count-item">
+            <div>
+              <img src="~@assets/images/unactive_app.png" alt="" />
+            </div>
+            <div>
+              <div class="total__count unactive__count num">{{unactive}}</div>
+              <div class="running__totaldesc">非活跃应用 (个)</div>
+            </div>
+          </div>
+        </div>
+        <div flex col="1">
+          <div col="1" class="running__count-item">
+            <div>
+              <img src="~@assets/images/pc_app.png" alt="" />
+            </div>
+            <div>
+              <div class="total__count pc__count num">{{pc}}</div>
+              <div class="running__totaldesc">PC应用 (个)</div>
+            </div>
+          </div>
+          <div col="1" class="running__count-item">
+            <div>
+              <img src="~@assets/images/mobile_app.png" alt="" />
+            </div>
+            <div>
+              <div class="total__count mobile__count num">{{mobile}}</div>
+              <div class="running__totaldesc">移动应用 (个)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Card>
+    <Card class="running__departs" col="2" title="应用类别统计">
+      <PieChart :data="appCategoryTopChart" :showReal="true" :color="['#58BDA5', '#e6B03F', '#419EF8', '#9A7DD1', '#3AC868', '#A13588', '#E6783F', '#e3544C', '#5054F2', '#979797']" :column="false" :chartFlex="1" />
+    </Card>
+  </aside>
+  <main flex-column col="8">
+    <Card class="running__pvuv" col="4">
+      <div col="1" flex-column center class="running__pvuv-left">
+        <h3 class="running__pvuvtitle">今日访问量</h3>
+        <div col="1">
+          <p>学生（PV）</p>
+          <NumCardGroup :color="['#fff', '#fff']" bgColor="#0e4e4d" :num="spv" :count="5" />
+        </div>
+        <div col="1">
+          <p>老师（PV）</p>
+          <NumCardGroup :color="['#fff', '#fff']" bgColor="#225a8c" :num="tpv" :count="5" />
+        </div>
+      </div>
+      <div col="1" flex-column center>
+        <h3 class="running__pvuvtitle">今日活跃用户数</h3>
+        <div col="1">
+          <p>学生（人）</p>
+          <NumCardGroup :color="['#fff', '#fff']" bgColor="#0e4e4d" :num="suv" :count="5" />
+        </div>
+        <div col="1">
+          <p>老师（人）</p>
+          <NumCardGroup :color="['#fff', '#fff']" bgColor="#225a8c" :num="tuv" :count="5" />
+        </div>
+      </div>
+    </Card>
+    <Card class="running__uv" col="3" title="近30日访客数（UV）">
+      <div slot="desc">
+        <div style="padding-right: 2em;">
+          <span v-for="(l, idx) in last30DaysAccess"><span class="running__legend" :style="{background: color[idx%color.length]}"></span><span>{{l.name}}</span></span>
+        </div>
+      </div>
+      <LineChart :color="color" :x="last30DaysAccessX" :data="last30DaysAccess" />
+    </Card>
+    <Card class="running__hot" col="2" title="累计热门应用">
+      <div flex-column>
+        <IconItem role="student" :column="false" />
+        <div class="running__hotapps" flex-column col="1">
+          <div flex col="1" colcenter>
+            <div col="1"></div>
+            <div col="4">
+              <img v-if="studentAppTop4[0]" :src="studentAppTop4[0] && studentAppTop4[0].url" width="36" />
+              <span v-if="studentAppTop4[0]">{{studentAppTop4[0] && studentAppTop4[0].name}}</span>
+            </div>
+            <div col="1"></div>
+            <div col="4">
+              <img v-if="studentAppTop4[1]" :src="studentAppTop4[1] && studentAppTop4[1].url" width="36" />
+              <span v-if="studentAppTop4[1]">{{studentAppTop4[1] && studentAppTop4[1].name}}</span>
+            </div>
+          </div>
+          <div flex col="1" colcenter>
+            <div col="1"></div>
+            <div col="4">
+              <img  v-if="studentAppTop4[2]" :src="studentAppTop4[2] && studentAppTop4[2].url" width="36" />
+              <span v-if="studentAppTop4[2]">{{studentAppTop4[2] && studentAppTop4[2].name}}</span>
+            </div>
+            <div col="1"></div>
+            <div col="4">
+              <img v-if="studentAppTop4[3]" :src="studentAppTop4[3] && studentAppTop4[3].url" width="36" />
+              <span v-if="studentAppTop4[3]">{{studentAppTop4[3] && studentAppTop4[3].name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div flex-column>
+        <IconItem role="teacher" :column="false" />
+        <div class="running__hotapps" flex-column col="1">
+          <div flex col="1" colcenter>
+            <div col="1"></div>
+            <div col="4">
+              <img v-if="teacherAppTop4[0]" :src="teacherAppTop4[0] && teacherAppTop4[0].url" width="36" />
+              <span v-if="teacherAppTop4[0]">{{teacherAppTop4[0] && teacherAppTop4[0].name}}</span>
+            </div>
+            <div col="2"></div>
+            <div col="4">
+              <img v-if="teacherAppTop4[1]" :src="teacherAppTop4[1] && teacherAppTop4[1].url" width="36" />
+              <span v-if="teacherAppTop4[1]">{{teacherAppTop4[1] && teacherAppTop4[1].name}}</span>
+            </div>
+          </div>
+          <div flex col="1" colcenter>
+            <div col="1"></div>
+            <div col="4">
+              <img  v-if="teacherAppTop4[2]" :src="teacherAppTop4[2] && teacherAppTop4[2].url" width="36" />
+              <span v-if="teacherAppTop4[2]">{{teacherAppTop4[2] && teacherAppTop4[2].name}}</span>
+            </div>
+            <div col="2"></div>
+            <div col="4">
+              <img v-if="teacherAppTop4[3]" :src="teacherAppTop4[3] && teacherAppTop4[3].url" width="36" />
+              <span v-if="teacherAppTop4[3]">{{teacherAppTop4[3] && teacherAppTop4[3].name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Card>
+  </main>
+  <aside class="running__rightaside" flex-column col="3">
+    <Card class="running__outattack" col="4" title="今日活跃应用TOP5" :row="false" :date="date">
+      <div v-if="todayTop5AppForS.length > 0 || todayTop5AppForT.length > 0" flex-column>
+        <div class="running__outattack-legend">
+          <span><span class="running__legend" style="background:linear-gradient(90deg, #05C180, #008E32);"></span><span>学生</span></span>
+          <span><span class="running__legend" style="background:linear-gradient(90deg, #5FF2F8, #0979B9);"></span><span>老师</span></span>
+        </div>
+        <ProgressBarGroup :data="todayTop5AppForS" :color="['#05C180', '#008E32']" />
+        <ProgressBarGroup :data="todayTop5AppForT" :color="['#5FF2F8', '#0979B9']" />
+      </div>
+      <NoProblem title="暂无活跃应用" v-else />
+    </Card>
+    <Card class="running__commets" col="2" title="应用评价" :row="false">
+      <div>
+        <div class="running__desc">
+          应用平均分：{{score}} 分，共 {{recordNum}} 个独立评价
+        </div>
+        <div class="app_assess">
+          <div class="running__icon">
+            <img :src="imgSrc" alt="" />
+          </div>
+          <div>
+            <div class="running__name">
+              {{appName}}
+            </div>
+            <div class="running__category">
+              {{category}}
+            </div>
+            <div class="running__score">
+              <rating :num="score" /><span class="ml-10">{{score}}分</span>
+            </div>
+          </div>
+        </div>
+        <transition-group tag="ul" name="list" class="running__commet-list">
+          <li
+            v-for="(d, idx) in loopList"
+            class="user"
+            :key="d.wid + d.assess_time">
+            <div class="user__icon">
+              <img src="http://placehold.it/30X30" alt="" width="30" height="30" />
+            </div>
+            <div class="user__content">
+              <div class="user__name">匿名用户</div>
+              <div class="user__commentdetail">
+                {{d.assessment}}
+              </div>
+            </div>
+          </li>
+        </transition-group>
+      </div>
+    </Card>
+  </aside>
+</div>

@@ -1,0 +1,171 @@
+<div class="core height100" flex>
+  <aside flex-column col="1">
+    <Card class="core__undeal" col="4" title="待处理事件" :date="freshDate" :detail="true">
+      <WaterBall :percent="parseInt(healthOfAll.healthScore) || 0" col="3" />
+      <div col="2" center flex-column>
+        <div col="1">
+          <div>安全</div>
+          <div class="num yellownum">{{healthOfAll.safetyScore || 0}}</div>
+        </div>
+        <div col="1">
+          <div>可用性</div>
+          <div class="num yellownum">{{healthOfAll.availableScore}}</div>
+        </div>
+      </div>
+    </Card>
+    <Card class="core__usable" col="5" title="可用" :row="false">
+      <div flex center>
+        <div col="1">
+          <div class="num yellownum">{{avalibility.availability_unsolved}}</div>
+          <div>未处理数</div>
+        </div>
+        <div col="1">
+          <div class="num whitenum">{{avalibility.availability_total}}</div>
+          <div>总可用性事件</div>
+        </div>
+      </div>
+      <h3 class="gradienttext">安全性</h3>
+      <div flex center>
+        <div col="1">
+          <div class="num whitenum">{{avalibility.safety_unsolved}}</div>
+          <div>未处理数</div>
+        </div>
+        <div col="1">
+          <div class="num whitenum">{{avalibility.safety_total}}</div>
+          <div>总安全漏洞数</div>
+        </div>
+      </div>
+    </Card>
+    <Card class="core__health" col="3" title="应用健康度排名">
+      <ProgressBarGroup :data="healths" flex-column spacearound />
+    </Card>
+  </aside>
+  <main flex-column col="4">
+    <Card class="core__apps" col="9" :row="false">
+      <div flex-column>
+        <div flex class="core__apps-title">
+          <div textcenter col="3">
+            <div>
+              <span>异常</span>
+              <span class="num yellownum">{{exceptionCount}}</span>
+              <span>应用数量</span>
+              <span class="num greennum">{{appCount}}</span>
+              <span>安心守护已运行</span>
+              <span class="num whitenum">{{days}}</span>
+              <span>天</span>
+              <span class="num whitenum">{{hours}}</span>
+              <span>时</span>
+              <span class="num whitenum">{{mins}}</span>
+              <span>分</span>
+            </div>
+            <div class="core__apps-line"></div>
+          </div>
+          <div col="2" class="core__apps-legend">
+            <div flex>
+              <div col="1">
+                <img src="~@assets/images/available_defend_unopen.png" width="12" />
+                <span style="vertical-align:middle;">可用性监测</span>
+              </div>
+              <div col="1">
+                <img src="~@assets/images/bug_defend_unopen.png" width="13" />
+                <span style="vertical-align:middle;">安全监测</span>
+              </div>
+              <div col="1">
+                <img src="~@assets/images/security_defend_unopen.png" width="12" />
+                <span style="vertical-align:middle;">应用安全防护</span>
+              </div>
+            </div>
+            <div flex>
+              <div col="1">
+                <span class="core__indicator core__indicator--safe"></span>
+                <span>已开启且正常</span>
+              </div>
+              <div col="1">
+                <span class="core__indicator core__indicator--error"></span>
+                <span>已开启且异常</span>
+              </div>
+              <div col="1">
+                <span class="core__indicator core__indicator--unopen"></span>
+                <span>未开启</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div col="1" flex-column rowcenter spacearound style="margin-top: 1em;">
+          <div col="1" flex center>
+            <AppItem col="1" :name="app.app_name" v-for="(app,index) in appsInfo"
+              v-if="app && index<6"
+              :safe="app.protect_detail.safety_bug_protect"
+              :enable="app.protect_detail.availability"
+              :protect="app.protect_detail.app_safety_protect"
+              :icon="app.icon_url" />
+            <template v-if="6 - appsInfo.length > 0 && appsInfo.length > 0">
+              <div col="1" v-for="i in 6 - appsInfo.length"></div>
+            </template>
+          </div>
+          <div col="1" flex center>
+            <AppItem col="1" :name="app.app_name" v-for="(app,index) in appsInfo"
+              v-if="app && index>=6 && index<12"
+              :safe="app.protect_detail.safety_bug_protect"
+              :enable="app.protect_detail.availability"
+              :protect="app.protect_detail.app_safety_protect"
+              :icon="app.icon_url" />
+            <template v-if="12 - appsInfo.length > 0 && appsInfo.length - 6 >= 0">
+              <div col="1" v-for="i in 6 - (appsInfo.length - 6)"></div>
+            </template>
+          </div>
+          <div col="1" flex center>
+            <AppItem col="1" :name="app.app_name" v-for="(app,index) in appsInfo"
+              v-if="app && index>=12 && index<18"
+              :safe="app.protect_detail.safety_bug_protect"
+              :enable="app.protect_detail.availability"
+              :protect="app.protect_detail.app_safety_protect"
+              :icon="app.icon_url" />
+            <template v-if="18 - appsInfo.length > 0 && appsInfo.length - 12 >= 0">
+              <div col="1" v-for="i in 6 - (appsInfo.length - 12)"></div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </Card>
+    <div class="core__events" flex col="3">
+      <Card class="core__undealevent" :date="freshDate" col="8" title="待处理事件">
+        <table v-if="eventsToBeDealt && eventsToBeDealt.length > 0">
+          <transition-group tag="tbody" name="core-list">
+            <tr v-if="index < 5 && e!=null" v-for="(e,index) in eventsToBeDealt" :key="e.create_time + e.event_dealer + idx">
+              <td width="10%"><strong>【 {{e.event_grade}} 】</strong></td>
+              <td width="15%">{{e.create_time}}</td>
+              <td width="15%">{{e.event_object}}</td>
+              <td><p>{{e.event_description}}</p></td>
+              <td width="10%">{{e.event_ascription}}</td>
+              <td width="10%">{{e.event_status}}</td>
+              <td width="10%">{{e.event_department+e.event_dealer}}</td>
+              <td width="5%">{{e.event_days}}</td>
+            </tr>
+            <tr v-for="i in (5 - eventsToBeDealt.length > 0 ? 5 - eventsToBeDealt.length : 0)" :key="'empty' + i">
+              <td>&nbsp;</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </transition-group>
+        </table>
+        <NoProblem v-else />
+      </Card>
+      <Card class="core__highfre" col="3" title="高频事件" :detail="true" :date="freshDate">
+        <table>
+          <tr v-if="index<5 && e!=null" v-for="(e,index) in highFrequencyEvents" :key="e.id">
+            <td width="30%"><strong>【 {{e.events_grade}} 】</strong></td>
+            <td width="30%">{{e.event_app_name}}</td>
+            <td width="35%">{{e.event_reason}}</td>
+            <td>{{e.event_count}}</td>
+          </tr>
+        </table>
+      </Card>
+    </div>
+  </main>
+</div>

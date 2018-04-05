@@ -1,0 +1,127 @@
+@import '~sass/easy';
+.behavior {
+  main {
+    .behavior__stuff {
+      margin-top: $paddingHalf / 2;
+      .behavior__client, .behavior__browser {
+        margin-top: 0;
+      }
+    }
+  }
+  .behavior__activation {
+    .legend > span {
+      margin-left: 2em;
+      > span:first-child {
+        margin-right: 0.5em;
+      }
+    }
+  }
+  @include breakpoint($big) {
+    .behavior__online, .behavior__type, .behavior__client, .behavior__platform {
+      .twopiechart .legend {
+        margin-bottom: 2em;
+        > span {
+          margin-left: 0.5em;
+        }
+      }
+    }
+  }
+  .behavior__active {
+    .behavior__active-map {
+      position: relative;
+      .visual-map {
+        position: absolute;
+        bottom: 2em;
+        left: 3em;
+        text-align: center;
+        .visual-map__top {
+          position: absolute;
+          top: 0;
+          left: 0;
+          margin-left: 1em;
+          // transform: translateX(140%);
+          font-size: 1.5em;
+        }
+        .visual-map__bottom {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          margin-left: 1em;
+          // transform: translateX(140%);
+          font-size: 1.5em;
+        }
+        .visual-map__bar {
+          width: 1em;
+          height: 4em;
+          border-radius: 0.5em;
+          background: linear-gradient(to top, #C1CDDD, #3D64DC 50%, #1D4ADC 100%);
+          margin: 0.5em auto;
+          position: relative;
+          &::before, &::after {
+            content: '高';
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            transform: translateY(-130%);
+          }
+          &::after {
+            content: '低';
+            bottom: 0;
+            transform: translateY(120%);
+          }
+        }
+      }
+    }
+  }
+  .behavior__history {
+    .card__body {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    [spacebetween] {
+      align-items: center;
+      padding-left: 1em;
+      padding-right: 1em;
+      &:first-child {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 0.5em;
+      }
+    }
+    .num {
+      font-size: 2em;
+    }
+  }
+  .behavior__browser {
+    .progressbargroup {
+      margin: 0 0.5em;
+    }
+    @include breakpoint($big) {
+      .progressbargroup {
+        margin-top: 1.5em;
+      }
+    }
+    .progressbar {
+      margin-bottom: 0;
+      margin-top: 0.5em;
+      .progressbar__bar {
+        height: 0.8em;
+      }
+      @include breakpoint($medium) {
+        margin-top: 0.3em;
+        .progressbar__bar {
+          height: 0.6em;
+        }
+      }
+      .num {
+        display: none;
+      }
+    }
+  }
+  .behavior__secure {
+    white-space: nowrap;
+    .percentbar__bar {
+      margin-right: 2em;
+    }
+  }
+}

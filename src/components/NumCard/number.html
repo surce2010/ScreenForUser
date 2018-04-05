@@ -1,0 +1,9 @@
+<div class="numcard" :style="{height: size + 'em'}">
+  <div v-for="n in 10" :key="n"
+    class="numcard__item" flex :style="{backgroundColor: bgColor, transform:'translateY(-'+(num)*100+'%)'}">
+    <div class="numcard__num num"
+      :style="{fontSize: size + 'em', 'background-image': 'linear-gradient(to right, '+color[0]+', '+color[1]+')'}">
+      {{n - 1}}
+    </div>
+  </div>
+</div>

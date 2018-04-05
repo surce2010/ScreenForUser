@@ -1,0 +1,10 @@
+<div class="percentbar" flex :flex-column="percents.length === 2">
+  <div class="percentbar__legend" col="1">
+    <IconItem :role="role" :column="false" />
+  </div>
+  <div col="4" :class="['percentbar__bar', percents.length === 2 ? 'percentbar__bar--two' : '']">
+    <div v-for="(v, idx) in percents" v-if="v > 0" :style="{background: color[idx%color.length], width: v + '%'}">
+      <div class="num">{{v+'%'}}</div>
+    </div>
+  </div>
+</div>

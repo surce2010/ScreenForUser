@@ -1,0 +1,6 @@
+<div class="progressbargroup">
+  <ProgressBar v-for="(item, idx) in percents" :key="idx" :value="item.value" :percent="item.percent" :name="item.name" :color="color" />
+  <template v-if="percents.length < count">
+    <ProgressBar name="" style="visibility: hidden;" :value="100" v-for="i in (count - percents.length)" :key="'emtpy'+i" />
+  </template>
+</div>

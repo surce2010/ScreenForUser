@@ -1,0 +1,19 @@
+.progressbar {
+  .num {
+    font-size: 1.5em;
+  }
+  .progressbar__text {
+    margin-bottom: 0.2em;
+  }
+  .progressbar__bar {
+    height: 1em;
+    background: rgba(234, 234, 234, 0.28);
+    border-radius: 0.4em;
+    overflow: hidden;
+  }
+  .progressbar__inner {
+    background: yellow;
+    border-radius: 0.4em;
+    height: 100%;
+  }
+}

@@ -1,0 +1,101 @@
+@import '~sass/easy';
+.secure {
+  .secure__prevent {
+    background-image: url(~@assets/images/shield.png);
+    background-repeat: no-repeat;
+    background-position: center 4em;
+    .card__body h3 {
+      font-weight: normal;
+      margin: 0.5em 0;
+    }
+    .numcardgroup {
+      justify-content: center;
+      &.smaller {
+        font-size: 0.8em;
+        @include breakpoint($medium) {
+          .numcard__num {
+            line-height: 1.2em;
+          }
+        }
+      }
+    }
+  }
+  .secure__apps {
+    .progressbargroup {
+      padding: 0 0.8em;
+      .progressbar__text {
+        span:first-child {
+          @include truncate(15em);
+        }
+      }
+      @include breakpoint($medium) {
+        .progressbar__text {
+          span:first-child {
+            @include truncate(8em);
+          }
+        }
+        .progressbar {
+          margin-bottom: 0.6em;
+        }
+        .progressbar__bar {
+          height: 0.8em;
+        }
+      }
+    }
+  }
+  .secure__outattack {
+    @include breakpoint($big) {
+      .progressbar {
+        margin-bottom: 0 !important;
+      }
+    }
+    .progressbar__bar {
+      height: 0.8em;
+    }
+    @include breakpoint($medium) {
+        .progressbar__bar {
+          height: 0.6em;
+        }
+      }
+  }
+  .secure__detail {
+    .table {
+      @include breakpoint(max-width 1280px) {
+        margin-top: -1em;
+      }
+      @include breakpoint(min-width 1440px) {
+        font-size: $fontSizeSmaller;
+      }
+      width: 100%;
+      height: 100%;
+      table-layout: fixed;
+      white-space: nowrap;
+      strong {
+        color: #F8E71C;
+      }
+      td {
+        @include truncate(90%);
+      }
+    }
+  }
+  .secure__type {
+    .card__body {
+      padding-left: 0;
+      padding-right: 0;
+      .top5__header, .top5__list {
+        padding-left: 3em;
+        padding-right: 1em;
+        .num:last-child {
+          font-size: 1.2em;
+        }
+      }
+    }
+  }
+  .secure__outattack {
+    .progressbargroup {
+      .progressbar {
+        margin-bottom: 0.8em;
+      }
+    }
+  }
+}

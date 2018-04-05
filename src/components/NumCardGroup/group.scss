@@ -1,0 +1,11 @@
+@import '~sass/easy';
+.numcardgroup {
+  display: flex;
+  .numcardgroup__unit {
+    align-self: flex-end;
+    sub {
+      display: inline-block;
+      padding-bottom: 0.5em;
+    }
+  }
+}

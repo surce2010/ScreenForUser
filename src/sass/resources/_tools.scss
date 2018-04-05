@@ -1,0 +1,44 @@
+
+// mixin function
+// 清除浮动
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+@mixin radius($r: 4px) {
+  border-radius: $r;
+}
+
+@mixin triangle($dir: top, $color: #666666, $size: 5px) {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0.5em;
+    top: 50%;
+    @if $dir == top {
+      margin-top: 0 - $size / 4;
+    } @else if $dir == bottom {
+      margin-top: 0 - $size * 1.25;
+    }
+    margin-left: 0 - $size / 2;
+    border: $size solid transparent;
+    border-#{$dir}-color: $color;
+  }
+}
+
+@mixin truncate($truncation-boundary: 100%) {
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin gradient($from: #FFFFFF, $to: #D1D1D1){
+  background-image: -webkit-gradient(linear, 0 0, 0 bottom, from($from), to($to));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

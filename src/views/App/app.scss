@@ -1,0 +1,29 @@
+@import '~sass/easy';
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $paddingMedium;
+    padding-bottom: 1em;
+    @include breakpoint($pad) {
+      justify-content: center;
+      padding-top: 2em;
+      .header__logo, .header__time {
+        display: none;
+      }
+    }
+    .header__title {
+      @include gradient;
+      font-size: 3em;
+      font-weight: bold;
+    }
+  }
+  .app__content {
+    flex: 1;
+    padding: 1em;
+  }
+}

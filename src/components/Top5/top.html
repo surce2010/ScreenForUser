@@ -1,0 +1,22 @@
+<div class="top5" flex-column>
+  <div col="2" class="top5__items">
+    <div v-for="item in percents" class="top5__item" col="1">
+      <div class="top5__bar" :style="{height: item.percent + '%', background: item.color}">
+        <div class="num">{{item.value}}</div>
+      </div>
+    </div>
+    <template v-if="percents.length < 5">
+      <div v-for="i in 5 - percents.length" style="visibility: hidden;" class="top5__item" col="1"></div>
+    </template>
+  </div>
+  <div col="2" class="top5__listwrap" flex-column spacearound>
+    <div flex class="top5__header">
+      <div v-for="k in showKey" :col="k.flex ? k.flex : ''" :style="{textAlign: k.align ? k.align : 'left'}">{{k.name}}</div>
+    </div>
+    <div class="top5__line" />
+    <div v-for="(d, idx) in data" flex spacearound class="top5__list">
+      <div class="top5__list-legend" :style="{background: color[idx%color.length]}"></div>
+      <div v-for="k in showKey" :col="k.flex ? k.flex : ''" :style="{textAlign: k.align ? k.align : 'left'}" class="num">{{d[k.value]}}</div>
+    </div>
+  </div>
+</div>

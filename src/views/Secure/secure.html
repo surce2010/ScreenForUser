@@ -1,0 +1,74 @@
+<div class="secure height100" flex>
+  <aside class="secure__leftaside" flex-column col="3">
+    <Card class="secure__prevent" col="2" title="阻止攻击次数" :date="freshTime" :detail="true">
+      <div textcenter flex-column>
+        <div col="3" flex-column spacearound>
+          <h3>
+            今日阻止
+          </h3>
+          <NumCardGroup :color="['#FAD961', '#F76B1C']" :num="preventedToday" :count="5" unit="次" />
+          <h3>累计阻止</h3>
+          <NumCardGroup class="smaller" :color="['#fff', '#fff']" :num="preventedTotal" :count="7" unit="次" />
+          <h3>近7日阻止攻击次数<sub style="margin-top: -1em;display:inline-block;">／次</sub></h3>
+        </div>
+        <div col="1">
+          <LineChart :color="['#F5A623']" :x="preventedCountLast7DaysX" :data="[{name: '近7日阻止攻击次数', value: preventedCountLast7DaysData}]" />
+        </div>
+      </div>
+    </Card>
+    <Card class="secure__apps" col="1" title="被攻击TOP3应用" :date="freshTime" :detail="true">
+      <div flex-column>
+        <vLegend :data="[{value: '#F76B1C', name: '当日'}]" />
+        <ProgressBarGroup col="1" flex-column spacebetween style="margin-top: 1.5em;" v-if="attackedAppsToday.length > 0" :count="3" :color="['#FAD961', '#F76B1C']" :data="attackedAppsToday" />
+        <NoProblem col="1" v-else />
+      </div>
+      <div flex-column>
+        <vLegend :data="[{value: '#FFFFFF', name: '历史'}]" />
+        <ProgressBarGroup col="1" flex-column spacebetween style="margin-top: 1.5em;" v-if="attackedAppsTotal.length > 0" :count="3" :color="['#868686', '#FFFFFF']" :data="attackedAppsTotal" />
+        <NoProblem col="1" v-else />
+      </div>
+    </Card>
+  </aside>
+  <main flex-column col="5">
+    <Card class="secure__origin" col="3" title="境内攻击来源（实时）">
+      <attack :attackLists="attackSources" :attackDest="attackedDetail.attack_dest"></attack>
+    </Card>
+    <Card class="secure__detail" col="1" title="实时攻击明细" :detail="true" :date="freshTime">
+      <table class="table" v-if="waitDealEvent.length > 0">
+        <tr v-for="(e,index) in waitDealEvent" :key="index">
+          <td width="15%">
+            <strong>【 {{e.attack_type}} 】</strong>
+          </td>
+          <td width="20%">{{e.attack_time}}</td>
+          <td width="17%">{{e.ip}}</td>
+          <td>{{e.address}} {{e.isp}}</td>
+          <td width="12%">{{e.platform}}</td>
+        </tr>
+        <tr v-for="i in (5 - waitDealEvent.length)" :key="index">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <NoProblem v-else />
+    </Card>
+  </main>
+  <aside class="secure__rightaside" flex-column col="2">
+    <Card class="secure__outattack" col="4" title="境外攻击来源TOP5" :date="prevDate">
+      <div flex-column>
+        <div flex spacebetween class="mt-half" style="margin-top: 0.5em;">
+          <div>攻击来源</div>
+          <div>攻击次数</div>
+        </div>
+        <ProgressBarGroup col="1" flex-column spacearound :color="['#05C180', '#008E32']" v-if="foreignAttackChart.length > 0" :data="foreignAttackChart" />
+        <NoProblem col="1" v-else />
+      </div>
+    </Card>
+    <Card class="secure__type" col="5" title="攻击方式TOP5" :date="prevDate">
+      <Top5 v-if="attackModeChart.length > 0" :data="attackModeChart" :showKey="[{name: '攻击方式', value: 'name', flex: 3}, {name: '攻击次数', value: 'value', align: 'center', flex:1}]"/>
+      <NoProblem col="1" v-else />
+    </Card>
+  </aside>
+</div>

@@ -1,0 +1,181 @@
+<div class="data height100" flex>
+  <aside class="data__leftaside" flex-column col="2">
+    <Card class="data__health" col="6" title="数据健康度" :date="date">
+      <div flex-column>
+        <div class="data__health-score">
+          <span class="num">{{healthScore}}</span><sup>分</sup>
+        </div>
+        <div col="1">
+          <Chart :options="healthOpt" />
+        </div>
+      </div>
+    </Card>
+    <Card class="data__sys" col="5" title="业务系统集成">
+      <div flex>
+        <ul flex-column col="1" spacearound>
+          <li>
+            <div>系统数量 (个)</div>
+            <div class="num">{{sysNum}}</div>
+          </li>
+          <li>
+            <div>接口数量 (个)</div>
+            <div class="num">{{interfaceNum}}</div>
+          </li>
+          <li>
+            <div>近一天数据吞吐量 (个)</div>
+            <div class="num">{{readAndWrite1day}}</div>
+          </li>
+        </ul>
+      </div>
+    </Card>
+    <Card class="data__code" col="6" title="代码标准" :row="false">
+      <ul col="2">
+        <li>
+          <div>对标表数 / 总表数 (张)</div>
+          <div class="num">{{codeUsefulCount}} / {{codeTotalCount}}</div>
+        </li>
+        <li>
+          <div>总记录数 (条)</div>
+          <div class="num">{{codeTotalRecordCount}}</div>
+        </li>
+        <li>
+          <div>总记录数日增量</div>
+        </li>
+      </ul>
+      <div>
+        <Chart :options="codeOpt" />
+      </div>
+    </Card>
+  </aside>
+  <main flex col="6">
+    <Card class="data__active" title="数据拓扑" col="1">
+      <Chart :options="extendOpt" />
+    </Card>
+  </main>
+  <!-- <aside class="data__rightaside" flex-column col="2"> -->
+    <!-- <Card class="data__undeal" title="待处理问题" col="2" :date="date">
+      <div flex-column>
+        <div class="textcenter data__undeal-legend">
+          <span><span class="rect_1"></span>非常紧急</span>
+          <span><span class="rect_2"></span>一般紧急</span>
+        </div>
+        <ul col="1">
+          <li>
+            <div>
+              <div>元数据技术属性规范性检测</div>
+              <div>问题数 (个)</div>
+            </div>
+            <div class="num">{{techCount}}</div>
+            <div><div class="arrow"></div></div>
+          </li>
+          <li>
+            <div>
+              <div>集成接口运行情况</div>
+              <div>问题数 (个)</div>
+            </div>
+            <div class="num">{{interfaceCount}}</div>
+            <div><div class="arrow"></div></div>
+          </li>
+          <li>
+            <div>
+              <div>元数据与数据库一致性检测</div>
+              <div>问题数 (个)</div>
+            </div>
+            <div class="num">{{databaseCount}}</div>
+            <div><div class="arrow"></div></div>
+          </li>
+          <li>
+            <div>
+              <div>代码标准一致性检测</div>
+              <div>问题数 (个)</div>
+            </div>
+            <div class="num">{{codeCount}}</div>
+            <div><div class="arrow"></div></div>
+          </li>
+          <li>
+            <div>
+              <div>数据质量合格性检测</div>
+              <div>问题数 (个)</div>
+            </div>
+            <div class="num">{{qualityCount}}</div>
+            <div><div class="arrow"></div></div>
+          </li>
+          <li>
+            <div>
+              <div>数据备份情况</div>
+              <div>问题数 (个)</div>
+            </div>
+            <div class="num">{{bakCount}}</div>
+            <div><div class="arrow"></div></div>
+          </li>
+        </ul>
+      </div>
+    </Card> -->
+  <!-- </aside> -->
+  <aside class="data__rightaside2" flex-column col="2">
+    <Card class="data__main" title="主数据" col="4" :row="false">
+      <ul col="3" flex-column spacearound>
+        <li>
+          <div>有效表 / 总表数 (张)</div>
+          <div class="num">{{usefulCount}} / {{totalTableCount}}</div>
+        </li>
+        <li>
+          <div>总记录数 (条)</div>
+          <div class="num">{{totalTableRecordCount}}</div>
+        </li>
+        <li>
+          <div>总记录数日增量</div>
+          <div class="num" style="visibility: hidden;">0</div>
+        </li>
+      </ul>
+      <div col="1">
+        <Chart :options="mainOpt" />
+      </div>
+    </Card>
+    <Card class="data__history" title="历史数据" col="3">
+      <div flex>
+        <ul col="1" flex-column spacearound>
+          <li>
+            <div>备份表数(张)</div>
+            <div class="num">{{historyBakCount}}</div>
+          </li>
+          <li>
+            <div>备份记录数(条)</div>
+            <div class="num">{{historyBakRecordCount}}</div>
+          </li>
+          <li>
+            <div>数据体积(G)</div>
+            <div class="num">{{historyVolumeCount}}</div>
+          </li>
+        </ul>
+      </div>
+    </Card>
+    <Card class="data__deal" title="已处理问题" col="4" :date="date">
+      <div flex-column>
+        <div class="qa-total">
+          共计 <span class="num">{{resolveCount}}</span> 件
+        </div>
+        <div class="qa-chart">
+          <Chart :height="dealHeight" :options="qaOpt" />
+        </div>
+        <!-- <div class="qa-list" flex-column col="1">
+          <div class="qa-list__heading">
+            <div>问题类型</div>
+            <div>处理时间</div>
+          </div>
+          <transition-group tag="div" name="list" class="qa-list__items" col="1">
+            <div v-for="resolve in resolvesShow" :key="resolve.wid" class="qa-list__item">
+              <div>
+                <em>【{{resolve.wtlx}}】</em>
+                <span class="num qa-list__content">{{resolve.wtms.length > 20 ? resolve.wtms.slice(0, 20) + '...' : resolve.wtms}}</span>
+              </div>
+              <div class="num">
+                {{resolve.clsj}}
+              </div>
+            </div>
+          </transition-group>
+        </div> -->
+      </div>
+    </Card>
+  </aside>
+</div>

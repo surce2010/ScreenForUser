@@ -1,0 +1,124 @@
+@import './sass/easy';
+@import 'normalize';
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+@font-face {
+  font-family: DINCondensed;
+  font-weight: normal;
+  font-style: normal;
+  src: url('~@assets/fonts/DINCond-Bold.otf') format("opentype");
+  // src: url('~@assets/fonts/DIN_Condensed_Bold.eot'); /* IE9 Compat Modes */
+  // src: url('~@assets/fonts/DIN_Condensed_Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8*/
+  //      url('~@assets/fonts/DIN_Condensed_Bold.woff') format('woff'), /* Pretty Modern Browsers */
+  //      url('~@assets/fonts/DIN_Condensed_Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+  //      url('~@assets/fonts/DIN_Condensed_Bold.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+body {
+  font-size: $fontSizeSmall;
+  @include breakpoint($medium) {
+    font-size: $fontSizeSmall;
+  }
+  @include breakpoint($normal) {
+    font-size: 13px;
+  }
+  @include breakpoint($big) {
+    font-size: 14px;
+  }
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', sans-serif;
+  color: $primary;
+  background: url(~@assets/images/bg.png);
+  // background-position: center center;
+  background-size: 120% 120%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+img {
+  vertical-align: middle;
+  max-width: 100%;
+}
+.num {
+  font-family: DINCondensed;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+.gradienttext {
+  @include gradient;
+}
+
+.height100 {
+  height: 100%;
+}
+[flex] {
+  display: flex;
+}
+[flex-column] {
+  display: flex;
+  flex-direction: column;
+}
+.rowcenter, [rowcenter] {
+  display: flex;
+  justify-content: center;
+}
+.colcenter, [colcenter] {
+  align-items: center;
+}
+.center, [center] {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.spacebetween, [spacebetween] {
+  justify-content: space-between;
+}
+.spacearound, [spacearound] {
+  justify-content: space-around;
+}
+.textcenter, [textcenter] {
+  text-align: center;
+}
+@for $i from 1 to 10 {
+  [col='#{$i}'] {
+    flex: $i 0 0 !important;
+  }
+}
+
+.icon {
+  display: inline-block;
+  width: 12px;
+  height: 100%;
+  background-position: center center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+.icon-available--unopen {
+  background-image: url(~@assets/images/available_defend_unopen.png);
+}
+
+.mt-1 {
+  margin-bottom: 1em;
+}
+.mt-half {
+  margin-bottom: 0.5em;
+}
+.textright {
+  text-align: right;
+}
+

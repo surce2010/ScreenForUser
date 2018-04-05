@@ -1,0 +1,48 @@
+.percentbar {
+  .num {
+    font-size: 1.5em;
+  }
+  .percentbar__legend {
+    margin-top: -0.2em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  .percentbar__bar {
+    height: 1em;
+    &.percentbar__bar--two {
+      margin-top: 0.5em;
+      > div {
+        &:first-child .num {
+          left: 0;
+          top: 50%;
+          transform: translate(-100%, -50%);
+        }
+        &:last-child .num {
+          right: 0;
+          top: 50%;
+          transform: translate(100%, -50%);
+        }
+      }
+    }
+    > div {
+      &:last-child {
+        border-top-right-radius: 0.5em;
+        border-bottom-right-radius: 0.5em;
+      }
+      &:first-child {
+        border-top-left-radius: 0.5em;
+        border-bottom-left-radius: 0.5em;
+      }
+      display: inline-block;
+      height: 100%;
+      position: relative;
+      .num {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateY(-100%);
+      }
+    }
+  }
+}

@@ -1,0 +1,143 @@
+@import '~sass/easy';
+.core {
+  @include breakpoint($small) {
+    display: block !important;
+    aside {
+      flex-direction: row !important;
+    }
+  }
+  @include breakpoint($pad) {
+    display: block;
+  }
+  .num {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.20);
+  }
+  .core__undeal, .core__usable {
+    .num {
+      font-size: 4em;
+      @include breakpoint($medium) {
+        font-size: 3em;
+      }
+    }
+  }
+  main {
+    .core__events {
+      margin-top: $paddingHalf / 2;
+      @include breakpoint($pad) {
+        flex-direction: column;
+      }
+      > .card {
+        margin-top: 0;
+      }
+    }
+  }
+  .core__apps-title {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.20);
+    @include breakpoint($big) {
+      font-size: $fontSize;
+    }
+    @include breakpoint($pad) {
+      flex-direction: column;
+    }
+    .num {
+      margin-left: 0.2em;
+      margin-right: 0.2em;
+      font-size: 3em;
+    }
+    .yellownum, .greennum {
+      margin-right: 0.4em;
+    }
+    .core__apps-legend {
+      margin-top: 0.2em;
+      > div {
+        margin-top: 0.3em;
+      }
+    }
+  }
+  .core__apps-line {
+    height: 0.2em;
+    margin-top: 0.5em;
+    background-image: linear-gradient(45deg,rgba(255, 255, 255, 0),rgba(255, 255, 255, 0.4) 26%,#fff 47%,rgba(255, 255, 255, 0.45) 68%,rgba(255, 255, 255, 0));
+  }
+  .core__undealevent, .core__highfre {
+    table {
+      width: 100%;
+      height: 100%;
+      table-layout: fixed;
+      td {
+        @include truncate(90%);
+        position: relative;
+        p {
+          padding: 0;
+          margin: 0;
+          @include truncate(80%);
+        }
+        strong {
+          color: #F8E71C;
+        }
+      }
+    }
+  }
+  .yellownum {
+    @include gradient(#FAD961, #F76B1C);
+    font-size: 2.5em;
+  }
+  .greennum {
+    font-size: 2.5em;
+    @include gradient(#b4ec51, #429321);
+  }
+  .whitenum {
+    color: white !important;
+    font-size: 2.5em;
+  }
+  .core__indicator {
+    display: inline-block;
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 0.2em;
+    + span {
+      vertical-align: middle;
+    }
+  }
+  .core__indicator--safe {
+    background: #4491FF;
+  }
+  .core__indicator--error {
+    background: #FA3928;
+  }
+  .core__indicator--warn {
+    background: #FF9600;
+  }
+  .core__indicator--unopen {
+    background: #D8D8D8;
+  }
+  // .list-move, .list-enter-active, .list-leave-active {
+  //   transition: transform 1s;
+  // }
+  // .list-enter {
+  //   transform: translateY(100%);
+  // }
+  // .list-enter-to, .list-leave {
+  //   transform: translateY(0);
+  //   opacity: 0;
+  // }
+  // .list-leave-to {
+  //   transform: translateY(-100%);
+  // }
+  // .list-leave-active {
+  //   position: absolute;
+  //   z-index: -1;
+  // }
+  .core__health {
+    @include breakpoint($medium) {
+      .progressbar {
+        margin-bottom: 0.6em;
+        .progressbar__bar {
+          height: 0.6em;
+        }
+      }
+    }
+  }
+}

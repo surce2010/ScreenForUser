@@ -1,0 +1,30 @@
+@import '~sass/easy';
+.piechartwithlegend {
+  .legendpie__legend {
+    padding-bottom: 1.5em;
+  }
+  .legendpie__row {
+    margin: 0 2em;
+    border-bottom: 1px solid rgba(242, 242, 242, 0.2);
+    text-align: left;
+    white-space: nowrap;
+    span {
+      font-size: $fontSizeSmall;
+      vertical-align: middle;
+      display: inline-block;
+      @include truncate(8em);
+    }
+    .legendpie__item {
+      display: inline-block;
+      width: 1em;
+      height: 1em;
+      border-radius: 50%;
+      margin-right: 0.5em;
+    }
+    .legendpie__item-value {
+      float: right;
+      margin-right: 1em;
+      margin-top: 0.2em;
+    }
+  }
+}

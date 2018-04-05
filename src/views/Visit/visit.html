@@ -1,0 +1,9 @@
+<div class="visit height100" flex>
+  <main col="7" flex>
+    <Card class="visit__apps" title="应用访问量趋势" :date="new Date" col="1" />
+  </main>
+  <aside flex-column col="3">
+    <Card class="visit__active" col="2" title="应用活动状态" :date="new Date" />
+    <Card class="visit__ranking" col="3" title="应用访问量排名" subtitle="(近30日)" />
+  </aside>
+</div>

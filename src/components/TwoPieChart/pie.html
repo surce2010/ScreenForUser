@@ -1,0 +1,13 @@
+<div class="twopiechart" flex-column>
+  <vLegend :data="legendWithColor" />
+  <div flex class="pies" center>
+    <div class="twopiechart__item">
+      <IconItem role="student" />
+      <PieChart :color="color" :inner="inner" :outer="outer" :data="data" />
+    </div>
+    <div class="twopiechart__item">
+      <IconItem role="teacher" />
+      <PieChart :color="color" :inner="inner" :outer="outer" :data="data2" />
+    </div>
+  </div>
+</div>

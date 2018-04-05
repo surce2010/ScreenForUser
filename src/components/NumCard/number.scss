@@ -1,0 +1,18 @@
+@import '~sass/easy';
+.numcard {
+  text-align: center;
+  margin: 0.5em;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  .numcard__item {
+    flex: 1 0 100%;
+    padding: 0 0.5em;
+    transition: all 0.5s;
+  }
+  .numcard__num {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1em;
+  }
+}

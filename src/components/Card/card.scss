@@ -1,0 +1,46 @@
+@import '~sass/easy';
+.card {
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+  margin: $paddingHalf / 2;
+  display: flex;
+  flex-direction: column;
+  .card__heading {
+    margin: 0;
+    flex-shrink: 0;
+    font-weight: normal;
+    padding: 1em;
+    padding-bottom: 0;
+    display: flex;
+    align-items: flex-end;
+    .card__heading-title {
+      @include gradient;
+      font-size: 1em;
+      font-weight: bold;
+      white-space: nowrap;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.30);
+    }
+    sub {
+      @include gradient;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+    .card__heading-desc {
+      flex: 1;
+      font-size: $fontSizeSmall;
+      color: #d5d5d5;
+      text-align: right;
+      white-space: nowrap;
+      @include breakpoint(max-width 1200px) {
+        display: none;
+      }
+    }
+  }
+  .card__body {
+    padding: 1em;
+    flex: 1 0 0;
+    > div {
+      flex: 1 0 0;
+    }
+  }
+}

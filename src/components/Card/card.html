@@ -1,0 +1,10 @@
+<section class="card">
+  <h3 class="card__heading" v-if="title || subtitle || desc">
+    <span class="card__heading-title">{{title}}</span>
+    <sub>{{subtitle}}</sub>
+    <span class="card__heading-desc">{{desc}}<slot name="desc"></slot></span>
+  </h3>
+  <div class="card__body" :flex="row" :flex-column="!row">
+    <slot></slot>
+  </div>
+</section>

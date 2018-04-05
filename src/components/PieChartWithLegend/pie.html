@@ -1,0 +1,20 @@
+<div flex :flex-column="column" class="piechartwithlegend">
+  <div :col="chartFlex">
+    <PieChart :height="height" :not-merge="notMerge" :data="data" :showValue="showReal" :inner="inner" :outer="outer" :color="color" />
+  </div>
+  <div col="1" flex-column class="legendpie__legend">
+    <div class="legendpie__row" v-for="row in rows" :key="'row'+row" flex center col="1">
+      <div :key="(row - 1) * cols" col="1">
+        <span class="legendpie__item" :style="{background: legends[(row - 1) * cols] ? legends[(row - 1) * cols].color : ''}"></span>
+        <span>{{legends[(row - 1) * cols] && legends[(row - 1) * cols].name}}</span>
+        <span v-if="showValue" class="legendpie__item-value">{{legends[(row - 1) * cols] && legends[(row - 1) * cols].value}}</span>
+      </div>
+      <div v-if="cols !== 1 && legends[(row - 1) * cols + 1]" :key="(row - 1) * cols + 1" col="1">
+        <span class="legendpie__item" :style="{background: legends[(row - 1) * cols + 1] ? legends[(row - 1) * cols + 1].color : ''}"></span>
+        <span>{{legends[(row - 1) * cols + 1] && legends[(row - 1) * cols + 1].name}}</span>
+        <span v-if="showValue" class="legendpie__item-value">{{legends[(row - 1) * cols + 1] && legends[(row - 1) * cols + 1].value}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+

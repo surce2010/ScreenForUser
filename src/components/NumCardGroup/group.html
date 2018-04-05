@@ -1,0 +1,11 @@
+<div class="numcardgroup">
+  <div v-for="(num, idx) in numsArr" :key="idx">
+    <num-card
+      :num="num"
+      :color="color"
+      :bgColor="bgColor" />
+  </div>
+  <div class="numcardgroup__unit" v-if="unit">
+    <sub>{{unit}}</sub>
+  </div>
+</div>

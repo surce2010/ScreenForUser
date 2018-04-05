@@ -1,0 +1,24 @@
+@import '~sass/easy';
+.progressbarrowgroup {
+  padding: 0 1em;
+  > div {
+    display: flex;
+    align-items: center;
+    margin: 0.2em 0;
+  }
+  .progressbar {
+    padding: 0 0.5em;
+  }
+  .progressbarrowgroup__title {
+    > div {
+      font-size: 0.8em;
+      color: #d5d5d5;
+      width: 7em;
+      @include truncate;
+    }
+  }
+  .num {
+    width: 2em;
+    font-size: 1.5em;
+  }
+}

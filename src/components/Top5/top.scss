@@ -1,0 +1,57 @@
+@import '~sass/easy';
+.top5 {
+  flex: 1 !important;
+  .top5__listwrap {
+    flex: 2 !important;
+  }
+  .top5__items {
+    display: flex;
+    justify-content: center;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    flex: 2 !important;
+  }
+  .top5__item {
+    text-align: center;
+    position: relative;
+    margin-top: 2em;
+    flex: 1 !important;
+    .top5__bar {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 1.2em;
+      margin-left: -0.5em;
+      border-radius: 0.5em;
+      .num {
+        position: absolute;
+        font-size: 1.5em;
+        left: 50%;
+        transform: translate(-50%, -150%);
+      }
+    }
+  }
+  .top5__line {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  .top5__header {
+    padding: 0 1em;
+  }
+  .top5__list {
+    flex: 1 !important;
+    padding: 0 1em;
+    position: relative;
+    align-items: center;
+    .top5__list-legend {
+      position: absolute;
+      left: 1.5em;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 100%;
+      width: 0.8em;
+      height: 0.8em;
+    }
+  }
+}

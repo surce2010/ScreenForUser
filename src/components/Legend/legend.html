@@ -1,0 +1,6 @@
+<div class="legend">
+  <span v-for="l in data" :key="l.value">
+    <span class="legend__icon" :style="{background: l.value}"></span>
+    <span>{{l.name}}</span>
+  </span>
+</div>

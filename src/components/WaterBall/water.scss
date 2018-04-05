@@ -1,0 +1,30 @@
+.waterball {
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  canvas {
+    vertical-align: middle;
+  }
+  .waterball-text {
+    position: absolute;
+    font-size: 1em;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    margin-left: 0.5em;
+    .waterball-score {
+      font-size: 6em;
+      font-weight: normal;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.20);
+    }
+    sub {
+      display: inline-block;
+      vertical-align: text-top;
+      margin-top: -0.5em;
+      margin-left: 0.3em;
+      font-size: 1.4em;
+    }
+  }
+}

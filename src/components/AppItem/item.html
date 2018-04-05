@@ -1,0 +1,22 @@
+<div class="appitem">
+  <div class="appitem__bg error" v-if="enable === '3' || safe === '2'"></div>
+  <div class="appitem__bg warn" v-if="enable === '2'"></div>
+  <img class="appitem__icon" :src="'http://axsh.campusphere.cn/' + icon" alt="" />
+  <div class="appitem__name">{{name}}</div>
+  <div class="appitem__status">
+    <img src="~@assets/images/available_defend_unopen.png" v-if="enable === '0'" />
+    <img src="~@assets/images/available_defend.png"  v-if="enable === '1'" />
+    <img src="~@assets/images/available_risk.png" v-if="enable === '2'" />
+    <img src="~@assets/images/available_defend_error.png" v-if="enable === '3'" />
+
+    <img src="~@assets/images/bug_defend_unopen.png" v-if="safe === '0'" />
+    <img src="~@assets/images/bug_defend.png"  v-if="safe === '1'" />
+    <img src="~@assets/images/bug_defend_error.png" v-if="safe === 2" />
+    <img src="~@assets/images/bug_defend_error.png" v-if="safe === 3" />
+
+    <img src="~@assets/images/security_defend_unopen.png" v-if="protect === '0'" />
+    <img src="~@assets/images/security_defend.png"  v-if="protect === '1'" />
+    <img src="~@assets/images/security_defend_error.png" v-if="protect === 2" />
+    <img src="~@assets/images/security_defend_error.png" v-if="protect === 3" />
+  </div>
+</div>

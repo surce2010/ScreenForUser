@@ -1,0 +1,108 @@
+<div class="host height100" flex>
+  <aside class="host__leftaside" col="3" flex-column>
+    <Card class="host__running" col="4" title="主机运行概况" :date="freshDate">
+      <div flex-column col="3">
+        <PieChart col="1" :outer="0.9" :color="['#3AC868', '#E6B03F']" :data="chartData" />
+      </div>
+      <div col="2" flex-column rowcenter class="host__running-legend">
+        <div col="1" flex colcenter>
+          <span>总数量</span>
+          <span col="1" class="textright">
+            <span class="num totalnum">{{hostRunningStatus.total}}</span>
+            <span>个</span>
+          </span>
+        </div>
+        <div col="1" flex colcenter>
+          <span>正常</span>
+          <span col="1" class="textright">
+            <span class="num greennum">{{hostRunningStatus.normal_count}}</span>
+            <span>个</span>
+          </span>
+        </div>
+        <div col="1" flex colcenter>
+          <span>异常</span>
+          <span col="1" class="textright">
+            <span class="num yellownum">{{hostRunningStatus.exception_count}}</span>
+            <span>个</span>
+          </span>
+        </div>
+      </div>
+    </Card>
+    <Card class="host__consume" col="3" title="主机资源消耗TOP5">
+      <div flex>
+        <div col="1" flex-column>
+          <vLegend :data="[{name: '繁忙度', value: '#F76B1C'}]" />
+          <ProgressBarGroup col="1" flex-column spacearound :real="true" :color="['#FAD961', '#F76B1C']" :data="busyHostChart" />
+        </div>
+        <div col="1" flex-column>
+          <vLegend :data="[{name: '空闲天数', value: '#FFFFFF'}]" />
+          <ProgressBarGroup col="1" flex-column spacearound :color="['#868686', '#FFFFFF']" :showValue="true" :data="idleHostChart" />
+        </div>
+      </div>
+    </Card>
+  </aside>
+  <main col="4" flex-column>
+    <div class="host__stuff" col="4" flex>
+      <Card class="host__health" col="1" title="主机健康度TOP5" subtitle="(近30日)">
+        <Top5 :data="eventsCountTop5" :showKey="[{name: 'IP地址', value: 'ip', flex: 2}, {name: '用途', value: 'purpose2', flex:2}, {name: '健康度', value: 'value', align: 'center', flex:1}]" />
+      </Card>
+      <Card class="host__reason" col="1" title="事件原因TOP5" subtitle="(近30日)">
+        <Top5 :data="eventsReasonTop5" :showKey="[{name: '事件原因', value: 'name', flex: 3}, {name: '事件数', value: 'value', align: 'center', flex:1}]" />
+      </Card>
+    </div>
+    <Card class="host__detail" col="3" title="主机异常明细">
+      <div flex-column>
+        <div flex center>
+          <div col="1">可用性</div>
+          <div col="1">安全</div>
+        </div>
+        <div flex center>
+          <div col="1">
+            <div class="num">{{hostException.availability_unsolved_event_count}}</div>
+            <div>未处理事件</div>
+          </div>
+          <div col="1">
+            <div class="num yellownum">{{hostException.availability_total_event_count}}</div>
+            <div>总可用事件</div>
+          </div>
+          <div col="1">
+            <div class="num">{{hostException.safety_unsolved_event_count}}</div>
+            <div>未处理事件</div>
+          </div>
+          <div col="1">
+            <div class="num yellownum">{{hostException.safety_total_event_count}}</div>
+            <div>总可用事件</div>
+          </div>
+        </div>
+        <div flex col="1">
+          <table style="margin-top: 0.5em;" v-if="exceptionList.length > 0">
+            <tr class="host__detail-header">
+              <th width="15%">主机IP</th>
+              <th width="15%">发生时间</th>
+              <th>异常明细</th>
+              <th width="12%">受影响的应用</th>
+            </tr>
+            <tr v-for="(e,index) in exceptionList" :key="index">
+              <td><strong>{{e.host_ip}}</strong></td>
+              <td>{{e.happen_time}}</td>
+              <td>{{e.exception_detail}}</td>
+              <td><strong>{{e.related_app}}</strong></td>
+            </tr>
+            <tr v-for="i in 5 - exceptionList.length">
+              <td>&nbsp;</td>
+            </tr>
+          </table>
+          <NoProblem col="1" v-if="exceptionList.length === 0" title="暂无异常主机" />
+        </div>
+      </div>
+    </Card>
+  </main>
+  <aside class="host__rightaside" flex-column col="2">
+    <Card class="host__sys" col="4" title="操作系统" :date="freshDate">
+      <PieChart :data="osPipeData" :inner="0" :outer="0.8" :cols="1" :showValue="true" />
+    </Card>
+    <Card class="host__component" col="3" title="组件分布" :date="freshDate">
+      <PieChart :data="componentPipeDate" :inner="0.5" :outer="0.9" />
+    </Card>
+  </aside>
+</div>

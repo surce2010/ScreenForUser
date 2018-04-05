@@ -1,0 +1,17 @@
+<div class="progressbarrowgroup">
+  <div v-for="(item, idx) in percents" :key="idx">
+    <div class="progressbarrowgroup__title">
+      <div>{{item.ip}}</div>
+      <div>{{item.name}}</div>
+    </div>
+    <ProgressBar col="1" value="" :percent="item.percent" name="" :color="color" />
+    <div class="num">
+      <template v-if="showValue">
+        {{item.value}}
+      </template>
+      <template v-else>
+        {{item.percent}}%
+      </template>
+    </div>
+  </div>
+</div>

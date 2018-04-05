@@ -1,0 +1,209 @@
+@import '~sass/easy';
+.data {
+  .data__health {
+    background-image: linear-gradient(209deg, #05C180 0%, #008E32 100%) !important;
+    .card__heading-title {
+      color: white !important;
+      background-image: none !important;
+      -webkit-text-fill-color: white !important;
+    }
+    .data__health-score {
+      text-align: center;
+      margin-top: 2em;
+      span {
+        font-size: 7em;
+        line-height: 0.8em;
+        vertical-align: text-top;
+      }
+      sup {
+        vertical-align: text-top;
+        font-size: 1.2em;
+        margin-left: 0.2em;
+      }
+    }
+  }
+  .data__sys, .data__code, .data__main, .data__history {
+    .card__body {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 0.8em 1em;
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+      div:first-child {
+        color: #D5D5D5;
+      }
+      .num {
+        text-align: right;
+        font-size: 2em;
+      }
+    }
+  }
+  .data__code, .data__main {
+    .card__body {
+      padding-bottom: 0;
+    }
+    ul li {
+      padding: 0.6em 1em;
+    }
+    ul li:last-child {
+      padding-bottom: 0;
+    }
+  }
+  .data__undeal {
+    .card__body {
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+      .data__undeal-legend {
+        padding-bottom: 1em;
+      }
+      .rect_1, .rect_2 {
+        display: inline-block;
+        width: 0.6em;
+        height: 0.6em;
+        border-radius: 50%;
+        margin: 0 0.5em;
+      }
+      .rect_1 {
+        background: #9455C9;
+      }
+      .rect_2 {
+        background: #8AAC70;
+      }
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      li {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        padding: 0.6em 1em;
+        background-clip: border-box;
+        @include breakpoint($big) {
+          line-height: 2.6em;
+        }
+        &:nth-of-type(-n + 2) {
+          background-image: linear-gradient(-180deg, rgba(255, 11, 192, 0.15) 0%, rgba(234,42,90,0.15) 50%, rgba(246,60,174, 0.15) 80%);
+        }
+        &:nth-of-type(n + 3) {
+          background-image: linear-gradient(-180deg, rgba(255, 255, 107, 0.1) 0%, rgba(255,254,80,0.15) 50%, rgba(255,254,57,0.15) 80%);
+        }
+        > div:nth-of-type(1) {
+          flex: 12;
+          font-size: 1em;
+          > div:nth-of-type(2) {
+            font-size: 0.9em;
+            line-height: 1.8em;
+            color: #d5d5d5;
+          }
+        }
+        > div:nth-of-type(2) {
+          flex: 1;
+          font-size: 1.5em;
+          text-align: right;
+        }
+        > div:nth-of-type(3) {
+          flex: 1;
+          text-align: right;
+        }
+      }
+    }
+  }
+  .arrow {
+    transform: rotate(45deg);
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    border: 2px solid #d8d8d8;
+    border-radius: 2px;
+    border-bottom: none;
+    border-left: none;
+  }
+  .data__history {
+    .card__body {
+      padding-bottom: 0;
+    }
+    ul li {
+      padding: 0.6em 1em;
+    }
+  }
+  .data__deal {
+    .qa-total {
+      font-size: 1em;
+      text-indent: 0.5em;
+      padding: 0 1em;
+      .num {
+        font-size: 2em;
+      }
+    }
+    .qa-list {
+      .qa-list__heading {
+        padding-top: 0.5em !important;
+        padding-bottom: 0.5em !important;
+        color: #d5d5d5;
+        font-size: 1em;
+        border-bottom: 1px solid rgba(242, 242, 242, 0.1);
+      }
+      .qa-list__item, .qa-list__heading {
+        display: flex;
+        align-items: center;
+        padding: 0.25em;
+        .num {
+          font-size: 0.9em;
+          font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', sans-serif;
+        }
+        > div:nth-of-type(1) {
+          flex: 8;
+          padding: 0;
+          line-height: 1.5em;
+          color: #fff;
+          em {
+            font-style: normal;
+            color: #F4C22B;
+          }
+        }
+        > div:nth-of-type(2) {
+          flex: 3;
+          text-align: center;
+          color: #d5d5d5;
+        }
+      }
+      .qa-list__content {
+        word-break: break-all;
+      }
+      .qa-list__items {
+        overflow: hidden;
+        flex: 1 0 0;
+        position: relative;
+      }
+    }
+  }
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-leave-to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  .list-leave-active {
+    position: absolute;
+  }
+  .list-move {
+    transition: transform 1s;
+  }
+}
