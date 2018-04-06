@@ -1,8 +1,8 @@
 <div class="running height100" flex>
   <div class="toggle__device">
     <span class="device__label">设备：</span>
-    <a :class="['device__btn', displayDevice === 'PC' ? 'device__btn-current' : '']" @click="toggleDieviceDisplay('PC')">PC</a>
-    <a :class="['device__btn', displayDevice === 'Mobile' ? 'device__btn-current' : '']" @click="toggleDieviceDisplay('Mobile')">移动</a>
+    <a :class="['device__btn', displayDevice === 'pc' ? 'device__btn-current' : '']" @click="toggleDieviceDisplay('pc')">PC</a>
+    <a :class="['device__btn', displayDevice === 'mobile' ? 'device__btn-current' : '']" @click="toggleDieviceDisplay('mobile')">移动</a>
   </div>
   <aside class="running__leftaside" flex-column col="4">
     <Card class="running__apps" col="3" title="校园应用统计" :date="date" :row="false" :detail="true">
@@ -57,7 +57,7 @@
         </div>
       </div>
     </Card>
-    <Card class="running__departs" col="2" title="应用类别统计" :date="date" :row="false" :detail="true">
+    <Card class="running__departs" col="2" title="应用部门统计" :date="date" :row="false" :detail="true">
       <PieChart :data="appCategoryTopChart" :showReal="true"
                 :color="['#58BDA5', '#e6B03F', '#419EF8', '#9A7DD1', '#3AC868', '#A13588', '#E6783F', '#e3544C', '#5054F2', '#979797']"
                 :column="false" :chartFlex="1"/>
@@ -100,18 +100,18 @@
     <Card class="running__hot" col="2" title="累计热门应用">
       <div flex-column>
         <IconItem role="student" :column="false"/>
-        <div class="running__hotapps" flex-column col="1">
+        <div class="running__hotapps running__hotapps-left" flex-column col="1">
           <div flex col="1" colcenter>
             <div col="1"></div>
             <div col="4">
               <img v-if="studentAppTop4[0]" :src="studentAppTop4[0] && studentAppTop4[0].url" width="36"/>
               <span v-if="studentAppTop4[0]">{{studentAppTop4[0] && studentAppTop4[0].name}}</span>
             </div>
-            <div col="1"></div>
             <div col="4">
               <img v-if="studentAppTop4[1]" :src="studentAppTop4[1] && studentAppTop4[1].url" width="36"/>
               <span v-if="studentAppTop4[1]">{{studentAppTop4[1] && studentAppTop4[1].name}}</span>
             </div>
+            <div col="1"></div>
           </div>
           <div flex col="1" colcenter>
             <div col="1"></div>
@@ -119,11 +119,11 @@
               <img v-if="studentAppTop4[2]" :src="studentAppTop4[2] && studentAppTop4[2].url" width="36"/>
               <span v-if="studentAppTop4[2]">{{studentAppTop4[2] && studentAppTop4[2].name}}</span>
             </div>
-            <div col="1"></div>
             <div col="4">
               <img v-if="studentAppTop4[3]" :src="studentAppTop4[3] && studentAppTop4[3].url" width="36"/>
               <span v-if="studentAppTop4[3]">{{studentAppTop4[3] && studentAppTop4[3].name}}</span>
             </div>
+            <div col="1"></div>
           </div>
         </div>
       </div>
@@ -131,28 +131,28 @@
         <IconItem role="teacher" :column="false"/>
         <div class="running__hotapps" flex-column col="1">
           <div flex col="1" colcenter>
-            <div col="1"></div>
+            <div col="2"></div>
             <div col="4">
               <img v-if="teacherAppTop4[0]" :src="teacherAppTop4[0] && teacherAppTop4[0].url" width="36"/>
               <span v-if="teacherAppTop4[0]">{{teacherAppTop4[0] && teacherAppTop4[0].name}}</span>
             </div>
-            <div col="2"></div>
             <div col="4">
               <img v-if="teacherAppTop4[1]" :src="teacherAppTop4[1] && teacherAppTop4[1].url" width="36"/>
               <span v-if="teacherAppTop4[1]">{{teacherAppTop4[1] && teacherAppTop4[1].name}}</span>
             </div>
+            <div col="1"></div>
           </div>
           <div flex col="1" colcenter>
-            <div col="1"></div>
+            <div col="2"></div>
             <div col="4">
               <img v-if="teacherAppTop4[2]" :src="teacherAppTop4[2] && teacherAppTop4[2].url" width="36"/>
               <span v-if="teacherAppTop4[2]">{{teacherAppTop4[2] && teacherAppTop4[2].name}}</span>
             </div>
-            <div col="2"></div>
             <div col="4">
               <img v-if="teacherAppTop4[3]" :src="teacherAppTop4[3] && teacherAppTop4[3].url" width="36"/>
               <span v-if="teacherAppTop4[3]">{{teacherAppTop4[3] && teacherAppTop4[3].name}}</span>
             </div>
+            <div col="1"></div>
           </div>
         </div>
       </div>
@@ -200,10 +200,10 @@
             class="user"
             :key="d.wid + d.assess_time">
             <div class="user__icon">
-              <img src="http://placehold.it/30X30" alt="" width="30" height="30"/>
+              <img src="http://placehold.it/30X30" alt="" width="24" height="24"/>
             </div>
             <div class="user__content">
-              <div class="user__name">匿名用户</div>
+              <div class="user__name">{{d.assessor_name}}</div>
               <div class="user__commentdetail">
                 {{d.assessment}}
               </div>

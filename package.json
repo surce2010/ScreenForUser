@@ -1,14 +1,15 @@
 {
   "dependencies": {
     "axios": "^0.17.0",
+    "echarts": "^3.7.0",
+    "mockjs": "^1.0.1-beta3",
+    "normalize-scss": "^7.0.0",
+    "sockjs-client": "^1.1.4",
     "vue": "^2.5.2",
     "vue-property-decorator": "^6.0.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.0",
-    "vuex-class": "^0.3.0",
-    "normalize-scss": "^7.0.0",
-    "sockjs-client": "^1.1.4",
-    "echarts": "^3.7.0"
+    "vuex-class": "^0.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.3",
