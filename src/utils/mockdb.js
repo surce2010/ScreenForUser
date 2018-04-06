@@ -1079,7 +1079,7 @@ Mock.mock(new RegExp('/topic/schoolAppStatisc/'), {
 });
 
 // 应用评价统计
-Mock.mock(new RegExp('/call/queryAssess'), function(options) {
+Mock.mock(new RegExp('/call/appAssessStatisc'), function (options) {
   if (JSON.parse(options.body).appType === 'pc') {
     return {
       'returnStatus': '1',
@@ -1156,7 +1156,7 @@ Mock.mock(new RegExp('/call/queryAssess'), function(options) {
 });
 
 // 应用评价详情列表
-Mock.mock(new RegExp('/call/appAssessDetailList'), function(options) {
+Mock.mock(new RegExp('/call/appAssessDetailList'), function (options) {
   if (JSON.parse(options.body).appType === 'pc') {
     return {
       'returnStatus': '1',
@@ -1253,3 +1253,561 @@ Mock.mock(new RegExp('/call/appAssessDetailList'), function(options) {
     };
   }
 });
+
+// 用户分析
+Mock.mock(new RegExp('/topic/schoolUserStatisc/'), {
+  //学生客户端统计
+  'studentClientStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 2,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 45247.0,
+        //客户端类型
+        'client_type': 'mobile'
+      },
+      {
+        'user_num': 95361.0,
+        'client_type': 'pc'
+      }]
+  },
+  //教师账号安全统计
+  'teacherAccountSafeStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 0,
+      'pages': 0
+    },
+    'dataSet': [
+      {
+        //密码安全等级
+        'pwd_safe_grade': '强',
+        //用户数据
+        'user_num': 100
+      },
+      {
+        //密码安全等级
+        'pwd_safe_grade': '中',
+        //用户数据
+        'user_num': 100
+      },
+      {
+        //密码安全等级
+        'pwd_safe_grade': '弱',
+        //用户数据
+        'user_num': 100
+      },
+      {
+        //密码安全等级
+        'pwd_safe_grade': '无安全等级',
+        //用户数据
+        'user_num': 100
+      }]
+  },
+  //账号激活
+  'accountActiveStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 0,
+      'pages': 0
+    },
+    'dataSet': [
+      {
+        //学生账号数
+        'account_num_s': 100,
+        //学生激活账号数
+        'active_account_num_s': 100,
+        //学生未激活账号数
+        'inactive_account_num_s': 100,
+        //教师账号数
+        'account_num_t': 100,
+        //教师激活账号数
+        'active_account_num_t': 100,
+        //教师未激活账号数
+        'inactive_account_num_t': 100
+      }]
+  },
+  //学生账号安全统计
+  'studentAccountSafeStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 0,
+      'pages': 0
+    },
+    'dataSet': [
+      {
+        //密码安全等级
+        'pwd_safe_grade': '强',
+        //用户数据
+        'user_num': 100
+      },
+      {
+        //密码安全等级
+        'pwd_safe_grade': '中',
+        //用户数据
+        'user_num': 100
+      },
+      {
+        //密码安全等级
+        'pwd_safe_grade': '弱',
+        //用户数据
+        'user_num': 100
+      },
+      {
+        //密码安全等级
+        'pwd_safe_grade': '无安全等级',
+        //用户数据
+        'user_num': 100
+      }]
+  },
+  //学生在线时长统计
+  'studentOnlineTimeStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 5,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 266.0,
+        //在线时长等级
+        'online_time_grade': '0.5-1h'
+      },
+      {
+        'user_num': 2077.0,
+        'online_time_grade': '1-2h'
+      },
+      {
+        'user_num': 26729.0,
+        'online_time_grade': '2-3h'
+      },
+      {
+        'user_num': 4400.0,
+        'online_time_grade': '<0.5h'
+      },
+      {
+        'user_num': 55179.0,
+        'online_time_grade': '>3h'
+      }]
+  },
+  //教师常用客户端统计
+  'teacherClientStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 2,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 1698.0,
+        //客户端类型
+        'client_type': 'mobile'
+      },
+      {
+        'user_num': 46953.0,
+        'client_type': 'pc'
+      }]
+  },
+  //学生登录方式统计
+  'studentLoginTypeStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 4,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 4237.0,
+        //登录方式
+        'login_type': '免登陆'
+      },
+      {
+        'user_num': 5481.0,
+        'login_type': '手机App登录'
+      },
+      {
+        'user_num': 33334.0,
+        'login_type': '联合登陆'
+      },
+      {
+        'user_num': 112559.0,
+        'login_type': '账号密码'
+      }]
+  },
+  //学生浏览器Top5
+  'studentBrowserTop5Statisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 5,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 42325.0,
+        //浏览器
+        'browser': 'Chrome'
+      },
+      {
+        'user_num': 38095.0,
+        'browser': 'Apache'
+      },
+      {
+        'user_num': 30160.0,
+        'browser': 'IE'
+      },
+      {
+        'user_num': 12404.0,
+        'browser': 'Safari'
+      },
+      {
+        'user_num': 4038.0,
+        'browser': 'Baidu'
+      }]
+  },
+  //教师常用网络统计
+  'teacherNetworkStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 1,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 59.0,
+        //网络运营商
+        'network_provider': '电信'
+      },
+      {
+        'user_num': 127.0,
+        'network_provider': '移动'
+      },
+      {
+        'user_num': 18.0,
+        'network_provider': '联通'
+      }]
+  },
+  //教师在线时长统计
+  'teacherOnlineTimeStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 5,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 733.0,
+        //在线时长
+        'online_time_grade': '0.5-1h'
+      },
+      {
+        'user_num': 1149.0,
+        'online_time_grade': '1-2h'
+      },
+      {
+        'user_num': 10419.0,
+        'online_time_grade': '2-3h'
+      },
+      {
+        'user_num': 4173.0,
+        'online_time_grade': '<0.5h'
+      },
+      {
+        'user_num': 17128.0,
+        'online_time_grade': '>3h'
+      }]
+  },
+  //学生网络统计
+  'studentNetworkStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 6,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 71.0,
+        //网络运营商
+        'network_provider': '电信'
+      },
+      {
+        'user_num': 27.0,
+        'network_provider': '移动'
+      },
+      {
+        'user_num': 4.0,
+        'network_provider': '联通'
+      }]
+  },
+  //教师登录类型
+  'teacherLoginTypeStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 4,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 3898.0,
+        //登录类型
+        'login_type': '免登陆'
+      },
+      {
+        'user_num': 765.0,
+        'login_type': '手机App登录'
+      },
+      {
+        'user_num': 2575.0,
+        'login_type': '联合登陆'
+      },
+      {
+        'user_num': 59682.0,
+        'login_type': '账号密码'
+      }]
+  },
+  //累计账号审计
+  'accountAuditStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 0,
+      'pages': 0
+    },
+    'dataSet': [
+      {
+        //恶意IP
+        'malic_ip_num': 0,
+        //密码暴力猜解
+        'pws_guess_num': 0
+      }]
+  },
+  //今日审计
+  'todayAccountAuditStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 0,
+      'pages': 0
+    },
+    'dataSet': [
+      {
+        //恶意IP
+        'malic_ip_num': 0,
+        //密码暴力猜解
+        'pws_guess_num': 0
+      }]
+  },
+  //教师常用浏览器统计
+  'teacherBrowserTop5Statisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 5,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 29965.0,
+        //浏览器
+        'browser': 'IE'
+      },
+      {
+        'user_num': 10654.0,
+        'browser': 'Chrome'
+      },
+      {
+        'user_num': 2493.0,
+        'browser': 'Apache'
+      },
+      {
+        'user_num': 1252.0,
+        'browser': '搜狗'
+      },
+      {
+        'user_num': 901.0,
+        'browser': 'QQ'
+      }]
+  },
+  //用户地区统计
+  'userAreaStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 3,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 2.0,
+        //省份
+        'province': '北京市'
+      },
+      {
+        'user_num': 2.0,
+        'province': '湖北省'
+      },
+      {
+        'user_num': 99.0,
+        'province': '浙江省'
+      }]
+  },
+  //用户境外国家Top5
+  'userForeignAreaTop5Statisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 3,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //用户数
+        'user_num': 2.0,
+        //省份
+        'country': '国家1'
+      },
+      {
+        'user_num': 2.0,
+        'country': '国家2'
+      },
+      {
+        'user_num': 99.0,
+        'country': '国家3'
+      },
+      {
+        'user_num': 99.0,
+        'country': '国家4'
+      },
+      {
+        'user_num': 99.0,
+        'country': '国家5'
+      }]
+  }
+})

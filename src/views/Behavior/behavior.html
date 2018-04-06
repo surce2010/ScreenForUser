@@ -22,12 +22,12 @@
     <Card class="behavior__online" col="3" title="账号在线时长" subtitle="（近30日）">
       <TwoPieChart :outer="0.9" :inner="0.55" :legend="['< 0.5h', '0.5-1h', '1-2h', '2-3h', '> 3h']" :data="onlineStudent" :data2="onlineTeacher" />
     </Card>
-    <Card class="behavior__type" col="3" title="账号登录类型" subtitle="（近30日）">
+    <Card class="behavior__type" col="3" title="账号登录类型">
       <TwoPieChart :outer="0.9" :inner="0.55" :legend="loginX" :data="loginStudent" :data2="loginTeacher" />
     </Card>
   </aside>
   <main flex-column col="4">
-    <Card class="behavior__active" title="用户活跃分布" col="5" subtitle="（近30日）">
+    <Card class="behavior__active" title="用户活跃分布" col="5">
       <div class="behavior__active-map">
         <Chart :options="opts" />
         <div class="visual-map">
@@ -38,10 +38,10 @@
       </div>
     </Card>
     <div class="behavior__stuff" flex col="3">
-      <Card class="behavior__client" col="1" title="用户常用客户端" subtitle="（近30日）">
+      <Card class="behavior__client" col="1" title="用户常用客户端">
         <TwoPieChart :outer="0.9" :inner="0.55" :color="['#9A7DD1', '#419EF8']" :legend="['PC', '移动']" :data="clientStudent" :data2="clientTeacher" />
       </Card>
-      <Card class="behavior__browser" col="1" title="用户常用浏览器Top5" subtitle="（近30日）">
+      <Card class="behavior__browser" col="1" title="用户常用浏览器Top5">
         <div>
           <IconItem role="student" :column="false" />
           <ProgressBarGroup :data="browserTop5.student" :color="['#05C180', '#008E32']" />
@@ -96,7 +96,7 @@
         </div>
       </div>
     </Card>
-    <Card class="behavior__platform" col="3" title="运营商" subtitle="（近30日）">
+    <Card class="behavior__platform" col="3" title="用户常用运营商">
       <TwoPieChart :outer="0.9" :inner="0.55" :color="['#9A7DD1', '#419EF8', '#42c66c']" :legend="network.x" :data="network.student" :data2="network.teacher" />
     </Card>
   </aside>

@@ -48,7 +48,7 @@ export default new Router({
       path: '/UserAction',
       name: 'behavior',
       meta: {
-        title: '用户行为分析'
+        title: '用户分析'
       },
       component: view('Behavior')
     }, {

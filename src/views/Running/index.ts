@@ -124,7 +124,7 @@ export default class Running extends Vue {
   }
 
   async queryHiscoreApp(rn = -1, appType: string) {
-    const {data} = await axios.post('/call/queryAssess', {
+    const {data} = await axios.post('/call/appAssessStatisc', {
       rn,
       schoolCode: this.$route.query.schoolCode,
       appType
