@@ -82,7 +82,7 @@ export default class Running extends Vue {
     const schoolId = this.$route.query.schoolCode;
     const token = this.$route.query.token;
     setInterval(() => {
-      if (this.displayDevice === 'PC') {
+      if (this.loop === this.assessDetail.length - 1) {
         this.hiscoreAppLoop();
       } else {
         this.loop = (this.loop + 1) % this.assessDetail.length;
