@@ -3,6 +3,7 @@ import {Component, Prop, Watch} from 'vue-property-decorator';
 import {State} from 'vuex-class';
 import WithRender from './behavior.html?style=./behavior.scss';
 import Card from '@components/Card';
+import ProportionBar from '@components/ProportionBar';
 import PercentBar from '@components/PercentBar';
 import Legend from '@components/Legend';
 import TwoPieChart from '@components/TwoPieChart';
@@ -14,10 +15,11 @@ import Chart from '@components/Chart';
 import 'echarts/map/js/china';
 import axios from "@utils/axios";
 import '@utils/mockdb'
+import {formatNumber} from "@utils/dataFormat";
 
 @WithRender
 @Component({
-  components: {Card, PercentBar, vLegend: Legend, TwoPieChart, Chart, ProgressBarGroup, IconItem}
+  components: {Card, ProportionBar, PercentBar, vLegend: Legend, TwoPieChart, Chart, ProgressBarGroup, IconItem}
 })
 export default class Behavior extends Vue {
   activeLegendColor = ['#E9B042', '#37A2F7'];
@@ -57,8 +59,9 @@ export default class Behavior extends Vue {
     }]
   };
   accountActive = {
-    student: [0, 0],
-    teacher: [0, 0]
+    student: 0,
+    teacher: 0,
+    total: ''
   };
   onlineStudent = [];
   onlineTeacher = [];
@@ -68,6 +71,14 @@ export default class Behavior extends Vue {
   clientStudent = [];
   clientTeacher = [];
   history = {
+    ip: 0,
+    guess: 0
+  };
+  historyToday = {
+    ip: 0,
+    guess: 0
+  };
+  historyTotal = {
     ip: 0,
     guess: 0
   };
@@ -84,6 +95,10 @@ export default class Behavior extends Vue {
     student: [],
     teacher: []
   };
+  timer = null;
+  historySource = 'today';
+  intervalTime = 60000;
+  userForeignAreaTop5Statisc = [];
 
   created() {
     //默认查询一次
@@ -92,6 +107,14 @@ export default class Behavior extends Vue {
     setInterval(() => {
       this.schoolUserStatiscLoop();
     }, 5000);
+
+    this.timer = setTimeout(() => {
+      if (this.historySource === 'today') {
+        this.toggleHistorySource('total')
+      } else {
+        this.toggleHistorySource('today')
+      }
+    }, this.intervalTime);
   }
 
   async querySchoolAppStatisc() {
@@ -112,19 +135,12 @@ export default class Behavior extends Vue {
       return;
     }
     this.date = new Date();
+    //账号身份分布
     const accountActiveStatisc = format(json.accountActiveStatisc)[0] || {};
-    let activeS = Math.floor(accountActiveStatisc.active_account_num_s / accountActiveStatisc.account_num_s * 100);
-    if (isNaN(activeS)) {
-      this.accountActive.student = [50, 50];
-    } else {
-      this.accountActive.student = [100 - activeS, activeS];
-    }
-    let activeT = Math.floor(accountActiveStatisc.active_account_num_t / accountActiveStatisc.account_num_t * 100);
-    if (isNaN(activeT)) {
-      this.accountActive.teacher = [50, 50];
-    } else {
-      this.accountActive.teacher = [100 - activeT, activeT];
-    }
+    this.accountActive.student = accountActiveStatisc.account_num_s;
+    this.accountActive.teacher = accountActiveStatisc.account_num_t;
+    let total = this.accountActive.student + this.accountActive.teacher;
+    this.accountActive.total = formatNumber(total);
 
     const x = ['<0.5h', '0.5-1h', '1-2h', '2-3h', '>3h'];
 
@@ -243,11 +259,19 @@ export default class Behavior extends Vue {
     }, {
       value: parseInt((mobile.user_num / (sum || 1) * 100).toFixed(0)),
       name: mobile.client_type
-    }]
+    }];
 
     const accountAuditStatisc = format(json.accountAuditStatisc)[0] || {};
-    this.history.guess = accountAuditStatisc.pws_guess_num || 0;
-    this.history.ip = accountAuditStatisc.malic_ip_num || 0;
+    this.historyTotal.guess = accountAuditStatisc.pws_guess_num || 0;
+    this.historyTotal.ip = accountAuditStatisc.malic_ip_num || 0;
+    const todayAccountAuditStatisc = format(json.todayAccountAuditStatisc)[0] || {};
+    this.historyToday.guess = todayAccountAuditStatisc.pws_guess_num || 0;
+    this.historyToday.ip = todayAccountAuditStatisc.malic_ip_num || 0;
+    if (this.historySource === 'today') {
+      this.history = this.historyToday;
+    } else {
+      this.history = this.historyTotal;
+    }
 
     const studentAccountSafeStatisc = format(json.studentAccountSafeStatisc);
 
@@ -301,7 +325,6 @@ export default class Behavior extends Vue {
       }
     });
     this.network.x = networkX; //所有常用运行商名称
-    console.log('networkX:', networkX);
     temp = [];
     sum = 0;
     studentNetworkStatisc.forEach(d => sum += d.user_num);
@@ -342,6 +365,16 @@ export default class Behavior extends Vue {
     this.opts.visualMap.max = max || 100;
     this.opts.series[0].data = temp;
 
+    const userForeignAreaTop5Statisc = format(json.userForeignAreaTop5Statisc);
+    sum = 0;
+    userForeignAreaTop5Statisc.forEach(d => sum += d.user_num);
+    this.userForeignAreaTop5Statisc = userForeignAreaTop5Statisc.map(d => {
+      return {
+        name: d.country,
+        value: Math.round(d.user_num / (sum || 1) * 100)
+      }
+    });
+
     const studentBrowserTop5Statisc = format(json.studentBrowserTop5Statisc);
     sum = 0;
     studentBrowserTop5Statisc.forEach(d => sum += d.user_num);
@@ -361,5 +394,28 @@ export default class Behavior extends Vue {
         value: Math.round(d.user_num / (sum || 1) * 100)
       }
     })
+  }
+
+  toggleHistorySource(name: string) {
+    this.historySource = name;
+    if (this.timer) {
+      clearInterval(this.timer);
+    }
+    this.timer = setTimeout(() => {
+      if (this.historySource === 'today') {
+        this.toggleHistorySource('total')
+      } else {
+        this.toggleHistorySource('today')
+      }
+    }, this.intervalTime);
+  };
+
+  @Watch('historySource')
+  onHistorySourceChange(nData: String) {
+    if (nData === 'today') {
+      this.history = this.historyToday;
+    } else {
+      this.history = this.historyTotal;
+    }
   }
 }

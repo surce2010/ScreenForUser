@@ -1339,13 +1339,13 @@ Mock.mock(new RegExp('/topic/schoolUserStatisc/'), {
     'dataSet': [
       {
         //学生账号数
-        'account_num_s': 100,
+        'account_num_s': 234,
         //学生激活账号数
         'active_account_num_s': 100,
         //学生未激活账号数
         'inactive_account_num_s': 100,
         //教师账号数
-        'account_num_t': 100,
+        'account_num_t': 2281,
         //教师激活账号数
         'active_account_num_t': 100,
         //教师未激活账号数
@@ -1677,9 +1677,9 @@ Mock.mock(new RegExp('/topic/schoolUserStatisc/'), {
     'dataSet': [
       {
         //恶意IP
-        'malic_ip_num': 0,
+        'malic_ip_num': 112,
         //密码暴力猜解
-        'pws_guess_num': 0
+        'pws_guess_num': 59
       }]
   },
   //今日审计
@@ -1699,9 +1699,9 @@ Mock.mock(new RegExp('/topic/schoolUserStatisc/'), {
     'dataSet': [
       {
         //恶意IP
-        'malic_ip_num': 0,
+        'malic_ip_num': 12,
         //密码暴力猜解
-        'pws_guess_num': 0
+        'pws_guess_num': 3
       }]
   },
   //教师常用浏览器统计

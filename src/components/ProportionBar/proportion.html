@@ -1,0 +1,11 @@
+<div class="proportionbar" flex>
+  <div class="proportionbar__legend" col="3">
+    <IconItem :role="role" :column="false" />
+  </div>
+  <div col="7" class="proportionbar__bar">
+    <div :style="{background: color[0], width: proportion + '%'}"></div>
+  </div>
+  <div class="proportionbar__value" col="2">
+    <div class="num">{{value}}</div>
+  </div>
+</div>

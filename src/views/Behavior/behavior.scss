@@ -1,4 +1,5 @@
 @import '~sass/easy';
+
 .behavior {
   main {
     .behavior__stuff {
@@ -9,10 +10,20 @@
     }
   }
   .behavior__activation {
-    .legend > span {
-      margin-left: 2em;
-      > span:first-child {
-        margin-right: 0.5em;
+    color: #fff;
+    font-size: 1em;
+    .title {
+      margin-top: -0.8em;
+      margin-right: 0.2em;
+      text-align: right;
+    }
+    .total-num {
+      .num {
+        font-size: 3em;
+        @include gradient(#FFFFFF, #B3B3B3);
+      }
+      .unit {
+        margin-left: 0.2em;
       }
     }
   }
@@ -29,6 +40,7 @@
   .behavior__active {
     .behavior__active-map {
       position: relative;
+      padding: 3em 0;
       .visual-map {
         position: absolute;
         bottom: 2em;
@@ -72,9 +84,61 @@
           }
         }
       }
+      .foreign-area {
+        position: absolute;
+        top: 3em;
+        right: -4.5em;
+        width: 10em;
+        height: 16em;
+        padding: 1em;
+        background-image: linear-gradient(-180deg, rgba(0, 134, 227, 0.6) 0%, rgba(0, 113, 221, 0.3) 21%, rgba(0, 89, 214, 0.1) 46%, rgba(0, 70, 209, 0) 97%);
+        box-shadow: 0 12px 25px 0 rgba(1, 19, 37, 0.30);
+        border-radius: 0.4em;
+        .title {
+          margin-bottom: 0.5em;
+        }
+        .progressbar {
+          margin-bottom: 0.8em;
+          .progressbar__bar {
+            height: 0.6em;
+          }
+          .num {
+            font-size: 1em;
+          }
+          @include breakpoint(max-width 1560px) {
+            margin-bottom: 0.2em;
+          }
+        }
+      }
     }
   }
   .behavior__history {
+    .behavior__history-btn {
+      > a {
+        display: inline-block;
+        width: 5em;
+        height: 1.6em;
+        border: 1px solid rgba(255, 255, 255, 0.42);
+        line-height: 1.6em;
+        font-size: 1.1em;
+        text-align: center;
+        vertical-align: middle;
+        transition: all .5s ease;
+        cursor: pointer;
+        &.current, &:hover, &:active {
+          color: #01122B;
+          border: 1px solid #27A6F6;
+          background-color: #27A6F6;
+        }
+        &:first-child {
+          border-right: none;
+          border-radius: 0.2em 0 0 0.2em;
+        }
+        &:last-child {
+          border-radius: 0 0.2em 0.2em 0;
+        }
+      }
+    }
     .card__body {
       padding-left: 0;
       padding-right: 0;
