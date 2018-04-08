@@ -65,6 +65,13 @@ export default new Router({
         title: '主机运行监测'
       },
       component: view('Host')
+    }, {
+      path: '/SystemAnalysis',
+      name: 'system',
+      meta: {
+        title: '系统运行分析'
+      },
+      component: view('SystemAnalysis')
     }]
   }]
 });

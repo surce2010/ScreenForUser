@@ -1,0 +1,118 @@
+<div class="system height100" flex>
+  <aside class="system__leftaside" col="9" flex-column>
+    <section class="system__overview" col="5" flex-column>
+      <h3 class="system__overview-heading">
+        <span class="heading__title">今日健康度得分</span>
+      </h3>
+      <div class="system__overview-list" flex>
+        <div col="1" flex-column rowcenter class="system__overview-item system__overview-count">
+          <div class="system_count-title">业务系统数量</div>
+          <div class="system__overview-info" flex colcenter>
+            <div col="3" class="system_count-icon">
+              <img src="~@assets/images/icon_count.png" alt=""/>
+            </div>
+            <div col="7" class="system_count-value" flex>
+              <div class="num">{{systemOverview.system_count}}</div>
+              <div class="unit">/个</div>
+            </div>
+          </div>
+        </div>
+        <div col="1" flex-column rowcenter class="system__overview-item system__overview-pv">
+          <div class="system_count-title">近30日累计PV</div>
+          <div class="system__overview-info" flex colcenter>
+            <div col="3" class="system_count-icon">
+              <img src="~@assets/images/icon_view.png" alt=""/>
+            </div>
+            <div col="7" class="system_count-value" flex>
+              <div class="num">{{systemOverview.last_30_days_pv}}</div>
+              <div class="unit">/次</div>
+            </div>
+          </div>
+        </div>
+        <div col="1" flex-column rowcenter class="system__overview-item system__overview-ip">
+          <div class="system_count-title">近30日累计独立IP地址数</div>
+          <div class="system__overview-info" flex colcenter>
+            <div col="3" class="system_count-icon">
+              <img src="~@assets/images/icon_ip.png" alt=""/>
+            </div>
+            <div col="7" class="system_count-value" flex>
+              <div class="num">{{systemOverview.last_30_days_ip}}</div>
+              <div class="unit">/个</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3 class="system__overview-heading" center>
+        <span class="heading__title">近30日访问量</span>
+      </h3>
+      <div class="system__overview-pvuv" col="1">
+        <div class="running__outattack-legend">
+          <span><span class="running__legend" style="background:linear-gradient(90deg, #05C180, #008E32);"></span><span>PV</span></span>
+          <span><span class="running__legend" style="background:linear-gradient(90deg, #5FF2F8, #0979B9);"></span><span>UV</span></span>
+        </div>
+        <LineChart :color="color" :x="last30DaysPvuvX" :data="last30DaysPvuv"/>
+      </div>
+    </section>
+    <Card class="provider__distribute" col="2" title="来访用户运营商分布" subtitle="(近30日)" :row="false">
+      <div class="provider__distribute-top2" flex>
+        <div col="1" flex colcenter v-for="item in pvAppTop2">
+          <div col="5">
+            <div class="title">{{item.system_name}}</div>
+            <div class="subtitle">{{item.company_name}}</div>
+          </div>
+          <div col="2" class="num">{{item.pv}}</div>
+        </div>
+      </div>
+      <div class="provider__distribute-other" flex>
+        <div col="1" flex colcenter v-for="item in pvAppTopOther">
+          <div col="5">
+            <div class="title">{{item.system_name}}</div>
+            <div class="subtitle">{{item.company_name}}</div>
+          </div>
+          <div col="2" class="num">{{item.pv}}</div>
+        </div>
+      </div>
+    </Card>
+  </aside>
+  <section class="system__active" col="7" flex-column>
+    <h3 class="system__active-heading">
+      <span class="heading__title">访问量分布</span>
+      <sub>(近30日)</sub>
+    </h3>
+    <div class="system__active-map" col="6" flex>
+      <div class="active-map" col="8">
+        <Chart :options="opts"/>
+        <div class="visual-map">
+          <div class="visual-map__bar"></div>
+          <div class="visual-map__top num">{{opts.visualMap.max}}</div>
+          <div class="visual-map__bottom num">0</div>
+        </div>
+      </div>
+      <div class="foreign-area">
+        <div class="title">境外访问Top 5</div>
+        <ProgressBarGroup :data="worldPvDistribute" :color="['#5FF2F8', '#0979B9']"/>
+      </div>
+      <div col="2"></div>
+    </div>
+    <div class="system__active-pv" col="4" flex>
+      <div class="system__provider_pv" col="6" flex-column>
+        <h3 class="system__active-heading">
+          <span class="heading__title">来访用户运营商分布</span>
+          <sub>(近30日)</sub>
+        </h3>
+        <div col="1" flex-column>
+          <PieChart col="1" :data="providerPvDistribute" :showReal="true" :color="['#58BDA5', '#e6B03F', '#419EF8', '#9A7DD1', '#3AC868', '#A13588', '#E6783F', '#e3544C', '#5054F2', '#979797']" :column="false" :chartFlex="1" :cols="1"/>
+        </div>
+      </div>
+      <div class="system__browser_pv" col="5" flex-column>
+        <h3 class="system__active-heading">
+          <span class="heading__title">来访用户常用浏览器Top5</span>
+          <sub>(近30日)</sub>
+        </h3>
+        <div col="1" flex-column>
+          <ProgressBarGroup flex-column :data="browserPvDistribute" :color="['#05C180', '#008E32']"/>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

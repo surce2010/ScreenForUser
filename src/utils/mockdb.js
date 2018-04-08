@@ -1810,4 +1810,114 @@ Mock.mock(new RegExp('/topic/schoolUserStatisc/'), {
         'country': '国家5'
       }]
   }
-})
+});
+
+// 系统运行分析
+Mock.mock(new RegExp('/axsh_new/sendapdex_getSystemAnalysisScreenNew'), {
+  //业务系统概览
+  'system_overview': {
+    'system_count': 200,
+    'last_30_days_pv': 17128,
+    'last_30_days_ip': 2128
+  },
+  //近30日访问量
+  'last_30_days_pvuv': [
+    {
+      'pv': 212,
+      'uv': 23,
+      'date': '2018-03-04'
+    },
+    {
+      'pv': 312,
+      'uv': 32,
+      'date': '2018-03-05'
+    }
+  ],
+  //访问量高的业务系统Top5（近30天）
+  'top5_pv_app': [
+    {
+      'system_name': '业务系统名称',
+      'company_name': '厂商名称',
+      'pv': 2999
+    },
+    {
+      'system_name': '业务系统名称',
+      'company_name': '厂商名称',
+      'pv': 1888
+    },
+    {
+      'system_name': '业务系统名称',
+      'company_name': '厂商名称',
+      'pv': 1112
+    },
+    {
+      'system_name': '业务系统名称',
+      'company_name': '厂商名称',
+      'pv': 639
+    },
+    {
+      'system_name': '业务系统名称',
+      'company_name': '厂商名称',
+      'pv': 482
+    }
+  ],
+  //国内访问量分布
+  'china_pv_distribute': [
+    {
+      'count': 22,
+      'name': '江苏'
+    },
+    {
+      'count': 16,
+      'name': '北京'
+    },
+    {
+      'count': 5,
+      'name': '上海'
+    }],
+  //境外访问量分布
+  'world_pv_distribute': [
+    {
+      'count': 22,
+      'name': '美国'
+    },
+    {
+      'count': 16,
+      'name': '加拿大'
+    },
+    {
+      'count': 5,
+      'name': '泰国'
+    }
+  ],
+  //来访用户运营商分布（近30天）
+  'provider_pv_distribute': [
+    {
+      'count': 22,
+      'name': '移动'
+    },
+    {
+      'count': 16,
+      'name': '联通'
+    },
+    {
+      'count': 5,
+      'name': '电信'
+    }
+  ],
+  //来访用户常用浏览器Top5
+  'browser_pv_distribute': [
+    {
+      'count': 22,
+      'name': 'RedhatLinux2.6.18-164.el5'
+    },
+    {
+      'count': 16,
+      'name': 'RedhatLinux2.6.32-431.el6.x86_64'
+    },
+    {
+      'count': 5,
+      'name': 'WindowsMicrosoftWindowsServer2008R2Standard'
+    }
+  ]
+});

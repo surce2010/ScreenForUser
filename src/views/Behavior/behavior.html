@@ -26,19 +26,21 @@
   </aside>
   <main flex-column col="4">
     <Card class="behavior__active" title="用户活跃分布" col="5">
-      <div class="behavior__active-map" col="9">
-        <Chart :options="opts"/>
-        <div class="visual-map">
-          <div class="visual-map__bar"></div>
-          <div class="visual-map__top num">{{opts.visualMap.max}}</div>
-          <div class="visual-map__bottom num">0</div>
+      <div class="behavior__active-map" col="6" flex>
+        <div class="active-map" col="9">
+          <Chart :options="opts"/>
+          <div class="visual-map">
+            <div class="visual-map__bar"></div>
+            <div class="visual-map__top num">{{opts.visualMap.max}}</div>
+            <div class="visual-map__bottom num">0</div>
+          </div>
         </div>
         <div class="foreign-area">
           <div class="title">境外访问Top 5</div>
           <ProgressBarGroup :data="userForeignAreaTop5Statisc" :color="['#5FF2F8', '#0979B9']"/>
         </div>
+        <div col="1"></div>
       </div>
-      <div col="1"></div>
     </Card>
     <div class="behavior__stuff" flex col="3">
       <Card class="behavior__client" col="1" title="用户常用客户端">
