@@ -1908,16 +1908,24 @@ Mock.mock(new RegExp('/axsh_new/sendapdex_getSystemAnalysisScreenNew'), {
   //来访用户常用浏览器Top5
   'browser_pv_distribute': [
     {
+      'count': 122,
+      'name': 'Chrome'
+    },
+    {
+      'count': 48,
+      'name': 'IE'
+    },
+    {
       'count': 22,
-      'name': 'RedhatLinux2.6.18-164.el5'
+      'name': '360'
     },
     {
       'count': 16,
-      'name': 'RedhatLinux2.6.32-431.el6.x86_64'
+      'name': '搜狗'
     },
     {
       'count': 5,
-      'name': 'WindowsMicrosoftWindowsServer2008R2Standard'
+      'name': 'Safari'
     }
   ]
 });

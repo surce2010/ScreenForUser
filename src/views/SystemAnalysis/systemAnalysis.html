@@ -96,21 +96,21 @@
     </div>
     <div class="system__active-pv" col="4" flex>
       <div class="system__provider_pv" col="6" flex-column>
-        <h3 class="system__active-heading">
+        <h3 class="system__active-heading" style="margin-bottom: 1.5em;">
           <span class="heading__title">来访用户运营商分布</span>
           <sub>(近30日)</sub>
         </h3>
         <div col="1" flex-column>
-          <PieChart col="1" :data="providerPvDistribute" :showReal="true" :color="['#58BDA5', '#e6B03F', '#419EF8', '#9A7DD1', '#3AC868', '#A13588', '#E6783F', '#e3544C', '#5054F2', '#979797']" :column="false" :chartFlex="1" :cols="1"/>
+          <PieChart col="1" :cols="1" :column="false" :outer="0.9" :color="['#E85650', '#3AC868', '#37A2F7']" :data="providerPvDistribute" />
         </div>
       </div>
       <div class="system__browser_pv" col="5" flex-column>
-        <h3 class="system__active-heading">
+        <h3 class="system__active-heading" style="margin-bottom: 1.5em;">
           <span class="heading__title">来访用户常用浏览器Top5</span>
           <sub>(近30日)</sub>
         </h3>
         <div col="1" flex-column>
-          <ProgressBarGroup flex-column :data="browserPvDistribute" :color="['#05C180', '#008E32']"/>
+          <RowProgressBarGroup col="1" flex-column spacearound :real="true" :color="['#05C180', '#008E32']" :data="browserPvDistribute" showValue="false" />
         </div>
       </div>
     </div>

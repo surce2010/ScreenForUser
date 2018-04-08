@@ -249,6 +249,13 @@
       .system__provider_pv {
         > div {
           //padding: 1em;
+          .legendpie__row {
+            text-align: center;
+            border-bottom: none;
+          }
+        }
+        .legendpie__legend {
+          padding: 2em 0;
         }
       }
       .system__browser_pv {
@@ -257,7 +264,7 @@
           .progressbar {
             margin-bottom: 0.8em;
             .progressbar__bar {
-              height: 0.6em;
+              height: 0.8em;
             }
             .num {
               font-size: 1em;
@@ -265,6 +272,9 @@
             @include breakpoint(max-width 1560px) {
               margin-bottom: 0.2em;
             }
+          }
+          .progressbarrowgroup__title {
+            text-align: right;
           }
         }
       }

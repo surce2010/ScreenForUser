@@ -10,6 +10,7 @@ import TwoPieChart from '@components/TwoPieChart';
 import create from '@utils/websocket';
 import format, {formatNumber} from '@utils/DataFormat';
 import ProgressBarGroup from '@components/ProgressBarGroup';
+import RowProgressBarGroup from '@components/RowProgressBarGroup';
 import IconItem from '@components/IconItem';
 import LineChart from '@components/LineChart';
 import PieChartWithLegend from '@components/PieChartWithLegend';
@@ -30,7 +31,8 @@ import '@utils/mockdb'
     ProgressBarGroup,
     IconItem,
     LineChart,
-    PieChart: PieChartWithLegend
+    PieChart: PieChartWithLegend,
+    RowProgressBarGroup
   }
 })
 export default class Behavior extends Vue {
