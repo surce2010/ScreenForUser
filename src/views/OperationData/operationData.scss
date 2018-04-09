@@ -1,0 +1,167 @@
+@import '~sass/easy';
+
+.operation {
+  .operation__leftaside {
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    margin: $paddingHalf / 2;
+    display: flex;
+    flex-direction: column;
+    .operation__leftaside-summary {
+      padding: 1.5em 1em;
+      .summary__item {
+        margin-left: 0.8em;
+        margin-right: 0.8em;
+        text-align: center;
+        .summary__item-title {
+          font-size: 1.1em;
+        }
+        .summary__item-info {
+          .summary__item-icon {
+            margin-right: 1em;
+            text-align: right;
+            img {
+              width: 1.8em;
+              margin-top: -1.4em;
+            }
+          }
+          .summary__item-value {
+            align-items: baseline;
+            .num {
+              font-size: 3em;
+              @include gradient(#61E2FA, #1C5DF7);
+              &.error {
+                @include gradient(#FF6B67, #C80A05);
+              }
+            }
+            .unit {
+              margin-left: 0.4em;
+              font-size: 1em;
+            }
+          }
+        }
+      }
+    }
+    .operation__leftaside-topology {
+      padding: 1em;
+    }
+  }
+  .operation__rightaside {
+    .operation__rightaside-data {
+      flex: 0 0 15.2em;
+      .data-item {
+        margin-left: 3em;
+        .data-item-title {
+          margin-bottom: 1.4em;
+          font-size: 1.2em;
+        }
+        .data-item-table {
+          margin-bottom: 1em;
+          .tabel-title {
+            font-size: 1em;
+            > span:nth-of-type(1) {
+              color: #3AC868;
+            }
+            > span:nth-of-type(2) {
+              margin: 0 0.5em;
+              opacity: 0.5;
+            }
+            > span:nth-of-type(3) {
+              color: #27A6F6;
+            }
+          }
+          .tabel-data {
+            > span:nth-of-type(1) {
+              @include gradient(#51EC75, #028550);
+              font-size: 2.5em;
+            }
+            > span:nth-of-type(2) {
+              margin: 0 0.2em;
+              font-size: 2.5em;
+              opacity: 0.5;
+            }
+            > span:nth-of-type(3) {
+              @include gradient(#61E2FA, #1C5DF7);
+              font-size: 2.5em;
+            }
+            > span:nth-of-type(4) {
+              margin-left: 0.2em;
+              font-size: 1em;
+            }
+          }
+          .backups-title {
+            font-size: 1em;
+          }
+          .backups-data {
+            > span:nth-of-type(1) {
+              @include gradient(#51EC75, #028550);
+              font-size: 2.5em;
+            }
+            > span:nth-of-type(2) {
+              margin-left: 0.2em;
+              font-size: 1em;
+            }
+          }
+        }
+        .data-item-record {
+          .record-title {
+            font-size: 1em;
+          }
+          .record-data {
+            > span:nth-of-type(1) {
+              font-size: 2.5em;
+              @include gradient(#FFFFFF, #B3B3B3);
+            }
+            > span:nth-of-type(2) {
+              margin-left: 0.2em;
+              font-size: 1em;
+            }
+          }
+        }
+      }
+    }
+    .operation__rightaside-todo {
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.2);
+      margin: $paddingHalf / 2;
+      flex: 0 0 7em;
+      .todo-summary {
+        height: 100%;
+        background-image: linear-gradient(-180deg, rgba(227, 0, 0, 0.6) 0%, rgba(221, 0, 0, 0.54) 21%, rgba(214, 0, 0, 0.32) 51%, rgba(209, 0, 0, 0) 100%);
+        box-shadow: 0 12px 25px 0 rgba(90, 4, 4, 0.30);
+        > div:nth-of-type(1) {
+          font-size: 1.2em;
+          text-align: right;
+        }
+        > div:nth-of-type(2) {
+          padding-left: 2em;
+          .num {
+            @include gradient(#FFFFFF, #B3B3B3);
+            font-size: 4em;
+          }
+          > span:nth-of-type(2) {
+            margin-left: 0.2em;
+            font-size: 1.2em;
+          }
+        }
+      }
+      .todo-type {
+        flex-wrap: wrap;
+        align-content: center;
+        .todo-type-item {
+          width: 33.3333%;
+          min-width: 33.3333%;
+          max-width: 33.3333%;
+          text-align: center;
+          .num {
+            @include gradient(#FFFFFF, #B3B3B3);
+            font-size: 2.4em;
+            &.warning {
+              @include gradient(#FF6864, #C80A05);
+            }
+          }
+        }
+      }
+    }
+  }
+}

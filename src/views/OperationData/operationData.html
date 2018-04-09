@@ -1,0 +1,170 @@
+<div class="operation height100" flex>
+  <aside class="operation__leftaside" col="1" flex-column>
+    <div class="operation__leftaside-summary" flex>
+      <div class="summary__item" col="1" flex-column rowcenter>
+        <div class="summary__item-title">集成系统数</div>
+        <div class="summary__item-info" flex colcenter>
+          <div col="3" class="summary__item-icon">
+            <img src="~@assets/images/active_app.png" alt=""/>
+          </div>
+          <div col="7" class="summary__item-value" flex>
+            <div class="num">62</div>
+            <div class="unit">/个</div>
+          </div>
+        </div>
+      </div>
+      <div class="summary__item" col="1" flex-column rowcenter>
+        <div class="summary__item-title">集成接口数</div>
+        <div class="summary__item-info" flex colcenter>
+          <div col="3" class="summary__item-icon">
+            <img src="~@assets/images/active_app.png" alt=""/>
+          </div>
+          <div col="7" class="summary__item-value" flex>
+            <div class="num">157</div>
+            <div class="unit">/个</div>
+          </div>
+        </div>
+      </div>
+      <div class="summary__item" col="1" flex-column rowcenter>
+        <div class="summary__item-title">异常接口数</div>
+        <div class="summary__item-info" flex colcenter>
+          <div col="3" class="summary__item-icon">
+            <img src="~@assets/images/active_app.png" alt=""/>
+          </div>
+          <div col="7" class="summary__item-value" flex>
+            <div class="num error">28</div>
+            <div class="unit">/个</div>
+          </div>
+        </div>
+      </div>
+      <div class="summary__item" col="1" flex-column rowcenter>
+        <div class="summary__item-title">数据体积</div>
+        <div class="summary__item-info" flex colcenter>
+          <div col="3" class="summary__item-icon">
+            <img src="~@assets/images/active_app.png" alt=""/>
+          </div>
+          <div col="7" class="summary__item-value" flex>
+            <div class="num">72</div>
+            <div class="unit">/GB</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="operation__leftaside-topology" flex col="1">
+      <Chart col="1" :options="extendOpt" />
+    </div>
+  </aside>
+  <aside class="operation__rightaside" col="1" flex-column>
+    <Card class="operation__rightaside-data">
+      <div class="data-item" col="1" flex-column>
+        <div class="data-item-title">数据中心</div>
+        <div class="data-item-table" flex-column>
+          <div class="tabel-title">
+            <span>有效表</span>
+            <span>/</span>
+            <span>总表数</span>
+          </div>
+          <div class="tabel-data">
+            <span class="num">60</span>
+            <span>/</span>
+            <span class="num">3,460</span>
+            <span>张</span>
+          </div>
+        </div>
+        <div class="data-item-record" flex-column>
+          <div class="record-title">
+            <span>总记录数</span>
+          </div>
+          <div class="record-data">
+            <span class="num">38,839</span>
+            <span>条</span>
+          </div>
+        </div>
+      </div>
+      <div class="data-item" col="1" flex-column>
+        <div class="data-item-title">学校标准</div>
+        <div class="data-item-table" flex-column>
+          <div class="tabel-title">
+            <span>有效表</span>
+            <span>/</span>
+            <span>总表数</span>
+          </div>
+          <div class="tabel-data">
+            <span class="num">60</span>
+            <span>/</span>
+            <span class="num">3,460</span>
+            <span>张</span>
+          </div>
+        </div>
+        <div class="data-item-record" flex-column>
+          <div class="record-title">
+            <span>总记录数</span>
+          </div>
+          <div class="record-data">
+            <span class="num">38,839</span>
+            <span>条</span>
+          </div>
+        </div>
+      </div>
+      <div class="data-item" col="1" flex-column>
+        <div class="data-item-title">数据备份</div>
+        <div class="data-item-table" flex-column>
+          <div class="backups-title">
+            <span>已备份表数</span>
+          </div>
+          <div class="backups-data">
+            <span class="num">3,460</span>
+            <span>张</span>
+          </div>
+        </div>
+        <div class="data-item-record" flex-column>
+          <div class="record-title">
+            <span>总记录数</span>
+          </div>
+          <div class="record-data">
+            <span class="num">38,839</span>
+            <span>条</span>
+          </div>
+        </div>
+      </div>
+    </Card>
+    <Card class="operation__rightaside-data" title="近30日数据量" col="1" :row="false">
+      <LineBarChart col="1" :color="color" :x="dataConsLatest30DaysX" :data="dataConsLatest30Days"></LineBarChart>
+    </Card>
+    <div class="operation__rightaside-todo" flex>
+      <div class="todo-summary" col="2" flex colcenter>
+        <div col="6">待处理问题</div>
+        <div col="7">
+          <span class="num">108</span>
+          <span>/件</span>
+        </div>
+      </div>
+      <div class="todo-type" col="3" flex>
+        <div class="todo-type-item" col="1" flex center>
+          <span class="item-name">问题类型</span>
+          <span :class="['num', false ? '' : 'warning']">28</span>
+        </div>
+        <div class="todo-type-item" col="1" flex center>
+          <span class="item-name">问题类型</span>
+          <span :class="['num', false ? '' : 'warning']">28</span>
+        </div>
+        <div class="todo-type-item" col="1" flex center>
+          <span class="item-name">问题类型</span>
+          <span :class="['num', false ? '' : 'warning']">28</span>
+        </div>
+        <div class="todo-type-item" col="1" flex center>
+          <span class="item-name">问题类型</span>
+          <span :class="['num', false ? '' : 'warning']">28</span>
+        </div>
+        <div class="todo-type-item" col="1" flex center>
+          <span class="item-name">问题类型</span>
+          <span :class="['num', false ? '' : 'warning']">28</span>
+        </div>
+        <div class="todo-type-item" col="1" flex center>
+          <span class="item-name">问题类型</span>
+          <span :class="['num', false ? '' : 'warning']">28</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>

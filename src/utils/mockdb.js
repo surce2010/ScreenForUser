@@ -1929,3 +1929,387 @@ Mock.mock(new RegExp('/axsh_new/sendapdex_getSystemAnalysisScreenNew'), {
     }
   ]
 });
+
+// 运行数据分析
+Mock.mock(new RegExp('/topic/schoolDataStatisc/'), {
+  //概况
+  'dataSummaryStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 17,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //集成系统数
+        'systemNum': 62,
+        //集成接口数
+        'apiNum': 157,
+        //异常接口数
+        'wrongApiNum': 28,
+        //数据体积
+        'dataVolume': 72
+      }
+    ]
+  },
+  //数据中心统计
+  'dataCenterStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 17,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //有效表数
+        'validTableNum': 60,
+        //总表数
+        'tableNum': 3460,
+        //总记录数
+        'rowNum': 38839
+      }
+    ]
+  },
+  //学校标准统计
+  'schoolStandardStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 17,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //有效表数
+        'validTableNum': 60,
+        //总表数
+        'tableNum': 3460,
+        //总记录数
+        'rowNum': 38839
+      }
+    ]
+  },
+  //数据备份统计
+  'dataBackStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 17,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //有效表数
+        'validTableNum': 60,
+        //总表数
+        'tableNum': 3460,
+        //总记录数
+        'rowNum': 38839
+      }
+    ]
+  },
+  //数据拓扑
+  'dataTopology': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 3402,
+      'pages': 4
+    },
+    'dataSet': [
+      {
+        'amp_school_id': 'njau',
+        'mbsjy': 'ORACLE_ZSJ_LOGIC',
+        'schoolid': 'njau',
+        'axsh_school_code': 'NJAU',
+        'school_name': '南京农业大学',
+        'zt': '0',
+        //状态 0：正常 1：异常
+        'id': 'x',
+        'mbsjymc': '主数据',
+        //目标数据源名称
+        'jksl': 3,
+        //接口数据量
+        'ybsjymc': '图书馆管理系统',
+        //源表数据源名称
+        'ybsjy': 'ORACLE_TS_LOGIC',
+        //源表数据源
+        'rq': '2017-11-11'
+      },
+      {
+        'amp_school_id': 'njau',
+        'mbsjy': 'ORACLE_ZSJ_LOGIC',
+        'schoolid': 'njau',
+        'axsh_school_code': 'NJAU',
+        'school_name': '南京农业大学',
+        'zt': '0',
+        'id': 'x',
+        'mbsjymc': '主数据',
+        'jksl': 6,
+        'ybsjymc': '房产管理系统',
+        'ybsjy': 'ORACLE_ZC_FC_LOGIC',
+        'rq': '2017-11-11'
+      }]
+  },
+  //近30天数据量
+  'dataConsLatest30Days': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 30,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //吞吐量
+        'through_put': 8382699.0,
+        //总记录数据日增量
+        'total_added': 1853667.0,
+        //日期
+        'statisc_date': '03/05'
+      },
+      {
+        'through_put': 1332699,
+        'total_added': 6309071.0,
+        'statisc_date': '03/06'
+      },
+      {
+        'through_put': 8332699.0,
+        'total_added': 967453.0,
+        'statisc_date': '03/07'
+      },
+      {
+        'through_put': 8628335.0,
+        'total_added': 1050659.0,
+        'statisc_date': '03/08'
+      },
+      {
+        'through_put': 8628335.0,
+        'total_added': 1154735.0,
+        'statisc_date': '03/09'
+      },
+      {
+        'through_put': 4948795.0,
+        'total_added': 367079.0,
+        'statisc_date': '03/10'
+      },
+      {
+        'through_put': 5398190.0,
+        'total_added': 516832.0,
+        'statisc_date': '03/11'
+      },
+      {
+        'through_put': 1.0332921E7,
+        'total_added': 1004716.0,
+        'statisc_date': '03/12'
+      },
+      {
+        'through_put': 1.3767963E7,
+        'total_added': 1431197.0,
+        'statisc_date': '03/13'
+      },
+      {
+        'through_put': 3.10045631E8,
+        'total_added': 5905266.0,
+        'statisc_date': '03/14'
+      },
+      {
+        'through_put': 2.45810786E8,
+        'total_added': 5.9323441E7,
+        'statisc_date': '03/15'
+      },
+      {
+        'through_put': 4.7969716E7,
+        'total_added': 4458804.0,
+        'statisc_date': '03/16'
+      },
+      {
+        'through_put': 7368351.0,
+        'total_added': 561811.0,
+        'statisc_date': '03/17'
+      },
+      {
+        'through_put': 9451994.0,
+        'total_added': 579392.0,
+        'statisc_date': '03/18'
+      },
+      {
+        'through_put': 1.1844377E7,
+        'total_added': 287325.0,
+        'statisc_date': '03/19'
+      },
+      {
+        'through_put': 4.5554585E7,
+        'total_added': 1.1031959E7,
+        'statisc_date': '03/20'
+      },
+      {
+        'through_put': 2.7155442E7,
+        'total_added': 706574.0,
+        'statisc_date': '03/21'
+      },
+      {
+        'through_put': 9921380.0,
+        'total_added': 849395.0,
+        'statisc_date': '03/22'
+      },
+      {
+        'through_put': 9233964.0,
+        'total_added': 666288.0,
+        'statisc_date': '03/23'
+      },
+      {
+        'through_put': 1.0508467E7,
+        'total_added': 1706232.0,
+        'statisc_date': '03/24'
+      },
+      {
+        'through_put': 5757457.0,
+        'total_added': 568272.0,
+        'statisc_date': '03/25'
+      },
+      {
+        'through_put': 1.2820147E7,
+        'total_added': 717377.0,
+        'statisc_date': '03/26'
+      },
+      {
+        'through_put': 9369170.0,
+        'total_added': 914321.0,
+        'statisc_date': '03/27'
+      },
+      {
+        'through_put': 6.8462243E7,
+        'total_added': 1.3228678E7,
+        'statisc_date': '03/28'
+      },
+      {
+        'through_put': 5.9174847E7,
+        'total_added': 736160.0,
+        'statisc_date': '03/29'
+      },
+      {
+        'through_put': 9584604.0,
+        'total_added': 943761.0,
+        'statisc_date': '03/30'
+      },
+      {
+        'through_put': 1.0720592E7,
+        'total_added': 997533.0,
+        'statisc_date': '03/31'
+      },
+      {
+        'through_put': 5980520.0,
+        'total_added': 631928.0,
+        'statisc_date': '04/01'
+      },
+      {
+        'through_put': 3.1178478E7,
+        'total_added': 8028935.0,
+        'statisc_date': '04/02'
+      },
+      {
+        'through_put': 2.1763181E7,
+        'total_added': 4117909.0,
+        'statisc_date': '04/03'
+      }]
+  },
+  //待处理问题总数
+  'problemTotalNumStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 17,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        'problemTotalNum': 10000
+      }]
+  },
+  //待处理问题类别统计
+  'problemStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 17,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        'probleType': '问题类型1', //问题类型
+        'problemNum': 5 //问题数量
+      },
+      {
+        'probleType': '问题类型1',
+        'problemNum': 5
+      },
+      {
+        'probleType': '问题类型1',
+        'problemNum': 5
+      },
+      {
+        'probleType': '问题类型1',
+        'problemNum': 5
+      },
+      {
+        'probleType': '问题类型1',
+        'problemNum': 5
+      },
+      {
+        'probleType': '问题类型1',
+        'problemNum': 5
+      }
+    ]
+  }
+});

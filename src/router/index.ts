@@ -72,6 +72,13 @@ export default new Router({
         title: '系统运行分析'
       },
       component: view('SystemAnalysis')
+    }, {
+      path: '/OperationData',
+      name: 'operation',
+      meta: {
+        title: '系统运行分析'
+      },
+      component: view('OperationData')
     }]
   }]
 });

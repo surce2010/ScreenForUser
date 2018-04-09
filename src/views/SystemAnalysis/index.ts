@@ -17,7 +17,7 @@ import PieChartWithLegend from '@components/PieChartWithLegend';
 import Chart from '@components/Chart';
 import 'echarts/map/js/china';
 import axios from "@utils/axios";
-import '@utils/mockdb'
+import '@utils/mockdb';
 
 @WithRender
 @Component({
