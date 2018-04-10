@@ -1,15 +1,12 @@
 import Vue from 'vue';
-import { Component, Prop, Watch } from 'vue-property-decorator';
-import {State, Action} from 'vuex-class';
+import {Component, Prop, Watch} from 'vue-property-decorator';
 import WithRender from './operationData.html?style=./operationData.scss';
 import Card from '@components/Card';
 import Chart from '@components/Chart';
 import LineBarChart from '@components/LineBarChart';
 import '../../extensions/graphx.js';
-import {DATA_HEALTH, DATA_SUMMARY, DATA_TECH, DATA_INTERFACE, DATA_DATABASE, DATA_CODE, DATA_QUALITY, DATA_BAK, DATA_RESOLVE, DATA_TOPOLOGY, DATA_LAST30DAYSPROCESSPROBLEMSTATISC} from '@store/Constants';
-import {formatNumber} from '@utils/DataFormat';
-import axios from "../../utils/axios";
-import format from "../../utils/dataFormat";
+import format, {formatNumber} from '@utils/DataFormat';
+import axios from '@utils/axios';
 import '@utils/mockdb';
 
 
@@ -17,63 +14,105 @@ import '@utils/mockdb';
 
 @WithRender
 @Component({
-  components: { Card, Chart, LineBarChart }
+  components: {Card, Chart, LineBarChart}
 })
 export default class Data extends Vue {
-  @Action(DATA_TOPOLOGY) queryDataTopology: Function;
-  @State(state => state.data.topology) topology;
+  dealHeight = '7em';
+  extendOpt = {};
+  systemNum = '';
+  apiNum = '';
+  wrongApiNum = '';
+  dataVolume = '';
+  dataConsLatest30DaysX = [];
+  dataConsLatest30Days = [];
+  dataCenterStatisc = {
+    validTableNum: '',
+    tableNum: '',
+    rowNum: '',
+  };
+  schoolStandardStatisc = {
+    validTableNum: '',
+    tableNum: '',
+    rowNum: '',
+  };
+  dataBackStatisc = {
+    backTableNum: '',
+    backRowNum: ''
+  };
+  problemTotalNum = {};
+  problemStatisc = [];
 
-  get sys() {
-    const items = this.topology;
-    const nodes = {};
-    items.forEach(item => {
-      nodes[item.mbsjy] = item.mbsjymc;
-      nodes[item.ybsjy] = item.ybsjymc;
-    })
-    return nodes;
+  async getSchoolDataStatisc() {
+    const {data} = await axios.get('/topic/schoolDataStatisc/', {
+      params: {
+        schoolCode: this.$route.query.schoolCode
+      }
+    });
+    if (data) {
+      return data;
+    }
   }
-  get centerSys() {
-    const nodes = this.sys;
-    for (let key in nodes) {
-      if (nodes[key] === '主数据') {
-        return {
-          value: 143,
-          symbolSize: 143,
-          id: key,
-          name: nodes[key],
-          category: 'center',
-          x: 360,
-          y: 360,
-          itemStyle: {
-            normal: {
-              color: '#04A9F5'
-            }
-          },
-          label: {
-            normal: {
-              fontSize: 20
+
+  async getSchoolDataStatiscLoop() {
+    //运行数据分析接口信息
+    const json = await this.getSchoolDataStatisc();
+    if (!json) {
+      return;
+    }
+
+    //概况
+    const dataSummaryStatisc = format(json.dataSummaryStatisc)[0];
+    this.systemNum = dataSummaryStatisc.systemNum;
+    this.apiNum = dataSummaryStatisc.apiNum;
+    this.wrongApiNum = dataSummaryStatisc.wrongApiNum;
+    this.dataVolume = dataSummaryStatisc.dataVolume;
+
+    //数据拓扑
+    const topology = format(json.dataTopology);
+    const sys = function (topology) {
+      const items = topology;
+      const nodes = {};
+      items.forEach(item => {
+        nodes[item.mbsjy] = item.mbsjymc;
+        nodes[item.ybsjy] = item.ybsjymc;
+      });
+      return nodes;
+    };
+    const centerSys = function (nodes) {
+      for (let key in nodes) {
+        if (nodes[key] === '主数据') {
+          return {
+            value: 143,
+            symbolSize: 143,
+            id: key,
+            name: nodes[key],
+            category: 'center',
+            x: 360,
+            y: 360,
+            itemStyle: {
+              normal: {
+                color: '#04A9F5'
+              }
+            },
+            label: {
+              normal: {
+                fontSize: 20
+              }
             }
           }
         }
       }
-    }
-    return null;
-  }
-  x = 360;
-  y = 360;
-  r = 100;
-  colors = ['#D6D9DD', '#AAAEB3', '#6F737A']
-  get extendOpt() {
-    const center = this.centerSys;
-    const items = this.sys;
+      return null;
+    };
+
+    const colors = ['#D6D9DD', '#AAAEB3', '#6F737A']
+    const items = sys(topology);
+    const center = centerSys(items);
     let count = -1;
     for (let key in items) {
-      count ++;
+      count++;
     }
-    const r = this.r;
-    const x = this.x;
-    const y = this.y;
-    const tick =  Math.floor(360 / count);
+    const tick = Math.floor(360 / count);
     const data = [];
 
     let i = 0;
@@ -83,22 +122,22 @@ export default class Data extends Vue {
       }
       let size = 40;
       let jksl = 0;
-      this.topology.forEach(item => {
+      topology.forEach(item => {
         if (item.ybsjy === key) {
           // size += item.jksl;
           jksl = item.jksl;
         }
-      })
-      let color = this.colors[0];
+      });
+      let color = colors[0];
       if (jksl > 5 && jksl <= 10) {
-        color = this.colors[1];
+        color = colors[1];
       } else if (jksl > 10) {
-        color = this.colors[2];
+        color = colors[2];
         size += 10;
       }
       data.push({
-        x: Math.round(x + Math.sin(tick * i) * r),
-        y: Math.round(y - Math.cos(tick * i) * r),
+        x: Math.round(360 + Math.sin(tick * i) * 100),
+        y: Math.round(360 - Math.cos(tick * i) * 100),
         name: items[key],
         id: key,
         value: size,//this.sys[i].jksl,
@@ -114,13 +153,13 @@ export default class Data extends Vue {
             position: 'bottom'
           }
         }
-      })
+      });
       i++;
     }
-    if (this.centerSys) {
-      data.unshift(this.centerSys);
+    if (center) {
+      data.unshift(center);
     }
-    let links = this.topology.map(item => ({
+    let links = topology.map(item => ({
       source: item.ybsjy,
       target: item.mbsjy,
       symbol: ['none', 'arrow'],
@@ -150,7 +189,7 @@ export default class Data extends Vue {
       }
       item.founded = true;
     });
-    return {
+    this.extendOpt = {
       series: [{
         type: 'graphx',
         legend: [{
@@ -167,30 +206,34 @@ export default class Data extends Vue {
         }
       }]
     }
-  };
-  dealHeight = '7em';
 
-  dataConsLatest30DaysX = [];
-  dataConsLatest30Days = [];
+    //数据中心统计
+    const dataCenterStatiscOrigin = format(json.dataCenterStatisc)[0];
+    this.dataCenterStatisc = {
+      validTableNum: formatNumber(dataCenterStatiscOrigin.validTableNum || 0),
+      tableNum: formatNumber(dataCenterStatiscOrigin.tableNum || 0),
+      rowNum: formatNumber(dataCenterStatiscOrigin.rowNum || 0),
+    };
+    //学校标准统计
+    const schoolStandardStatiscOrigin = format(json.schoolStandardStatisc)[0];
+    this.schoolStandardStatisc = {
+      validTableNum: formatNumber(schoolStandardStatiscOrigin.validTableNum || 0),
+      tableNum: formatNumber(schoolStandardStatiscOrigin.tableNum || 0),
+      rowNum: formatNumber(schoolStandardStatiscOrigin.rowNum || 0),
+    };
+    //数据备份统计
+    const dataBackStatiscOrigin = format(json.dataBackStatisc)[0];
+    this.dataBackStatisc = {
+      backTableNum: formatNumber(dataBackStatiscOrigin.backTableNum || 0),
+      backRowNum: formatNumber(dataBackStatiscOrigin.backRowNum || 0),
+    };
 
+    //待处理问题总数
+    const problemTotalNumStatisc = format(json.problemTotalNumStatisc)[0];
+    this.problemTotalNum = formatNumber(problemTotalNumStatisc.problemTotalNum || 0);
 
-  async getSchoolDataStatisc() {
-    const {data} = await axios.get('/topic/schoolDataStatisc/', {
-      params: {
-        schoolCode: this.$route.query.schoolCode
-      }
-    });
-    if (data) {
-      return data;
-    }
-  }
-
-  async getSchoolDataStatiscLoop() {
-    //运行数据分析接口信息
-    const json = await this.getSchoolDataStatisc();
-    if (!json) {
-      return;
-    }
+    //待处理问题总数
+    this.problemStatisc = format(json.problemStatisc);
 
     //近30天数据量
     const dataConsLatest30DaysOrigin = format(json.dataConsLatest30Days);
@@ -217,38 +260,16 @@ export default class Data extends Vue {
     }];
   }
 
-  created () {
+  created() {
     const width = document.body.getBoundingClientRect().width;
     if (width > 1560) {
       this.dealHeight = '15em';
     }
-    const param = {schoolId: this.$route.query.schoolCode};
-    this.queryDataTopology(param);
-
-
 
     this.getSchoolDataStatiscLoop();
     setTimeout(() => {
-      this.queryDataTopology(param);
-
-
       this.getSchoolDataStatiscLoop();
     }, 86400000);
-
-  //   this.last30DaysAccessX = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'];
-  //   this.last30DaysAccess = [
-  //     {
-  //       name:'降水量',
-  //       type:'bar',
-  //       icon: 'circle',
-  //       value:[820, 580, 640, 820, 580, 640, 820, 580, 640, 820, 580, 640, 820, 580, 640, 820, 580, 640, 820, 580, 640, 820, 580, 640, 820, 580, 640, 820, 580, 640]
-  //     },
-  //     {
-  //       name:'平均温度',
-  //       type:'line',
-  //       // icon: 'image://'+lineIcon,
-  //       value:[880, 630, 690, 880, 630, 690, 880, 630, 690, 880, 630, 690, 880, 630, 690, 880, 630, 690, 880, 630, 690, 880, 630, 690, 880, 630, 690, 880, 630, 690]
-  //     }];
   }
 
 }

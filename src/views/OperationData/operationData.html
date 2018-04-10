@@ -8,7 +8,7 @@
             <img src="~@assets/images/active_app.png" alt=""/>
           </div>
           <div col="7" class="summary__item-value" flex>
-            <div class="num">62</div>
+            <div class="num">{{systemNum}}</div>
             <div class="unit">/个</div>
           </div>
         </div>
@@ -20,7 +20,7 @@
             <img src="~@assets/images/active_app.png" alt=""/>
           </div>
           <div col="7" class="summary__item-value" flex>
-            <div class="num">157</div>
+            <div class="num">{{apiNum}}</div>
             <div class="unit">/个</div>
           </div>
         </div>
@@ -32,7 +32,7 @@
             <img src="~@assets/images/active_app.png" alt=""/>
           </div>
           <div col="7" class="summary__item-value" flex>
-            <div class="num error">28</div>
+            <div class="num error">{{wrongApiNum}}</div>
             <div class="unit">/个</div>
           </div>
         </div>
@@ -44,7 +44,7 @@
             <img src="~@assets/images/active_app.png" alt=""/>
           </div>
           <div col="7" class="summary__item-value" flex>
-            <div class="num">72</div>
+            <div class="num">{{dataVolume}}</div>
             <div class="unit">/GB</div>
           </div>
         </div>
@@ -65,9 +65,9 @@
             <span>总表数</span>
           </div>
           <div class="tabel-data">
-            <span class="num">60</span>
+            <span class="num">{{dataCenterStatisc.validTableNum}}</span>
             <span>/</span>
-            <span class="num">3,460</span>
+            <span class="num">{{dataCenterStatisc.tableNum}}</span>
             <span>张</span>
           </div>
         </div>
@@ -76,7 +76,7 @@
             <span>总记录数</span>
           </div>
           <div class="record-data">
-            <span class="num">38,839</span>
+            <span class="num">{{dataCenterStatisc.rowNum}}</span>
             <span>条</span>
           </div>
         </div>
@@ -90,9 +90,9 @@
             <span>总表数</span>
           </div>
           <div class="tabel-data">
-            <span class="num">60</span>
+            <span class="num">{{schoolStandardStatisc.validTableNum}}</span>
             <span>/</span>
-            <span class="num">3,460</span>
+            <span class="num">{{schoolStandardStatisc.tableNum}}</span>
             <span>张</span>
           </div>
         </div>
@@ -101,7 +101,7 @@
             <span>总记录数</span>
           </div>
           <div class="record-data">
-            <span class="num">38,839</span>
+            <span class="num">{{schoolStandardStatisc.rowNum}}</span>
             <span>条</span>
           </div>
         </div>
@@ -113,7 +113,7 @@
             <span>已备份表数</span>
           </div>
           <div class="backups-data">
-            <span class="num">3,460</span>
+            <span class="num">{{dataBackStatisc.backTableNum}}</span>
             <span>张</span>
           </div>
         </div>
@@ -122,7 +122,7 @@
             <span>总记录数</span>
           </div>
           <div class="record-data">
-            <span class="num">38,839</span>
+            <span class="num">{{dataBackStatisc.backRowNum}}</span>
             <span>条</span>
           </div>
         </div>
@@ -135,34 +135,14 @@
       <div class="todo-summary" col="2" flex colcenter>
         <div col="6">待处理问题</div>
         <div col="7">
-          <span class="num">108</span>
+          <span class="num">{{problemTotalNum}}</span>
           <span>/件</span>
         </div>
       </div>
       <div class="todo-type" col="3" flex>
-        <div class="todo-type-item" col="1" flex center>
-          <span class="item-name">问题类型</span>
-          <span :class="['num', false ? '' : 'warning']">28</span>
-        </div>
-        <div class="todo-type-item" col="1" flex center>
-          <span class="item-name">问题类型</span>
-          <span :class="['num', false ? '' : 'warning']">28</span>
-        </div>
-        <div class="todo-type-item" col="1" flex center>
-          <span class="item-name">问题类型</span>
-          <span :class="['num', false ? '' : 'warning']">28</span>
-        </div>
-        <div class="todo-type-item" col="1" flex center>
-          <span class="item-name">问题类型</span>
-          <span :class="['num', false ? '' : 'warning']">28</span>
-        </div>
-        <div class="todo-type-item" col="1" flex center>
-          <span class="item-name">问题类型</span>
-          <span :class="['num', false ? '' : 'warning']">28</span>
-        </div>
-        <div class="todo-type-item" col="1" flex center>
-          <span class="item-name">问题类型</span>
-          <span :class="['num', false ? '' : 'warning']">28</span>
+        <div class="todo-type-item" col="1" flex center v-for="obj in problemStatisc">
+          <span col="1" class="item-name">{{obj.probleType}}</span>
+          <span col="1" :class="['num', obj.problemNum === 0 ? '' : 'warning']">{{obj.problemNum}}</span>
         </div>
       </div>
     </div>

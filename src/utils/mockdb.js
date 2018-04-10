@@ -2025,12 +2025,10 @@ Mock.mock(new RegExp('/topic/schoolDataStatisc/'), {
     },
     'dataSet': [
       {
-        //有效表数
-        'validTableNum': 60,
-        //总表数
-        'tableNum': 3460,
-        //总记录数
-        'rowNum': 38839
+        //备份表数
+        'backTableNum': 3460,
+        //备份记录数
+        'backRowNum': 38839
       }
     ]
   },
@@ -2060,7 +2058,7 @@ Mock.mock(new RegExp('/topic/schoolDataStatisc/'), {
         'id': 'x',
         'mbsjymc': '主数据',
         //目标数据源名称
-        'jksl': 3,
+        'jksl|+1': 3,
         //接口数据量
         'ybsjymc': '图书馆管理系统',
         //源表数据源名称
@@ -2287,28 +2285,28 @@ Mock.mock(new RegExp('/topic/schoolDataStatisc/'), {
     },
     'dataSet': [
       {
-        'probleType': '问题类型1', //问题类型
+        'probleType': '问题类型', //问题类型
         'problemNum': 5 //问题数量
       },
       {
-        'probleType': '问题类型1',
-        'problemNum': 5
+        'probleType': '问题类型',
+        'problemNum': 0
       },
       {
-        'probleType': '问题类型1',
-        'problemNum': 5
+        'probleType': '问题类型',
+        'problemNum': 28
       },
       {
-        'probleType': '问题类型1',
-        'problemNum': 5
+        'probleType': '问题类型',
+        'problemNum': 32
       },
       {
-        'probleType': '问题类型1',
-        'problemNum': 5
+        'probleType': '问题类型',
+        'problemNum': 51
       },
       {
-        'probleType': '问题类型1',
-        'problemNum': 5
+        'probleType': '问题类型',
+        'problemNum': 0
       }
     ]
   }

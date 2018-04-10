@@ -170,10 +170,10 @@ export default class Running extends Vue {
       todayTop5AppForT: [],//学生今日热门应用Top5
       teacherAppTop4: [],//累计教师应用Top5
       todayAccessStatisc: {
-        tuv: 0,//学生UV
-        suv: 0,//教师UV
-        spv: 0,//教师PV
-        tpv: 0,//学生PV
+        tuv: 0,
+        suv: 0,
+        spv: 0,
+        tpv: 0,
       },//今日访问统计
     };
     pc.last30DaysAccessStatisc = format(schoolAppStatiscObj.pc.last30DaysAccessStatisc) || [];//最近30天访问情况
@@ -244,10 +244,10 @@ export default class Running extends Vue {
       todayTop5AppForT: [],//学生今日热门应用Top5
       teacherAppTop4: [],//累计教师应用Top5
       todayAccessStatisc: {
-        tuv: 0,//学生UV
-        suv: 0,//教师UV
-        spv: 0,//教师PV
-        tpv: 0,//学生PV
+        tuv: 0,
+        suv: 0,
+        spv: 0,
+        tpv: 0,
       },//今日访问统计
     };
     mobile.last30DaysAccessStatisc = format(schoolAppStatiscObj.mobile.last30DaysAccessStatisc) || [];//最近30天访问情况
