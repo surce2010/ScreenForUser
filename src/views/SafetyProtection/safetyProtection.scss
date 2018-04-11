@@ -1,0 +1,327 @@
+@import '~sass/easy';
+
+.safety {
+  .safety__summary {
+    position: relative;
+    flex: 0 0 7em;
+    justify-items: right;
+    .safety__total-apps {
+      position: absolute;
+      top: $paddingHalf / 2;
+      left: $paddingHalf / 2;
+      z-index: 1;
+      width: 18em;
+      height: 10em;
+      background-image: linear-gradient(-209deg, rgba(5, 193, 128, 1) 0%, rgba(0, 142, 50, 1) 100%);
+      box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.30);
+      .total-apps-wrap {
+        height: 100%;
+        background: url(~@assets/images/shield.png) no-repeat center 0.6em;
+        background-size: 11em 10em;
+        .total-apps-title {
+          font-size: 1.2em;
+        }
+        .total-apps-value {
+          .num {
+            @include gradient(#FFFFFF, #B3B3B3);
+            font-size: 5em;
+          }
+        }
+      }
+    }
+    .safety__prevented-attacked-times {
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.2);
+      margin: $paddingHalf / 2;
+      margin-left: 18em + $paddingHalf * 1.5;
+      .prevented-attacked-times_item {
+        position: relative;
+        padding-left: 5em;
+        &:nth-of-type(1) {
+          .item-flag {
+            background: #27A6F6;
+          }
+        }
+        .item-flag {
+          position: absolute;
+          top: 0;
+          left: 1.1em;
+          width: 1.8em;
+          height: 3.2em;
+          padding: 0.4em 0.4em 0.8em;
+          background: #3AC868;
+          border-bottom-left-radius: 0.9em;
+          border-bottom-right-radius: 0.9em;
+          line-height: 1.1em;
+          color: #1D1D1D;
+          font-size: 1.2em;
+        }
+        .item-title {
+          font-size: 1em;
+          > span:nth-of-type(1) {
+            color: #3AC868;
+          }
+          > span:nth-of-type(2) {
+            margin: 0 0.5em;
+            opacity: 0.5;
+          }
+          > span:nth-of-type(3) {
+            color: #27A6F6;
+          }
+        }
+        .item-value {
+          > span:nth-of-type(1) {
+            @include gradient(#51EC75, #028550);
+            font-size: 3em;
+          }
+          > span:nth-of-type(2) {
+            margin: 0 0.2em;
+            font-size: 3em;
+            opacity: 0.8;
+          }
+          > span:nth-of-type(3) {
+            @include gradient(#61E2FA, #1C5DF7);
+            font-size: 3em;
+          }
+          > span:nth-of-type(4) {
+            margin-left: 0.2em;
+            font-size: 1em;
+          }
+        }
+      }
+    }
+  }
+  .safety__attack {
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    margin: $paddingHalf / 2;
+    .safety__attack-map {
+      margin: 3.4em 6em 1em;
+    }
+    .safety__attack-detail {
+      flex: 0 0 10em;
+      .detail-header {
+        margin: 0 5em;
+        .detail-header-title {
+          @include gradient;
+          font-size: 1.2em;
+          font-weight: bold;
+          white-space: nowrap;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.30);
+        }
+        .detail-header-time {
+          font-size: 1em;
+        }
+      }
+      .detail-content {
+        margin: 1em 3.5em 0;
+        overflow: hidden;
+        .detail-content-item {
+          margin-bottom: 0.5em;
+          > span {
+            width: 10%;
+            padding: 0 1em;
+            border-right: 1px solid rgba(255, 255, 2555, 0.2);
+            font-size: 1em;
+            @include truncate(100%);
+            &:nth-of-type(1) {
+              color: #F8E71C;
+            }
+            &:last-of-type {
+              border-right: 0;
+            }
+          }
+        }
+        table {
+          @include breakpoint(min-width 1440px) {
+            font-size: $fontSizeSmaller;
+          }
+          width: 100%;
+          height: 100%;
+          table-layout: fixed;
+          white-space: nowrap;
+          td {
+            padding: 0 1em;
+            @include truncate(90%);
+            border-right: 1px solid rgba(255, 255, 2555, 0.2);
+            &:first-of-type {
+              color: #F8E71C;
+            }
+            &:last-of-type {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .safety__outattack {
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    margin: $paddingHalf / 2;
+    .safety__outattack-header {
+      margin-top: 1.2em;
+      font-size: 1em;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .safety__outattack-chart {
+      margin: 1em 0.5em;
+    }
+  }
+  .safety__attacked-apps {
+    //flex: 0 0 20em;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    margin: $paddingHalf / 2;
+    .attacked-apps-header {
+      margin: 1em;
+      align-items: baseline;
+      .title {
+        align-items: baseline;
+        > span {
+          font-weight: bold;
+          white-space: nowrap;
+          &:first-of-type {
+            @include gradient;
+            font-size: 1.2em;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.30);
+          }
+        }
+      }
+      .more {
+        color: #F5A623;
+        text-align: right;
+      }
+    }
+    .toggle__date {
+      margin-bottom: 1em;
+      text-align: center;
+      .device__btn {
+        display: inline-block;
+        width: 3.2em;
+        height: 1.5em;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        line-height: 1.5em;
+        font-size: 1.1em;
+        text-align: center;
+        vertical-align: middle;
+        transition: all .5s ease;
+        cursor: pointer;
+        &.current, &:hover, &:active {
+          color: #01122B;
+          border: 1px solid #27A6F6;
+          background-color: #27A6F6;
+        }
+        &:first-of-type {
+          border-top-left-radius: 0.2em;
+          border-bottom-left-radius: 0.2em;
+        }
+        &:last-of-type {
+          border-top-right-radius: 0.2em;
+          border-bottom-right-radius: 0.2em;
+        }
+      }
+    }
+    .attacked-apps-num {
+      margin: 0 1em;
+      table {
+        @include breakpoint(min-width 1440px) {
+          font-size: $fontSizeSmaller;
+        }
+        width: 100%;
+        height: 100%;
+        table-layout: fixed;
+        white-space: nowrap;
+        text-align: center;
+        border-spacing: 0;
+        th {
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          color: rgba(255, 255, 255, 0.8);
+          @include truncate(100%);
+          &:first-of-type {
+            text-align: left;
+          }
+          &:last-of-type {
+            text-align: right;
+          }
+        }
+        td {
+          font-size: 1.1em;
+          @include truncate(100%);
+          &:first-of-type {
+            text-align: left;
+            font-weight: bold;
+          }
+          &:last-of-type {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+  .safety__attacked-mode {
+    //flex: 0 0 17em;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+    margin: $paddingHalf / 2;
+    > div {
+      .attacked-mode-header {
+        margin: 1em;
+        align-items: baseline;
+        .title {
+          align-items: baseline;
+          > span {
+            font-weight: bold;
+            white-space: nowrap;
+            &:first-of-type {
+              @include gradient;
+              font-size: 1.2em;
+              text-shadow: 0 2px 4px rgba(0, 0, 0, 0.30);
+            }
+          }
+        }
+        .more {
+          color: #F5A623;
+          text-align: right;
+        }
+      }
+      .attacked-mode-content {
+        margin: 0 1em;
+        table {
+          @include breakpoint(min-width 1440px) {
+            font-size: $fontSizeSmaller;
+          }
+          width: 100%;
+          height: 100%;
+          table-layout: fixed;
+          white-space: nowrap;
+          text-align: center;
+          border-spacing: 0;
+          th {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.8);
+            @include truncate(100%);
+            &:first-of-type {
+              text-align: left;
+            }
+            &:last-of-type {
+              text-align: right;
+            }
+          }
+          td {
+            font-size: 1.1em;
+            @include truncate(100%);
+            &:first-of-type {
+              text-align: left;
+              font-weight: bold;
+            }
+            &:last-of-type {
+              text-align: right;
+            }
+          }
+        }
+      }
+    }
+  }
+}

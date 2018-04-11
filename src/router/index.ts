@@ -79,6 +79,13 @@ export default new Router({
         title: '系统运行分析'
       },
       component: view('OperationData')
+    }, {
+      path: '/SafetyProtection',
+      name: 'safetyProtection',
+      meta: {
+        title: '安全守护'
+      },
+      component: view('SafetyProtection')
     }]
   }]
 });

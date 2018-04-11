@@ -2311,3 +2311,184 @@ Mock.mock(new RegExp('/topic/schoolDataStatisc/'), {
     ]
   }
 });
+
+// 安全防护
+Mock.mock(new RegExp('/cldPortal_new/event/getSafetyProtectBigScreenNew'), {
+  //累计攻击来源top5/次
+  'foreignAttack': [
+    {
+      'address': '香港',
+      'count': 91358.0
+    },
+    {
+      'address': '美国',
+      'count': 82190.0
+    },
+    {
+      'address': '韩国',
+      'count': 53367.0
+    },
+    {
+      'address': '日本',
+      'count': 23065.0
+    },
+    {
+      'address': '北美地区',
+      'count': 6819.0
+    }],
+  //被攻击top5应用/次
+  'attackedApps': {
+    //累计
+    'total_statis': [
+      {
+        'app_name': '学校主页',
+        'count': 5928740.0,
+        'app_id': '87'
+      },
+      {
+        'app_name': '新闻网',
+        'count': 1393064.0,
+        'app_id': '6962620582571966829'
+      },
+      {
+        'app_name': '管理与经济学部网站',
+        'count': 524359.0,
+        'app_id': '7384849226712235166'
+      },
+      {
+        'app_name': '国际合作与交流处',
+        'count': 500964.0,
+        'app_id': '8635600447378167375'
+      },
+      {
+        'app_name': '建筑学院',
+        'count': 493410.0,
+        'app_id': '1710230075'
+      }],
+    //今日
+    'today_statis': [
+      {
+        'app_name': '学校主页',
+        'count': 16201,
+        'app_id': 87
+      },
+      {
+        'app_name': '本科生招生网',
+        'count': 5452,
+        'app_id': 6962195405514582996
+      },
+      {
+        'app_name': '研究生招生网',
+        'count': 787,
+        'app_id': 1710230079
+      },
+      {
+        'app_name': '新闻网',
+        'count': 690,
+        'app_id': 6962620582571966829
+      },
+      {
+        'app_name': '迎新网',
+        'count': 435,
+        'app_id': 4982922672254571046
+      }]
+  },
+  //守护应用总数
+  'totalApps': 16,
+  //累计攻击方式top
+  'attackMode': [
+    {
+      'address': '可疑攻击',
+      'count': 3918721.0
+    },
+    {
+      'address': '漏洞防护',
+      'count': 1603987.0
+    },
+    {
+      'address': '协议违规',
+      'count': 1196797.0
+    },
+    {
+      'address': '文件限制',
+      'count': 1001581.0
+    },
+    {
+      'address': 'SQL注入攻击',
+      'count': 948728.0
+    }],
+  //汇总数据
+  'preventedAttackedTimes': {
+    //今日正常访问数
+    'visitToday': 10000,
+    //累计出流量
+    'output': 300,
+    //累计进流量
+    'input': 100,
+    //今日防护攻击数
+    'preventedToday': 24626,
+    //累计防护攻击数
+    'preventedTotal': 11083942,
+    //近七日防护攻击次数
+    'preventedCountLast7Days': [
+      {
+        'date': '03.26',
+        'count': 78028.0
+      },
+      {
+        'date': '03.27',
+        'count': 10446.0
+      },
+      {
+        'date': '03.28',
+        'count': 77628.0
+      },
+      {
+        'date': '03.29',
+        'count': 53404.0
+      },
+      {
+        'date': '03.30',
+        'count': 64723.0
+      },
+      {
+        'date': '03.31',
+        'count': 48174.0
+      },
+      {
+        'date': '04.01',
+        'count': 39243.0
+      }],
+    //累计正常访问数
+    'visitTotal': 221100
+  },
+  //实时攻击明细
+  'attackedDetail': {
+    'attack_dest': {
+      'desti_name': '天津大学',
+      'lati': '39.119594',
+      'long': '117.182462'
+    },
+    'attackLists': [
+      {
+        'address': '河南省漯河市 联通',
+        'attack_type': '扫描工具',
+        'ip': '115.49.167.198',
+        'attack_time': '04/02 14:48:04',
+        'lati': '33.576278688483',
+        'operator': '',
+        'platform': '人事处网站',
+        'long': '114.04606140023'
+      },
+      {
+        'address': '河南省漯河市 联通',
+        'attack_type': '扫描工具',
+        'ip': '115.49.167.198',
+        'attack_time': '04/02 14:48:04',
+        'lati': '33.576278688483',
+        'operator': '',
+        'platform': '人事处网站',
+        'long': '114.04606140023'
+      }]
+  }
+});
