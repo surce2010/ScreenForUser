@@ -2343,26 +2343,31 @@ Mock.mock(new RegExp('/cldPortal_new/event/getSafetyProtectBigScreenNew'), {
       {
         'app_name': '学校主页',
         'count': 5928740.0,
+        'normal_count': 240,
         'app_id': '87'
       },
       {
         'app_name': '新闻网',
         'count': 1393064.0,
+        'normal_count': 240,
         'app_id': '6962620582571966829'
       },
       {
         'app_name': '管理与经济学部网站',
         'count': 524359.0,
+        'normal_count': 240,
         'app_id': '7384849226712235166'
       },
       {
         'app_name': '国际合作与交流处',
         'count': 500964.0,
+        'normal_count': 240,
         'app_id': '8635600447378167375'
       },
       {
         'app_name': '建筑学院',
         'count': 493410.0,
+        'normal_count': 240,
         'app_id': '1710230075'
       }],
     //今日
@@ -2370,32 +2375,37 @@ Mock.mock(new RegExp('/cldPortal_new/event/getSafetyProtectBigScreenNew'), {
       {
         'app_name': '学校主页',
         'count': 16201,
+        'normal_count': 240,
         'app_id': 87
       },
       {
         'app_name': '本科生招生网',
         'count': 5452,
+        'normal_count': 240,
         'app_id': 6962195405514582996
       },
       {
         'app_name': '研究生招生网',
         'count': 787,
+        'normal_count': 240,
         'app_id': 1710230079
       },
       {
         'app_name': '新闻网',
         'count': 690,
+        'normal_count': 240,
         'app_id': 6962620582571966829
       },
       {
         'app_name': '迎新网',
         'count': 435,
+        'normal_count': 240,
         'app_id': 4982922672254571046
       }]
   },
   //守护应用总数
   'totalApps': 16,
-  //累计攻击方式top
+  //累计攻击方式top5/次
   'attackMode': [
     {
       'address': '可疑攻击',
@@ -2420,15 +2430,15 @@ Mock.mock(new RegExp('/cldPortal_new/event/getSafetyProtectBigScreenNew'), {
   //汇总数据
   'preventedAttackedTimes': {
     //今日正常访问数
-    'visitToday': 10000,
+    'visitToday': 100,
     //累计出流量
     'output': 300,
     //累计进流量
     'input': 100,
     //今日防护攻击数
-    'preventedToday': 24626,
+    'preventedToday': 626,
     //累计防护攻击数
-    'preventedTotal': 11083942,
+    'preventedTotal': 3942,
     //近七日防护攻击次数
     'preventedCountLast7Days': [
       {
@@ -2460,7 +2470,7 @@ Mock.mock(new RegExp('/cldPortal_new/event/getSafetyProtectBigScreenNew'), {
         'count': 39243.0
       }],
     //累计正常访问数
-    'visitTotal': 221100
+    'visitTotal': 2100
   },
   //实时攻击明细
   'attackedDetail': {
@@ -2471,24 +2481,26 @@ Mock.mock(new RegExp('/cldPortal_new/event/getSafetyProtectBigScreenNew'), {
     },
     'attackLists': [
       {
-        'address': '河南省漯河市 联通',
-        'attack_type': '扫描工具',
+        'address': '英国 伦敦',
+        'attack_type': '缺失报头',
         'ip': '115.49.167.198',
         'attack_time': '04/02 14:48:04',
-        'lati': '33.576278688483',
+        'lati': '55.378051',
         'operator': '',
-        'platform': '人事处网站',
-        'long': '114.04606140023'
+        'platform': '安心守护平台',
+        'long': '-3.435973',
+        'provider': '联通'
       },
       {
-        'address': '河南省漯河市 联通',
+        'address': '阿富汗 喀布尔',
         'attack_type': '扫描工具',
         'ip': '115.49.167.198',
         'attack_time': '04/02 14:48:04',
-        'lati': '33.576278688483',
+        'lati': '33.93911',
         'operator': '',
-        'platform': '人事处网站',
-        'long': '114.04606140023'
+        'platform': '安心守护平台',
+        'long': '67.709953',
+        'provider': '电信'
       }]
   }
 });

@@ -37,12 +37,21 @@
         }
       }
     },
+    beforeDestroy () {
+      window.removeEventListener('resize', this.resize)
+    },
     mounted() {
       this.$nextTick(() => {
+        window.addEventListener('resize', this.resize);
         this.initChart();
       });
     },
     methods: {
+      resize() {
+        if (this.chart) {
+          this.chart.resize();
+        }
+      },
       refresh() {
         clearInterval(this.iIndex);
         var points = this.getPoints();

@@ -70,6 +70,7 @@
           }
         }
         .item-value {
+          align-items: baseline;
           > span:nth-of-type(1) {
             @include gradient(#51EC75, #028550);
             font-size: 3em;
@@ -101,7 +102,7 @@
     .safety__attack-detail {
       flex: 0 0 10em;
       .detail-header {
-        margin: 0 5em;
+        margin: 0 4.6em 0 5em;
         .detail-header-title {
           @include gradient;
           font-size: 1.2em;
@@ -149,6 +150,7 @@
             }
             &:last-of-type {
               border-right: none;
+              text-align: right;
             }
           }
         }
@@ -214,6 +216,7 @@
           background-color: #27A6F6;
         }
         &:first-of-type {
+          border-right: none;
           border-top-left-radius: 0.2em;
           border-bottom-left-radius: 0.2em;
         }
@@ -236,6 +239,7 @@
         text-align: center;
         border-spacing: 0;
         th {
+          padding: 0.5em 0;
           border-bottom: 1px solid rgba(255, 255, 255, 0.2);
           color: rgba(255, 255, 255, 0.8);
           @include truncate(100%);
@@ -247,6 +251,7 @@
           }
         }
         td {
+          padding: 0.5em 0;
           font-size: 1.1em;
           @include truncate(100%);
           &:first-of-type {

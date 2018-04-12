@@ -5,7 +5,7 @@
         <div class="total-apps-wrap" flex-column center>
           <div class="total-apps-title">守护应用总数</div>
           <div class="total-apps-value">
-            <span class="num">500</span>
+            <span class="num">{{totalApps}}</span>
             <span>个</span>
           </div>
         </div>
@@ -13,43 +13,43 @@
       <div class="safety__prevented-attacked-times" col="1" flex>
         <div class="prevented-attacked-times_item" col="1" flex-column rowcenter>
           <div class="item-flag">今日</div>
-          <div class="item-title">
+          <div class="item-title" flex>
             <span>防护攻击数</span>
             <span>/</span>
             <span>正常访问数</span>
           </div>
-          <div class="item-value">
-            <span class="num">60</span>
+          <div class="item-value" flex>
+            <span class="num">{{preventedAttackedTimes.preventedToday}}</span>
             <span>/</span>
-            <span class="num">3,460</span>
+            <span class="num">{{preventedAttackedTimes.visitToday}}</span>
             <span>个</span>
           </div>
         </div>
         <div class="prevented-attacked-times_item" col="1" flex-column rowcenter>
           <div class="item-flag">累计</div>
-          <div class="item-title">
+          <div class="item-title" flex>
             <span>防护攻击数</span>
             <span>/</span>
             <span>正常访问数</span>
           </div>
-          <div class="item-value">
-            <span class="num">460</span>
+          <div class="item-value" flex>
+            <span class="num">{{preventedAttackedTimes.preventedTotal}}</span>
             <span>/</span>
-            <span class="num">32,460</span>
+            <span class="num">{{preventedAttackedTimes.visitTotal}}</span>
             <span>个</span>
           </div>
         </div>
         <div class="prevented-attacked-times_item" col="1" flex-column rowcenter>
           <div class="item-flag">累计</div>
-          <div class="item-title">
+          <div class="item-title" flex>
             <span>进流量</span>
             <span>/</span>
             <span>出流量</span>
           </div>
-          <div class="item-value">
-            <span class="num">280</span>
+          <div class="item-value" flex>
+            <span class="num">{{preventedAttackedTimes.input}}</span>
             <span>/</span>
-            <span class="num">400</span>
+            <span class="num">{{preventedAttackedTimes.output}}</span>
             <span>MB</span>
           </div>
         </div>
@@ -61,16 +61,17 @@
       <div class="safety__attack-detail">
         <div class="detail-header" flex>
           <span class="detail-header-title" col="2">实时攻击明细</span>
-          <span class="detail-header-time">截止2017/08/15 11:47</span>
+          <span class="detail-header-time">{{closeTime}}</span>
         </div>
         <div class="detail-content">
           <table v-if="waitDealEvent.length > 0">
             <tr v-for="(e,index) in waitDealEvent" :key="index">
               <td width="15%">【 {{e.attack_type}} 】</td>
-              <td width="20%">{{e.attack_time}}</td>
-              <td width="17%">{{e.ip}}</td>
-              <td>{{e.address}} {{e.isp}}</td>
-              <td width="12%">{{e.platform}}</td>
+              <td width="20%">{{e.platform}}</td>
+              <td width="18%">{{e.attack_time}}</td>
+              <td width="18%">{{e.ip}}</td>
+              <td>{{e.address}}</td>
+              <td width="10%">{{e.provider}}</td>
             </tr>
           </table>
           <NoProblem v-else/>
@@ -79,12 +80,12 @@
     </div>
   </main>
   <aside col="3" flex-column>
-    <div class="safety__outattack" col="2" flex-column>
+    <div class="safety__outattack" col="5" flex-column>
       <div class="safety__outattack-header">近7日防护攻击次数/次</div>
       <LineChart col="1" class="safety__outattack-chart" :color="['#E9B042']" :x="preventedCountLast7DaysX"
                  :data="[{name: '近7日阻止攻击次数', value: preventedCountLast7DaysData}]"/>
     </div>
-    <div class="safety__attacked-apps" col="4" flex-column>
+    <div class="safety__attacked-apps" col="7" flex-column>
       <div class="attacked-apps-header" flex>
         <div class="title" col="1" flex>
           <span>被攻击Top5应用</span>
@@ -93,49 +94,34 @@
         <span class="more">更多>></span>
       </div>
       <div class="toggle__date">
-        <a :class="['device__btn', true ? 'current' : '']" @click="">当日</a><a
-        :class="['device__btn', displayDate === 'total' ? 'current' : '']" @click="">累计</a>
+        <a :class="['device__btn', displayDate === 'today' ? 'current' : '']" @click="toggleDisplayDate('today')">当日</a><a
+        :class="['device__btn', displayDate === 'total' ? 'current' : '']" @click="toggleDisplayDate('total')">累计</a>
       </div>
-      <div class="attacked-apps-num" col="1">
+      <div class="attacked-apps-num">
         <table>
           <tr>
             <th width="50%">应用方式</th>
             <th width="20%">攻击次数</th>
             <th width="30%">正常访问次数</th>
           </tr>
-          <tr>
-            <td>信息门户平台</td>
-            <td>240</td>
-            <td>240</td>
+          <tr v-if="displayDate === 'today'" v-for="item in attackedAppsToday">
+            <td>{{item.app_name}}</td>
+            <td>{{item.count}}</td>
+            <td>{{item.normal_count}}</td>
           </tr>
-          <tr>
-            <td>统一身份认证</td>
-            <td>200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>统一身份认证</td>
-            <td>200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>统一身份认证</td>
-            <td>200</td>
-            <td>200</td>
-          </tr>
-          <tr>
-            <td>统一身份认证</td>
-            <td>200</td>
-            <td>200</td>
+          <tr v-if="displayDate === 'total'" v-for="item in attackedAppsTotal">
+            <td>{{item.app_name}}</td>
+            <td>{{item.count}}</td>
+            <td>{{item.normal_count}}</td>
           </tr>
         </table>
       </div>
     </div>
-    <div class="safety__attacked-mode" col="3" flex>
+    <div class="safety__attacked-mode" col="6" flex>
       <div class="attack-mode" col="1" flex-column>
         <div class="attacked-mode-header" flex>
           <div class="title" col="1" flex>
-            <span>被攻击Top5应用</span>
+            <span>累计攻击方式Top5</span>
             <span>/次</span>
           </div>
           <span class="more">>></span>
@@ -143,24 +129,12 @@
         <div class="attacked-mode-content" col="1">
           <table>
             <tr>
-              <th width="70%">方式</th>
-              <th width="30%">攻击数</th>
+              <th width="60%">方式</th>
+              <th width="40%">攻击数</th>
             </tr>
-            <tr>
-              <td>注入攻击</td>
-              <td>240</td>
-            </tr>
-            <tr>
-              <td>跨站脚本攻击</td>
-              <td>200</td>
-            </tr>
-            <tr>
-              <td>注入攻击</td>
-              <td>240</td>
-            </tr>
-            <tr>
-              <td>跨站脚本攻击</td>
-              <td>200</td>
+            <tr v-for="item in attackMode">
+              <td>{{item.address}}</td>
+              <td>{{item.count}}</td>
             </tr>
           </table>
         </div>
@@ -168,7 +142,7 @@
       <div class="foreign-attack" col="1" flex-column>
         <div class="attacked-mode-header" flex>
           <div class="title" col="1" flex>
-            <span>被攻击Top5应用</span>
+            <span>累计攻击来源Top5</span>
             <span>/次</span>
           </div>
           <span class="more">>></span>
@@ -176,24 +150,12 @@
         <div class="attacked-mode-content" col="1">
           <table>
             <tr>
-              <th width="70%">方式</th>
-              <th width="30%">攻击数</th>
+              <th width="60%">方式</th>
+              <th width="40%">攻击数</th>
             </tr>
-            <tr>
-              <td>注入攻击</td>
-              <td>240</td>
-            </tr>
-            <tr>
-              <td>跨站脚本攻击</td>
-              <td>200</td>
-            </tr>
-            <tr>
-              <td>注入攻击</td>
-              <td>240</td>
-            </tr>
-            <tr>
-              <td>跨站脚本攻击</td>
-              <td>200</td>
+            <tr v-for="item in foreignAttack">
+              <td>{{item.address}}</td>
+              <td>{{item.count}}</td>
             </tr>
           </table>
         </div>

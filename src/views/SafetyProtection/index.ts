@@ -11,176 +11,203 @@ import ProgressBarGroup from '@components/ProgressBarGroup';
 import Top5 from '@components/Top5';
 import Attack from '@components/Attack.vue';
 import create from '@utils/websocket';
-import {splitNumber} from '@utils/DataFormat';
+import axios from "@utils/axios";
+import {formatNumber} from "@utils/dataFormat";
+import '@utils/mockdb';
 
-@WithRender
-@Component({
-  components: {Card, NumCardGroup, LineChart, vLegend: Legend, ProgressBarGroup, NoProblem, Attack, Top5}
+@WithRender @Component({
+  components: {
+    Card,
+    NumCardGroup,
+    LineChart,
+    vLegend: Legend,
+    ProgressBarGroup,
+    NoProblem,
+    Attack,
+    Top5
+  }
 })
 export default class Secure extends Vue {
-
-  freshTime = new Date();
-  attackMode = [];
-  attackedApps = {today_statis: [], total_statis: []};
-  attackedDetail = {};
-  foreignAttack = [];
+  date = new Date();
+  preventedAttackedTimes = {
+    visitToday: '',
+    output: '',
+    input: '',
+    preventedToday: '',
+    preventedTotal: '',
+    preventedCountLast7Days: [],
+    visitTotal: ''
+  };
+  totalApps = '';
+  attackedDetail = {
+    attack_dest: {},
+    attackLists: []
+  };
   waitDealEvent = [];
   attackSources = [];
-  intervalIndex = null;
-  current = 0;
-  split = 30;
-  preventedCountLast7Days = [];
-  preventedTodays = [];
-  preventedTotals = [];
+  attackedApps = {
+    total_statis: [],
+    today_statis: []
+  };
+  timer = null;
+  displayDate = 'today';
+  intervalTime = 5000;
+  attackMode = [];
+  foreignAttack = [];
 
-  get preventedToday() {
-    return this.preventedTodays[this.current] || 0;
+  created() {
+    //默认查询一次
+    this.getSafetyProtectBigScreenNewLoop();
+
+    setInterval(() => {
+      this.getSafetyProtectBigScreenNewLoop();
+    }, 5000);
+
+    this.timer = setTimeout(() => {
+      if (this.displayDate === 'today') {
+        this.toggleDisplayDate('today')
+      } else {
+        this.toggleDisplayDate('total')
+      }
+    }, this.intervalTime);
   }
 
-  get preventedTotal() {
-    return this.preventedTotals[this.current] || 0;
+  async getSafetyProtectBigScreenNew() {
+    const {data} = await axios.get('/cldPortal_new/event/getSafetyProtectBigScreenNew', {
+      params: {
+        schoolCode: this.$route.query.schoolCode
+      }
+    });
+    if (data) {
+      return data;
+    }
   }
 
-  get prevDate() {
-    return new Date(this.freshTime.getTime() - 86400000)
+  async getSafetyProtectBigScreenNewLoop() {
+    //用户分析接口信息
+    const json = await this.getSafetyProtectBigScreenNew();
+    if (!json) {
+      return;
+    }
+    this.date = new Date();
+
+    //守护应用总数
+    this.totalApps = formatNumber(json.totalApps || 0);
+
+    //汇总数据
+    const preventedAttackedTimesOrigin = json.preventedAttackedTimes;
+    this.preventedAttackedTimes = {
+      visitToday: formatNumber(preventedAttackedTimesOrigin.visitToday || 0),
+      output: formatNumber(preventedAttackedTimesOrigin.output || 0),
+      input: formatNumber(preventedAttackedTimesOrigin.input || 0),
+      preventedToday: formatNumber(preventedAttackedTimesOrigin.preventedToday || 0),
+      preventedTotal: formatNumber(preventedAttackedTimesOrigin.preventedTotal || 0),
+      preventedCountLast7Days: preventedAttackedTimesOrigin.preventedCountLast7Days,
+      visitTotal: formatNumber(preventedAttackedTimesOrigin.visitTotal || 0)
+    };
+
+    //实时攻击明细
+    this.attackedDetail = json.attackedDetail;
+    this.scrollShow();
+
+    //被攻击top5应用/次
+    this.attackedApps = json.attackedApps;
+
+    //累计攻击方式top5/次
+    this.attackMode = json.attackMode;
+
+    //累计攻击来源top5/次
+    this.foreignAttack = json.foreignAttack;
+  }
+
+  get closeTime() {
+    const date = this.date;
+    const y = date.getFullYear();
+    const M = date.getMonth() + 1;
+    const d = date.getDate();
+    const h = date.getHours();
+    const m = date.getMinutes();
+    return `截止${y}/${M < 10 ? '0' + M : M}/${d < 10 ? '0' + d : d} ${h < 10 ? '0' + h : h}:${m < 10 ? '0' + m : m}`
   }
 
   get preventedCountLast7DaysX() {
-    return this.preventedCountLast7Days.map(item => item.date)
+    return this.preventedAttackedTimes.preventedCountLast7Days.map(item => item.date)
   }
 
   get preventedCountLast7DaysData() {
-    return this.preventedCountLast7Days.map(item => item.count)
+    return this.preventedAttackedTimes.preventedCountLast7Days.map(item => item.count)
   }
 
   get attackedAppsToday() {
-    return this.attackedApps.today_statis.slice(0, 3).map(item => ({name: item.app_name, value: item.count}))
+    return this.attackedApps.today_statis.map(item => ({
+      app_name: item.app_name,
+      count: item.count,
+      normal_count: item.normal_count
+    }))
   }
 
   get attackedAppsTotal() {
-    return this.attackedApps.total_statis.slice(0, 3).map(item => ({name: item.app_name, value: item.count}))
+    return this.attackedApps.total_statis.map(item => ({
+      app_name: item.app_name,
+      count: item.count,
+      normal_count: item.normal_count
+    }))
   }
 
-  get foreignAttackChart() {
-    return this.foreignAttack.map(item => ({value: item.count, name: item.address}))
-  }
-
-  get attackModeChart() {
-    return this.attackMode.map(item => ({value: item.count, name: item.address}));
-  }
-
-
-  created() {
-    create().subscribe('/getCoreAppsBigScreen', {
-      login: this.$route.query.schoolCode,
-      token: this.$route.query.token,
-      interfaceName: 'bigScreen-getSafetyProtectBigScreen'
-    }, result => {
-      this.freshTime = new Date();
-      this.attackMode = result.attackMode.sort(function (a, b) {
-        return parseInt(b.count) - parseInt(a.count);
-      });
-      this.attackedApps = result.attackedApps;
-      this.attackedDetail = result.attackedDetail;
-      this.foreignAttack = result.foreignAttack.sort(function (a, b) {
-        return parseInt(b.count) - parseInt(a.count);
-      });
-      this.preventedCountLast7Days = result.preventedAttackedTimes.preventedCountLast7Days || [];
-      this.preventedTodays = splitNumber(this.preventedToday, result.preventedAttackedTimes.preventedToday || 0, this.split);
-      this.preventedTotals = splitNumber(this.preventedTotal, result.preventedAttackedTimes.preventedTotal || 0, this.split);
-      this.scrollShow();
-    });
-  }
-
-  mounted() {
-    setInterval(() => {
-      if (this.current >= this.split - 1) {
-        this.current = this.split - 1;
-      } else {
-        this.current++;
-      }
-    }, 3000);
-  }
-
-  getTotal(arr, valKey) {
-    var total = 0;
-    var size = this.pieSize;
-    arr.forEach(function (e, i) {
-      if (i < size) {
-        total = total + parseInt(e[valKey]);
-      }
-    });
-    return total;
-  }
-
-  getMax(arr, key) {
-    var max = 0;
-    arr.forEach(function (element) {
-      var val = parseInt(element[key]);
-      if (val > max) {
-        max = val;
-      }
-    });
-
-    return max;
-  }
-
-  getValArr(arr, key) {
-    var temp = [];
-    if (arr) {
-      arr.forEach(function (element) {
-        temp.push(element[key]);
-      });
+  toggleDisplayDate(name: string) {
+    this.displayDate = name;
+    if (this.timer) {
+      clearInterval(this.timer);
     }
+    this.timer = setTimeout(() => {
+      if (this.displayDate === 'today') {
+        this.toggleDisplayDate('total')
+      } else {
+        this.toggleDisplayDate('today')
+      }
+    }, this.intervalTime);
+  };
 
-    return temp;
+  @Watch('displayDate')
+  onDisplayDeviceChange(nData: String) {
+    if (nData === 'today') {
+      this.toggleDisplayDate('today')
+    } else {
+      this.toggleDisplayDate('total')
+    }
   }
 
   scrollShow() {
-    var that = this;
-    var page = 1;
-    var size = 4;
-
-    var temList = this.attackedDetail.attackLists;
-
+    let that = this;
+    let size = 4;
+    let temList = this.attackedDetail.attackLists;
     if (!temList) {
       return;
     }
-
-
-    var count = temList.length;
-
+    let count = temList.length;
     clearInterval(this.intervalIndex);
-    var i = 0;
+    let i = 0;
     this.intervalIndex = setInterval(function () {
       if (i >= count) {
         i = 0;
       }
-
-      var attactTemp = [];
-
+      let attactTemp = [];
       for (let m = i; m < count && m < i + size; m++) {
         let o = temList[m];
-
         attactTemp.push(o);
-
         if (m < count - 1 && o.attack_time !== temList[m + 1].attack_time) {
           break;
         } else {
           i++;
         }
       }
-
       attactTemp.forEach(function (e) {
         that.waitDealEvent.unshift(e);
       });
-
       while (that.waitDealEvent.length > size) {
         that.waitDealEvent.pop();
       }
-
       i++;
-
       that.attackSources = attactTemp;
     }, 2000);
   }

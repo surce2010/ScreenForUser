@@ -185,7 +185,7 @@
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
-          -webkit-box-orient: vertical;;
+          -webkit-box-orient: vertical;
           @include breakpoint(1440px) {
             -webkit-line-clamp: 4;
             height: 5em;

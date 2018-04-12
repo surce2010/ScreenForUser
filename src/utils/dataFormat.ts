@@ -4,6 +4,7 @@ export default function dataFormat(data): any[] {
   }
   return [];
 }
+
 export function splitNumber(source: number, target: number, slice = 30): number[] {
   const delta = target - source;
   const everyDelta = Math.floor(delta / slice);
@@ -12,13 +13,13 @@ export function splitNumber(source: number, target: number, slice = 30): number[
     split = new Array(slice).fill(target)
   } else {
     let next = source;
-    for (let i=0; i<slice; i++) {
+    for (let i = 0; i < slice; i++) {
       const d = Math.round(Math.random() * (everyDelta / 10) + everyDelta);
       next = next + d;
       if (next >= target) {
         split.push(target)
       } else {
-        if ( i === slice - 1) {
+        if (i === slice - 1) {
           split.push(target);
         } else {
           split.push(next);
@@ -29,16 +30,19 @@ export function splitNumber(source: number, target: number, slice = 30): number[
   return split;
 }
 
-
 function parseColor(hexStr) {
-  return hexStr.length === 4 ? hexStr.substr(1).split('').map(function (s) { return 0x11 * parseInt(s, 16); }) : [hexStr.substr(1, 2), hexStr.substr(3, 2), hexStr.substr(5, 2)].map(function (s) { return parseInt(s, 16); })
+  return hexStr.length === 4 ? hexStr.substr(1).split('').map(function (s) {
+    return 0x11 * parseInt(s, 16);
+  }) : [hexStr.substr(1, 2), hexStr.substr(3, 2), hexStr.substr(5, 2)].map(function (s) {
+    return parseInt(s, 16);
+  })
 }
+
 function pad(s) {
   return (s.length === 1) ? '0' + s : s;
-};
+}
 
-export function gradient(start, end, steps, gamma = 1)
-{
+export function gradient(start, end, steps, gamma = 1) {
   var i, j, ms, me, output = [], so = [];
   var normalize = function (channel) {
     return Math.pow(channel / 255, gamma);

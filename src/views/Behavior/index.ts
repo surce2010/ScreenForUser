@@ -8,14 +8,13 @@ import PercentBar from '@components/PercentBar';
 import Legend from '@components/Legend';
 import TwoPieChart from '@components/TwoPieChart';
 import create from '@utils/websocket';
-import format from '@utils/DataFormat';
+import format, {formatNumber} from '@utils/DataFormat';
 import ProgressBarGroup from '@components/ProgressBarGroup';
 import IconItem from '@components/IconItem';
 import Chart from '@components/Chart';
 import 'echarts/map/js/china';
 import axios from "@utils/axios";
-import '@utils/mockdb'
-import {formatNumber} from "@utils/dataFormat";
+import '@utils/mockdb';
 
 @WithRender
 @Component({
