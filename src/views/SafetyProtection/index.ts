@@ -50,6 +50,7 @@ export default class Secure extends Vue {
     today_statis: []
   };
   timer = null;
+  intervalIndex = null;
   displayDate = 'today';
   intervalTime = 5000;
   attackMode = [];
