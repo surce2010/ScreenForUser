@@ -86,6 +86,13 @@ export default new Router({
         title: '安全守护'
       },
       component: view('SafetyProtection')
+    }, {
+      path: '/SafetyMonitoring',
+      name: 'SafetyMonitoring',
+      meta: {
+        title: '安全监测'
+      },
+      component: view('SafetyMonitoring')
     }]
   }]
 });

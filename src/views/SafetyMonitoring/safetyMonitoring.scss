@@ -1,0 +1,258 @@
+@import '~sass/easy';
+
+.monitoring {
+  .monitoring__leftaside {
+
+    .monitoring__leftaside-inspect {
+      padding: 1em;
+      .app_inspect-wrap {
+        .pic {
+          display: inline-block;
+          width: 11.6em;
+          height: 11.6em;
+          margin-right: 2.4em;
+        }
+        .app_inspect {
+          position: relative;
+          flex: 0 0 22.5em;
+          height: 12.2em;
+          margin-right: 4em;
+          background-image: linear-gradient(-179deg, #0086E3 0%, rgba(0, 113, 221, 0.91) 31%, rgba(0, 89, 214, 0.54) 59%, rgba(0, 70, 209, 0.06) 96%);
+          box-shadow: 0 1em 2em 0 rgba(1, 19, 37, 0.30);
+          border-radius: 0.2em;
+          .arrow {
+            display: none;
+            position: absolute;
+            z-index: -1;
+            width: 4.5em;
+            height: 5em;
+            &:nth-of-type(1) {
+              left: -0.6em;
+              top: -0.6em;
+              background: url(~@assets/images/arrow_lt.png) no-repeat center center;
+            }
+            &:nth-of-type(2) {
+              right: -0.6em;
+              top: -0.6em;
+              background: url(~@assets/images/arrow_rt.png) no-repeat center center;
+            }
+            &:nth-of-type(3) {
+              right: -0.6em;
+              bottom: -0.6em;
+              background: url(~@assets/images/arrow_rb.png) no-repeat center center;
+            }
+            &:nth-of-type(4) {
+              left: -0.6em;
+              bottom: -0.6em;
+              background: url(~@assets/images/arrow_lb.png) no-repeat center center;
+            }
+          }
+          .inspect-header {
+            height: 3em;
+            background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.50) 100%);
+            border-radius: 0.2em 0.2em 0 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            text-align: center;
+            .inspect-header-icon {
+              display: inline-block;
+              width: 1.5em;
+              height: 1.5em;
+              margin-right: 0.5em;
+            }
+            .inspect-header-title {
+              font-size: 1.3em;
+              font-weight: bold;
+              @include gradient(#FFFFFF, #D1D1D1);
+            }
+          }
+          .inspect-content {
+            position: relative;
+            margin: 0.8em 1.2em;
+            .inspect-content-icon {
+              position: absolute;
+              top: -2.2em;
+              left: 1.2em;
+              width: 2.8em;
+              height: 2.8em;
+            }
+            .inspect-content-info {
+              margin: 0 1em 0 4em;
+              .title {
+                font-size: 1em;
+                > span {
+                  margin-left: 0.3em;
+                  font-size: 1.1em;
+                  font-weight: bold;
+                }
+              }
+              .duration {
+                font-size: 1em;
+                .num {
+                  margin-left: 0.3em;
+                }
+              }
+            }
+            .line {
+              width: 100%;
+              height: 1px;
+              margin: 0.3em 0;
+              background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.80) 20%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.80) 80%, rgba(255, 255, 255, 0) 100%);
+            }
+            .inspect-content-record {
+              .total {
+                font-size: 1em;
+                .num {
+                  font-size: 1.8em;
+                }
+              }
+              .progress {
+                font-size: 1em;
+                .normal {
+                  .num {
+                    @include gradient(#51EC75, #028550);
+                    font-size: 1.8em;
+                  }
+                }
+                .error {
+                  .num {
+                    @include gradient(#FF6864, #C80A05);
+                    font-size: 1.8em;
+                  }
+                }
+                .tobe {
+                  .num {
+                    @include gradient(#61E2FA, #1C5DF7);
+                    font-size: 1.8em;
+                  }
+                }
+                .percentbar__bar {
+                  height: 0.2em;
+                }
+              }
+            }
+          }
+        }
+        .app_inspect.current {
+          position: relative;
+          flex: 0 0 30.8em;
+          height: 15.8em;
+          margin-right: 4em;
+          background-image: linear-gradient(-179deg, #0086E3 0%, rgba(0, 113, 221, 0.91) 31%, rgba(0, 89, 214, 0.54) 59%, rgba(0, 70, 209, 0.06) 96%);
+          box-shadow: 0 1em 2em 0 rgba(1, 19, 37, 0.30);
+          border-radius: 0.2em;
+          .arrow {
+            display: block;
+            position: absolute;
+            z-index: -1;
+            width: 4.5em;
+            height: 5em;
+            &:nth-of-type(1) {
+              left: -0.6em;
+              top: -0.6em;
+              background: url(~@assets/images/arrow_lt.png) no-repeat center center;
+            }
+            &:nth-of-type(2) {
+              right: -0.6em;
+              top: -0.6em;
+              background: url(~@assets/images/arrow_rt.png) no-repeat center center;
+            }
+            &:nth-of-type(3) {
+              right: -0.6em;
+              bottom: -0.6em;
+              background: url(~@assets/images/arrow_rb.png) no-repeat center center;
+            }
+            &:nth-of-type(4) {
+              left: -0.6em;
+              bottom: -0.6em;
+              background: url(~@assets/images/arrow_lb.png) no-repeat center center;
+            }
+          }
+          .inspect-header {
+            height: 3.6em;
+            background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.50) 100%);
+            border-radius: 0.2em 0.2em 0 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            text-align: center;
+            .inspect-header-icon {
+              display: inline-block;
+              width: 1.8em;
+              height: 1.8em;
+              margin-right: 0.5em;
+            }
+            .inspect-header-title {
+              font-size: 1.5em;
+              font-weight: bold;
+              @include gradient(#FFFFFF, #D1D1D1);
+            }
+          }
+          .inspect-content {
+            position: relative;
+            margin: 0.8em 2.5em;
+            .inspect-content-icon {
+              position: absolute;
+              top: -2.6em;
+              left: 2em;
+              width: 3.5em;
+              height: 3.5em;
+            }
+            .inspect-content-info {
+              margin: 0 3em 0 6em;
+              .title {
+                font-size: 1.1em;
+                > span {
+                  margin-left: 0.3em;
+                  font-size: 1.2em;
+                  font-weight: bold;
+                }
+              }
+              .duration {
+                font-size: 1.1em;
+                .num {
+                  margin-left: 0.3em;
+                }
+              }
+            }
+            .line {
+              width: 100%;
+              height: 1px;
+              margin: 0.8em 0;
+              background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.80) 20%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.80) 80%, rgba(255, 255, 255, 0) 100%);
+            }
+            .inspect-content-record {
+              .total {
+                font-size: 1.1em;
+                .num {
+                  font-size: 2.8em;
+                }
+              }
+              .progress {
+                font-size: 1.1em;
+                .normal {
+                  .num {
+                    @include gradient(#51EC75, #028550);
+                    font-size: 2.8em;
+                  }
+                }
+                .error {
+                  .num {
+                    @include gradient(#FF6864, #C80A05);
+                    font-size: 2.8em;
+                  }
+                }
+                .tobe {
+                  .num {
+                    @include gradient(#61E2FA, #1C5DF7);
+                    font-size: 2.8em;
+                  }
+                }
+                .percentbar__bar {
+                  height: 0.2em;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

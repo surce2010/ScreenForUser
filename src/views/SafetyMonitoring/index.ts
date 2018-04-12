@@ -1,15 +1,14 @@
 import Vue from 'vue';
 import {Component, Prop, Watch} from 'vue-property-decorator';
 import {State} from 'vuex-class';
-import WithRender from './safetyProtection.html?style=./safetyProtection.scss';
+import WithRender from './safetyMonitoring.html?style=./safetyMonitoring.scss';
 import Card from '@components/Card';
 import NumCardGroup from '@components/NumCardGroup';
 import LineChart from '@components/LineChart';
 import Legend from '@components/Legend';
 import NoProblem from '@components/NoProblem';
-import ProgressBarGroup from '@components/ProgressBarGroup';
+import PercentBar from '@components/PercentBar';
 import Top5 from '@components/Top5';
-import Attack from '@components/Attack.vue';
 import create from '@utils/websocket';
 import axios from "@utils/axios";
 import {formatNumber} from "@utils/dataFormat";
@@ -21,13 +20,12 @@ import '@utils/mockdb';
     NumCardGroup,
     LineChart,
     vLegend: Legend,
-    ProgressBarGroup,
+    PercentBar,
     NoProblem,
-    Attack,
     Top5
   }
 })
-export default class SafetyProtection extends Vue {
+export default class SafetyMonitoring extends Vue {
   date = new Date();
   preventedAttackedTimes = {
     visitToday: '',

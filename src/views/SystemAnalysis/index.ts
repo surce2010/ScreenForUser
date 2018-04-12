@@ -35,7 +35,7 @@ import '@utils/mockdb';
     RowProgressBarGroup
   }
 })
-export default class Behavior extends Vue {
+export default class SystemAnalysis extends Vue {
   opts = {
     tooltip: {
       trigger: 'item'

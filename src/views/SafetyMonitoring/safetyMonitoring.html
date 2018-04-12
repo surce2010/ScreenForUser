@@ -1,0 +1,100 @@
+<div class="monitoring height100" flex>
+  <aside class="monitoring__leftaside" col="6" flex-column>
+    <Card class="monitoring__leftaside-inspect" col="1" :row="false">
+      <div class="app_inspect-wrap" flex colcenter>
+        <img class="pic" src="~@assets/images/radar.gif" alt=""/>
+        <div col="1" flex colcenter spacebetween>
+          <div :class="['app_inspect', false ? 'current' : '']" flex-column>
+            <span class="arrow"></span>
+            <span class="arrow"></span>
+            <span class="arrow"></span>
+            <span class="arrow"></span>
+            <div class="inspect-header" flex center>
+              <img class="inspect-header-icon" src="~@assets/images/icon_box.png" alt=""/>
+              <span class="inspect-header-title">应用监测</span>
+            </div>
+            <div class="inspect-content" flex-column>
+              <img class="inspect-content-icon" src="~@assets/images/icon_search.png" alt=""/>
+              <div class="inspect-content-info" flex-column>
+                <div class="title">当前检测应用为<span>信息门户平台</span></div>
+                <div class="duration">历时<span class="num">1h 23m 45s</span></div>
+              </div>
+              <div class="line"></div>
+              <div class="inspect-content-record" flex spacebetween>
+                <div class="total" col="1" flex-column colcenter>
+                  <span>全部应用</span>
+                  <span class="num">89</span>
+                </div>
+                <div col="1"></div>
+                <div class="progress" col="3" flex-column>
+                  <div flex>
+                    <div class="normal" col="1" flex-column colcenter>
+                      <span>正常</span>
+                      <span class="num">27</span>
+                    </div>
+                    <div class="error" col="1" flex-column colcenter>
+                      <span>异常</span>
+                      <span class="num">3</span>
+                    </div>
+                    <div class="tobe" col="1" flex-column colcenter>
+                      <span>待检测</span>
+                      <span class="num">59</span>
+                    </div>
+                  </div>
+                  <PercentBar :value="[27, 3, 59]" :color="['#3AC868', '#F25B58', '#27A6F6']" :displayRole="false" :displayNum="false"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div :class="['app_inspect', true ? 'current' : '']" flex-column>
+            <span class="arrow"></span>
+            <span class="arrow"></span>
+            <span class="arrow"></span>
+            <span class="arrow"></span>
+            <div class="inspect-header" flex center>
+              <img class="inspect-header-icon" src="~@assets/images/icon_tv.png" alt=""/>
+              <span class="inspect-header-title">主机监测</span>
+            </div>
+            <div class="inspect-content" flex-column>
+              <img class="inspect-content-icon" src="~@assets/images/icon_search.png" alt=""/>
+              <div class="inspect-content-info" flex-column>
+                <div class="title">当前检测应用为<span>信息门户平台</span></div>
+                <div class="duration">历时<span class="num">1h 23m 45s</span></div>
+              </div>
+              <div class="line"></div>
+              <div class="inspect-content-record" flex spacebetween>
+                <div class="total" col="1" flex-column colcenter>
+                  <span>全部应用</span>
+                  <span class="num">89</span>
+                </div>
+                <div col="1"></div>
+                <div class="progress" col="3" flex-column>
+                  <div flex>
+                    <div class="normal" col="1" flex-column colcenter>
+                      <span>正常</span>
+                      <span class="num">27</span>
+                    </div>
+                    <div class="error" col="1" flex-column colcenter>
+                      <span>异常</span>
+                      <span class="num">3</span>
+                    </div>
+                    <div class="tobe" col="1" flex-column colcenter>
+                      <span>待检测</span>
+                      <span class="num">59</span>
+                    </div>
+                  </div>
+                  <PercentBar :value="[27, 3, 59]" :color="['#3AC868', '#F25B58', '#27A6F6']" :displayRole="false" :displayNum="false"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div col="2" flex>
+      </div>
+    </Card>
+  </aside>
+  <aside class="monitoring__rightaside" col="2" flex-column>
+    <Card class="running__apps" col="3" title="校园应用统计" :date="date" :row="false" :detail="true"></Card>
+  </aside>
+</div>

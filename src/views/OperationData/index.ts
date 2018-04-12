@@ -16,7 +16,7 @@ import '@utils/mockdb';
 @Component({
   components: {Card, Chart, LineBarChart}
 })
-export default class Data extends Vue {
+export default class OperationData extends Vue {
   dealHeight = '7em';
   extendOpt = {};
   systemNum = '';

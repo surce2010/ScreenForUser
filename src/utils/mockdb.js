@@ -2504,3 +2504,105 @@ Mock.mock(new RegExp('/cldPortal_new/event/getSafetyProtectBigScreenNew'), {
       }]
   }
 });
+
+// 安全监测
+Mock.mock(new RegExp('/cldPortal_new/event/getSafetyInspectScreenNew'), {
+  //应用监测
+  'app_inspect': {
+    'total_app': 89,
+    'normal': 27,
+    'abnormal': 3,
+    'tobe_inspect': 59,
+    'abnormal_count': 3,
+    'abnormal_list': [
+      {
+        'name': '名称',
+        'url': 'URL',
+        'start_time': '监测开始时间',
+        'end_time': '监测结束时间',
+        'abnormal_type': '异常类型'
+      }],
+    'inspect_list': [
+      {
+        'name': '名称',
+        'url': 'URL',
+        'start_time': '监测开始时间',
+        'end_time': '监测结束时间',
+        'normal': '是否异常：1异常 2正常 3检测中'
+      }]
+  },
+  //主机监测
+  'host_inspect': {
+    'total_app': 89,
+    'normal': 27,
+    'abnormal': 3,
+    'tobe_inspect': 59,
+    'abnormal_count': 3,
+    'abnormal_list': [
+      {
+        'name': '名称',
+        'url': 'URL',
+        'start_time': '监测开始时间',
+        'abnormal_type': '异常类型'
+      }],
+    'inspect_list': [
+      {
+        'name': '名称',
+        'url': 'URL',
+        'start_time': '监测开始时间',
+        'normal': '是否异常：1异常 2正常 3检测中'
+      }]
+  },
+  //当前未处理事件
+  'unsolved_events': {
+    'total_count': 108, //当前未处理事件
+    'safetybug': 28, //安全漏洞
+    'modified': 28, //篡改
+    'trojan': 28, //木马
+    'sensitive': 0, //敏感内容
+    'hidden_link': 0, //暗链
+    'component': 28 //组件版本
+  },
+  //是用系统分布
+  'operationSystem': [
+    {
+      'os_count': 22,
+      'os_name': 'RedhatLinux2.6.18-164.el5'
+    },
+    {
+      'os_count': 16,
+      'os_name': 'RedhatLinux2.6.32-431.el6.x86_64'
+    },
+    {
+      'os_count': 5,
+      'os_name': 'WindowsMicrosoftWindowsServer2008R2Standard'
+    }
+  ],
+  //使用组件分布
+  'componentUsage': [
+    {
+      'component_name': 'JDK1.4.2',
+      'component_count': 11
+    },
+    {
+      'component_name': 'OpenSSH4.3p2',
+      'component_count': 11
+    },
+    {
+      'component_name': 'OpenSSL0.9.8e-fips-rhel5',
+      'component_count': 11
+    },
+    {
+      'component_name': 'vsftpd2.0.5',
+      'component_count': 4
+    },
+    {
+      'component_name': 'JDK1.4.2_14',
+      'component_count': 4
+    },
+    {
+      'component_name': 'Tomcat6.0.26',
+      'component_count': 3
+    }
+  ]
+});

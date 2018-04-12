@@ -9,7 +9,9 @@ import IconItem from '@components/IconItem';
 })
 export default class PercentBar extends Vue {
   @Prop() role: string;
+  @Prop({default: true}) displayRole: boolean;
   @Prop() value: number[];
+  @Prop({default: true}) displayNum: boolean;
   @Prop({default: () => ['#E9B042', '#37A2F7']}) color: string[];
 
   get percents() {
