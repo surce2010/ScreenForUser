@@ -2510,25 +2510,31 @@ Mock.mock(new RegExp('/cldPortal_new/event/getSafetyInspectScreenNew'), {
   //应用监测
   'app_inspect': {
     'total_app': 89,
-    'normal': 27,
-    'abnormal': 3,
-    'tobe_inspect': 59,
-    'abnormal_count': 3,
+    'normal': 20,
+    'abnormal': 13,
+    'tobe_inspect': 56,
+    'abnormal_count': 1,
     'abnormal_list': [
       {
         'name': '名称',
-        'url': 'URL',
-        'start_time': '监测开始时间',
-        'end_time': '监测结束时间',
+        'url': 'http://my.wisedu.com/edc/ID/6.Operation/',
+        'start_time': '2018-04-14 15:58:00',
+        'end_time': '2018-04-14 16:18:09',
         'abnormal_type': '异常类型'
       }],
     'inspect_list': [
       {
         'name': '名称',
         'url': 'URL',
-        'start_time': '监测开始时间',
-        'end_time': '监测结束时间',
-        'normal': '是否异常：1异常 2正常 3检测中'
+        'start_time': '2018-04-14 15:58:00',
+        'end_time': '2018-04-14 16:00:11',
+        'normal': '2' // 1异常 2正常 3检测中
+      }, {
+        'name': '名称',
+        'url': 'URL',
+        'start_time': '2018-04-14 15:58:00',
+        'end_time': '2018-04-14 16:00:11',
+        'normal': '3' // 1异常 2正常 3检测中
       }]
   },
   //主机监测
@@ -2542,15 +2548,15 @@ Mock.mock(new RegExp('/cldPortal_new/event/getSafetyInspectScreenNew'), {
       {
         'name': '名称',
         'url': 'URL',
-        'start_time': '监测开始时间',
+        'start_time': '2018-04-14 15:58:00',
         'abnormal_type': '异常类型'
       }],
     'inspect_list': [
       {
         'name': '名称',
         'url': 'URL',
-        'start_time': '监测开始时间',
-        'normal': '是否异常：1异常 2正常 3检测中'
+        'start_time': '2018-04-14 16:58:00',
+        'normal': '3' // 1异常 2正常 3检测中
       }]
   },
   //当前未处理事件
@@ -2563,7 +2569,7 @@ Mock.mock(new RegExp('/cldPortal_new/event/getSafetyInspectScreenNew'), {
     'hidden_link': 0, //暗链
     'component': 28 //组件版本
   },
-  //是用系统分布
+  //使用系统分布
   'operationSystem': [
     {
       'os_count': 22,

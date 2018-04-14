@@ -28,65 +28,71 @@ import '@utils/mockdb';
   }
 })
 export default class SafetyMonitoring extends Vue {
-
-  providerPvDistribute = [{
-    name: 'Windows',
-    value: 65
-  }, {
-    name: 'Linux',
-    value: 15
-  }, {
-    name: 'Mac OS',
-    value: 20
-  }];
-
-  date = new Date();
-  preventedAttackedTimes = {
-    visitToday: '',
-    output: '',
-    input: '',
-    preventedToday: '',
-    preventedTotal: '',
-    preventedCountLast7Days: [],
-    visitTotal: ''
-  };
-  totalApps = '';
-  attackedDetail = {
-    attack_dest: {},
-    attackLists: []
-  };
-  waitDealEvent = [];
-  attackSources = [];
-  attackedApps = {
-    total_statis: [],
-    today_statis: []
-  };
   timer = null;
-  intervalIndex = null;
-  displayDate = 'today';
   intervalTime = 5000;
-  attackMode = [];
-  foreignAttack = [];
+  inspectSource = 'app';
+  app_inspect = {
+    total_app: 0,
+    normal: 0,
+    abnormal: 0,
+    tobe_inspect: 0,
+    abnormal_count: 0,
+    abnormal_list: [],
+    inspect_list: []
+  };
+  currentAppInspect = {
+    name: '',
+    url: '',
+    start_time: '',
+    end_time: '',
+    normal: ''
+  };
+  host_inspect = {
+    total_app: 0,
+    normal: 0,
+    abnormal: 0,
+    tobe_inspect: 0,
+    abnormal_count: 0,
+    abnormal_list: [],
+    inspect_list: []
+  };
+  currentHostInspect = {
+    name: '',
+    url: '',
+    start_time: '',
+    normal: ''
+  };
+  unsolved_events = {
+    total_count: 0,
+    safetybug: 0,
+    modified: 0,
+    trojan: 0,
+    sensitive: 0,
+    hidden_link: 0,
+    component: 0
+  };
+  operationSystemOrigin = [];
+  componentUsageOrigin = [];
 
   created() {
     //默认查询一次
-    this.getSafetyProtectBigScreenNewLoop();
+    this.getSafetyInspectScreenNewLoop();
 
     setInterval(() => {
-      this.getSafetyProtectBigScreenNewLoop();
+      this.getSafetyInspectScreenNewLoop();
     }, 5000);
 
     this.timer = setTimeout(() => {
-      if (this.displayDate === 'today') {
-        this.toggleDisplayDate('today')
+      if (this.inspectSource === 'app') {
+        this.toggleInspectSource('host')
       } else {
-        this.toggleDisplayDate('total')
+        this.toggleInspectSource('app')
       }
     }, this.intervalTime);
   }
 
-  async getSafetyProtectBigScreenNew() {
-    const {data} = await axios.get('/cldPortal_new/event/getSafetyProtectBigScreenNew', {
+  async getSafetyInspectScreenNew() {
+    const {data} = await axios.get('/cldPortal_new/event/getSafetyInspectScreenNew', {
       params: {
         schoolCode: this.$route.query.schoolCode
       }
@@ -96,132 +102,130 @@ export default class SafetyMonitoring extends Vue {
     }
   }
 
-  async getSafetyProtectBigScreenNewLoop() {
-    //用户分析接口信息
-    const json = await this.getSafetyProtectBigScreenNew();
+  async getSafetyInspectScreenNewLoop() {
+    //安全监测接口信息
+    const json = await this.getSafetyInspectScreenNew();
     if (!json) {
       return;
     }
-    this.date = new Date();
 
-    //守护应用总数
-    this.totalApps = formatNumber(json.totalApps || 0);
+    //应用监测
+    this.app_inspect = json.app_inspect;
+    this.currentAppInspect = json.app_inspect.inspect_list[0];
 
-    //汇总数据
-    const preventedAttackedTimesOrigin = json.preventedAttackedTimes;
-    this.preventedAttackedTimes = {
-      visitToday: formatNumber(preventedAttackedTimesOrigin.visitToday || 0),
-      output: formatNumber(preventedAttackedTimesOrigin.output || 0),
-      input: formatNumber(preventedAttackedTimesOrigin.input || 0),
-      preventedToday: formatNumber(preventedAttackedTimesOrigin.preventedToday || 0),
-      preventedTotal: formatNumber(preventedAttackedTimesOrigin.preventedTotal || 0),
-      preventedCountLast7Days: preventedAttackedTimesOrigin.preventedCountLast7Days,
-      visitTotal: formatNumber(preventedAttackedTimesOrigin.visitTotal || 0)
-    };
+    //主机监测
+    this.host_inspect = json.host_inspect;
+    this.currentHostInspect = json.host_inspect.inspect_list[0];
 
-    //实时攻击明细
-    this.attackedDetail = json.attackedDetail;
-    this.scrollShow();
+    //当前未处理事件
+    this.unsolved_events = json.unsolved_events;
 
-    //被攻击top5应用/次
-    this.attackedApps = json.attackedApps;
+    //使用系统分布
+    this.operationSystemOrigin = json.operationSystem;
 
-    //累计攻击方式top5/次
-    this.attackMode = json.attackMode;
-
-    //累计攻击来源top5/次
-    this.foreignAttack = json.foreignAttack;
+    //使用组件分布
+    this.componentUsageOrigin = json.componentUsage;
   }
 
-  get closeTime() {
-    const date = this.date;
-    const y = date.getFullYear();
-    const M = date.getMonth() + 1;
-    const d = date.getDate();
-    const h = date.getHours();
-    const m = date.getMinutes();
-    return `截止${y}/${M < 10 ? '0' + M : M}/${d < 10 ? '0' + d : d} ${h < 10 ? '0' + h : h}:${m < 10 ? '0' + m : m}`
+  get computingTime() {
+    let _st = this.currentAppInspect.start_time;
+    let _et = this.currentAppInspect.end_time;
+    _st = _st.toString().replace(/-/g, "/");
+    _et = _et.toString().replace(/-/g, "/");
+    let _stime = new Date(_st).getTime();
+    let _etime = new Date(_et).getTime();
+    let _iT = (_etime - _stime) / 1000;
+    let _D = Math.floor(_iT / 86400);
+    let _H = Math.floor((_iT - 86400 * _D) / 3600);
+    let _M = Math.floor((_iT - _D * 86400 - _H * 3600) / 60);
+    let _S = Math.floor(_iT % 60);
+    return _H + 'h ' + _M + 'm ' + _S + 's';
   }
 
-  get preventedCountLast7DaysX() {
-    return this.preventedAttackedTimes.preventedCountLast7Days.map(item => item.date)
+  get applicationStateRatio() {
+    return [this.app_inspect.normal, this.app_inspect.abnormal, this.app_inspect.tobe_inspect]
   }
 
-  get preventedCountLast7DaysData() {
-    return this.preventedAttackedTimes.preventedCountLast7Days.map(item => item.count)
+  get hostStateRatio() {
+    return [this.host_inspect.normal, this.host_inspect.abnormal, this.host_inspect.tobe_inspect]
   }
 
-  get attackedAppsToday() {
-    return this.attackedApps.today_statis.map(item => ({
-      app_name: item.app_name,
-      count: item.count,
-      normal_count: item.normal_count
-    }))
+  get appAbnormalList() {
+    return this.app_inspect.abnormal_list.slice(0, 3);
   }
 
-  get attackedAppsTotal() {
-    return this.attackedApps.total_statis.map(item => ({
-      app_name: item.app_name,
-      count: item.count,
-      normal_count: item.normal_count
-    }))
+  get appInspectList() {
+    return this.app_inspect.inspect_list.slice(0, 8).map(item => {
+      if (item.normal === '1') {
+        item.typeName = '异常'
+      } else if (item.normal === '2') {
+        item.typeName = '正常'
+      } else if (item.normal === '3') {
+        item.typeName = '检测中'
+      } else {
+        item.typeName = ''
+      }
+      return item;
+    });
   }
 
-  toggleDisplayDate(name: string) {
-    this.displayDate = name;
+  get hostAbnormalList() {
+    return this.host_inspect.abnormal_list.slice(0, 3);
+  }
+
+  get hostInspectList() {
+    return this.host_inspect.inspect_list.slice(0, 8).map(item => {
+      if (item.normal === '1') {
+        item.typeName = '异常'
+      } else if (item.normal === '2') {
+        item.typeName = '正常'
+      } else if (item.normal === '3') {
+        item.typeName = '检测中'
+      } else {
+        item.typeName = ''
+      }
+      return item;
+    });
+  }
+
+  get operationSystem() {
+    return this.operationSystemOrigin.map(item => {
+      return {
+        name: item.os_name,
+        value: item.os_count
+      }
+    })
+  }
+
+  get componentUsage() {
+    return this.componentUsageOrigin.map(item => {
+      return {
+        name: item.component_name,
+        value: item.component_count
+      }
+    })
+  }
+
+  toggleInspectSource(name: string) {
+    this.inspectSource = name;
     if (this.timer) {
       clearInterval(this.timer);
     }
     this.timer = setTimeout(() => {
-      if (this.displayDate === 'today') {
-        this.toggleDisplayDate('total')
+      if (this.inspectSource === 'app') {
+        this.toggleInspectSource('host')
       } else {
-        this.toggleDisplayDate('today')
+        this.toggleInspectSource('app')
       }
     }, this.intervalTime);
   };
 
-  @Watch('displayDate')
-  onDisplayDeviceChange(nData: String) {
-    if (nData === 'today') {
-      this.toggleDisplayDate('today')
+  @Watch('inspectSource')
+  onInspectSourceChange(nData: String) {
+    if (nData === 'app') {
+      this.toggleInspectSource('app')
     } else {
-      this.toggleDisplayDate('total')
+      this.toggleInspectSource('host')
     }
-  }
-
-  scrollShow() {
-    let that = this;
-    let size = 4;
-    let temList = this.attackedDetail.attackLists;
-    if (!temList) {
-      return;
-    }
-    let count = temList.length;
-    clearInterval(this.intervalIndex);
-    let i = 0;
-    this.intervalIndex = setInterval(function () {
-      if (i >= count) {
-        i = 0;
-      }
-      let attactTemp = [];
-      for (let m = i; m < count && m < i + size; m++) {
-        let o = temList[m];
-        attactTemp.push(o);
-        if (m < count - 1 && o.attack_time !== temList[m + 1].attack_time) {
-          break;
-        } else {
-          i++;
-        }
-      }
-      attactTemp.forEach(function (e) {
-        that.waitDealEvent.unshift(e);
-      });
-      while (that.waitDealEvent.length > size) {
-        that.waitDealEvent.pop();
-      }
-      i++;
-      that.attackSources = attactTemp;
-    }, 2000);
   }
 }

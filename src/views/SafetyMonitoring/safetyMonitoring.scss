@@ -13,7 +13,8 @@
           margin: 0 2em;
         }
         .app_inspect {
-          //flex: 0 0 22.5em;
+          flex: 3 0 0 !important;
+          transition: all ease 0.3s;
           height: 12.2em;
           margin: 0 2em;
           background-image: linear-gradient(-179deg, #0086E3 0%, rgba(0, 113, 221, 0.91) 31%, rgba(0, 89, 214, 0.54) 59%, rgba(0, 70, 209, 0.06) 96%);
@@ -131,7 +132,7 @@
             }
           }
           &.current {
-            //flex: 0 0 30.8em;
+            flex: 5 0 0 !important;
             position: relative;
             height: 15.8em;
             .arrow {
@@ -208,7 +209,9 @@
       }
       .abnormal_app-wrap {
         .abnormal_app {
+          flex: 3 0 0 !important;
           margin: 0 0.6em;
+          transition: all ease 0.3s;
           .abnormal_app-info {
             .abnormal_app-number {
               flex: 0 0 4em;
@@ -298,6 +301,9 @@
                   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
                   color: rgba(255, 255, 255, 0.8);
                   @include truncate(100%);
+                  &:first-of-type {
+                    padding-left: 1.4em;
+                  }
                   &:last-of-type {
                     text-align: right;
                   }
@@ -354,6 +360,7 @@
             }
           }
           &.current {
+            flex: 5 0 0 !important;
             .abnormal_app-info {
               .abnormal_app-number {
                 flex: 0 0 7.6em;

@@ -4,7 +4,7 @@
       <div class="app_inspect-wrap" flex colcenter>
         <img class="pic" src="~@assets/images/radar.gif" alt=""/>
         <div class="app_inspect-list" col="1" flex colcenter spacebetween>
-          <div col="4" :class="['app_inspect', true ? 'current' : '']" flex-column>
+          <div :class="['app_inspect', inspectSource === 'app' ? 'current' : '']" @click="toggleInspectSource('app')" flex-column>
             <span class="arrow"></span>
             <span class="arrow"></span>
             <span class="arrow"></span>
@@ -18,38 +18,39 @@
               <div class="inspect-content-info" flex>
                 <div col="1"></div>
                 <div col="4" flex-column>
-                  <div class="title">当前检测应用为<span>信息门户平台</span></div>
-                  <div class="duration">历时<span class="num">1h 23m 45s</span></div>
+                  <div class="title">当前检测应用为<span>{{currentAppInspect.name}}</span></div>
+                  <div class="duration">历时<span class="num">{{computingTime}}</span></div>
                 </div>
               </div>
               <div class="line"></div>
               <div class="inspect-content-record" flex spacebetween>
                 <div class="total" col="1" flex-column colcenter>
                   <span>全部应用</span>
-                  <span class="num">89</span>
+                  <span class="num">{{app_inspect.total_app}}</span>
                 </div>
                 <div col="1"></div>
                 <div class="progress" col="3" flex-column>
                   <div flex>
                     <div class="normal" col="1" flex-column colcenter>
                       <span>正常</span>
-                      <span class="num">27</span>
+                      <span class="num">{{app_inspect.normal}}</span>
                     </div>
                     <div class="error" col="1" flex-column colcenter>
                       <span>异常</span>
-                      <span class="num">3</span>
+                      <span class="num">{{app_inspect.abnormal}}</span>
                     </div>
                     <div class="tobe" col="1" flex-column colcenter>
                       <span>待检测</span>
-                      <span class="num">59</span>
+                      <span class="num">{{app_inspect.tobe_inspect}}</span>
                     </div>
                   </div>
-                  <PercentBar :value="[27, 3, 59]" :color="['#3AC868', '#F25B58', '#27A6F6']" :displayRole="false" :displayNum="false"/>
+                  <PercentBar :value="applicationStateRatio" :color="['#3AC868', '#F25B58', '#27A6F6']"
+                              :displayRole="false" :displayNum="false"/>
                 </div>
               </div>
             </div>
           </div>
-          <div col="3" :class="['app_inspect', false ? 'current' : '']" flex-column>
+          <div :class="['app_inspect', inspectSource === 'host' ? 'current' : '']" @click="toggleInspectSource('host')" flex-column>
             <span class="arrow"></span>
             <span class="arrow"></span>
             <span class="arrow"></span>
@@ -63,33 +64,34 @@
               <div class="inspect-content-info" flex>
                 <div col="1"></div>
                 <div col="4" flex-column>
-                  <div class="title">当前检测应用为<span>信息门户平台</span></div>
-                  <div class="duration">历时<span class="num">1h 23m 45s</span></div>
+                  <div class="title">当前检测应用为<span>{{currentHostInspect.name}}</span></div>
+                  <div class="duration">&nbsp;</div>
                 </div>
               </div>
               <div class="line"></div>
               <div class="inspect-content-record" flex spacebetween>
                 <div class="total" col="1" flex-column colcenter>
                   <span>全部应用</span>
-                  <span class="num">89</span>
+                  <span class="num">{{host_inspect.total_app}}</span>
                 </div>
                 <div col="1"></div>
                 <div class="progress" col="3" flex-column>
                   <div flex>
                     <div class="normal" col="1" flex-column colcenter>
                       <span>正常</span>
-                      <span class="num">27</span>
+                      <span class="num">{{host_inspect.normal}}</span>
                     </div>
                     <div class="error" col="1" flex-column colcenter>
                       <span>异常</span>
-                      <span class="num">3</span>
+                      <span class="num">{{host_inspect.abnormal}}</span>
                     </div>
                     <div class="tobe" col="1" flex-column colcenter>
                       <span>待检测</span>
-                      <span class="num">59</span>
+                      <span class="num">{{host_inspect.tobe_inspect}}</span>
                     </div>
                   </div>
-                  <PercentBar :value="[27, 3, 59]" :color="['#3AC868', '#F25B58', '#27A6F6']" :displayRole="false" :displayNum="false"/>
+                  <PercentBar :value="hostStateRatio" :color="['#3AC868', '#F25B58', '#27A6F6']" :displayRole="false"
+                              :displayNum="false"/>
                 </div>
               </div>
             </div>
@@ -97,61 +99,28 @@
         </div>
       </div>
       <div class="abnormal_app-wrap" flex spacearound>
-        <div col="5" :class="['abnormal_app', true ? 'current' : '']">
+        <div :class="['abnormal_app', inspectSource === 'app' ? 'current' : '']">
           <div class="abnormal_app-info" flex>
             <div class="abnormal_app-number" flex-column center>
               <span class="title">异常应用</span>
               <div flex center>
-                <span class="num">3</span>
+                <span class="num">{{app_inspect.abnormal_count}}</span>
                 <sub>个</sub>
               </div>
             </div>
             <div class="abnormal_app-list" col="1" flex>
-              <div class="list-item" col="1" flex-column>
-                <span class="app-name">信息门户平台</span>
+              <div class="list-item" col="1" flex-column v-for="item in appAbnormalList">
+                <span class="app-name">{{item.name}}</span>
                 <div class="app-url" flex-column>
                   <span class="title">URL：</span>
-                  <span class="value">http://my.wisedu.com/edc/ID/6.Operation/</span>
+                  <span class="value">{{item.url}}</span>
                 </div>
                 <div class="app-event" flex-column>
                   <span class="title">检测起止时间：</span>
-                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
+                  <span class="value">{{item.start_time}} - {{item.end_time}}</span>
                 </div>
                 <div class="app-abnormal-type" flex>
-                  <span class="type-name">异常类型</span>
-                  <span class="type-name">异常类型</span>
-                  <span class="type-name">异常类型</span>
-                  <span class="type-name">异常类型</span>
-                </div>
-              </div>
-              <div class="list-item" col="1" flex-column>
-                <span class="app-name">信息门户平台</span>
-                <div class="app-url" flex-column>
-                  <span class="title">URL：</span>
-                  <span class="value">http://my.wisedu.com/edc/ID/6.Operation/</span>
-                </div>
-                <div class="app-event" flex-column>
-                  <span class="title">检测起止时间：</span>
-                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
-                </div>
-                <div class="app-abnormal-type" flex>
-                  <span class="type-name">异常类型</span>
-                  <span class="type-name">异常类型</span>
-                </div>
-              </div>
-              <div class="list-item" col="1" flex-column>
-                <span class="app-name">信息门户平台</span>
-                <div class="app-url" flex-column>
-                  <span class="title">URL：</span>
-                  <span class="value">http://my.wisedu.com/edc/ID/6.Operation/</span>
-                </div>
-                <div class="app-event" flex-column>
-                  <span class="title">检测起止时间：</span>
-                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
-                </div>
-                <div class="app-abnormal-type" flex>
-                  <span class="type-name">异常类型</span>
-                  <span class="type-name">异常类型</span>
+                  <span class="type-name">{{item.abnormal_type}}</span>
                 </div>
               </div>
             </div>
@@ -165,75 +134,40 @@
                 <span col="1">状态</span>
               </div>
               <div class="t__body" flex-column>
-                <div :class="['t__tr', true ? 'state-success' : '', false ? 'state-loading' : '']" flex>
-                  <span col="2">信息门户平台信息门户平台信息门户平台</span>
-                  <span col="4">http://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operation</span>
-                  <span col="3">2018.11.12 12:00:00-13:00:00</span>
-                  <span col="1">正常</span>
-                </div>
-                <div :class="['t__tr', false ? 'state-success' : '', true ? 'state-loading' : '']" flex>
-                  <span col="2">信息门户平台信息门户平台信息门户平台</span>
-                  <span col="4">http://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operation</span>
-                  <span col="3">2018.11.12 12:00:00-13:00:00</span>
-                  <span col="1">检测中</span>
+                <div v-for="obj in appInspectList"
+                     :class="['t__tr', obj.normal === '2' ? 'state-success' : '', obj.normal === '3' ? 'state-loading' : '']"
+                     flex>
+                  <span col="2">{{obj.name}}</span>
+                  <span col="4">{{obj.url}}</span>
+                  <span col="3">{{obj.start_time}} - {{obj.end_time}}</span>
+                  <span col="1">{{obj.typeName}}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div col="3" :class="['abnormal_app', false ? 'current' : '']">
+        <div :class="['abnormal_app', inspectSource === 'host' ? 'current' : '']">
           <div class="abnormal_app-info" flex>
             <div class="abnormal_app-number" flex-column center>
               <span class="title">异常应用</span>
               <div flex center>
-                <span class="num">3</span>
+                <span class="num">{{host_inspect.abnormal_count}}</span>
                 <sub>个</sub>
               </div>
             </div>
             <div class="abnormal_app-list" col="1" flex>
-              <div class="list-item" col="1" flex-column>
-                <span class="app-name">172.16.0.8</span>
+              <div class="list-item" col="1" flex-column v-for="item in hostAbnormalList">
+                <span class="app-name">{{item.name}}</span>
                 <div class="app-url" flex-column>
                   <span class="title">服务器用途：</span>
-                  <span class="value">数据库服务器</span>
+                  <span class="value">{{item.url}}</span>
                 </div>
                 <div class="app-event" flex-column>
                   <span class="title">监测时间：</span>
-                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
+                  <span class="value">{{item.start_time}}</span>
                 </div>
                 <div class="app-abnormal-type" flex>
-                  <span class="type-name">异常类型</span>
-                  <span class="type-name">异常类型</span>
-                </div>
-              </div>
-              <div class="list-item" col="1" flex-column>
-                <span class="app-name">172.16.0.8</span>
-                <div class="app-url" flex-column>
-                  <span class="title">服务器用途：</span>
-                  <span class="value">数据库服务器</span>
-                </div>
-                <div class="app-event" flex-column>
-                  <span class="title">监测时间：</span>
-                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
-                </div>
-                <div class="app-abnormal-type" flex>
-                  <span class="type-name">异常类型</span>
-                  <span class="type-name">异常类型</span>
-                </div>
-              </div>
-              <div class="list-item" col="1" flex-column>
-                <span class="app-name">172.16.0.8</span>
-                <div class="app-url" flex-column>
-                  <span class="title">服务器用途：</span>
-                  <span class="value">数据库服务器</span>
-                </div>
-                <div class="app-event" flex-column>
-                  <span class="title">监测时间：</span>
-                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
-                </div>
-                <div class="app-abnormal-type" flex>
-                  <span class="type-name">异常类型</span>
-                  <span class="type-name">异常类型</span>
+                  <span class="type-name">{{item.abnormal_type}}</span>
                 </div>
               </div>
             </div>
@@ -241,23 +175,19 @@
           <div class="abnormal_app-content">
             <div class="t__wrap" flex-column>
               <div class="t__head" flex>
-                <span col="2">应用名称</span>
-                <span col="4">URL</span>
-                <span col="3">检测起止时间</span>
+                <span col="2">主机IP地址</span>
+                <span col="4">服务器用途</span>
+                <span col="3">监测时间</span>
                 <span col="1">状态</span>
               </div>
               <div class="t__body" flex-column>
-                <div :class="['t__tr', true ? 'state-success' : '', false ? 'state-loading' : '']" flex>
-                  <span col="2">信息门户平台信息门户平台信息门户平台</span>
-                  <span col="4">http://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operation</span>
-                  <span col="3">2018.11.12 12:00:00-13:00:00</span>
-                  <span col="1">正常</span>
-                </div>
-                <div :class="['t__tr', false ? 'state-success' : '', true ? 'state-loading' : '']" flex>
-                  <span col="2">信息门户平台信息门户平台信息门户平台</span>
-                  <span col="4">http://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operation</span>
-                  <span col="3">2018.11.12 12:00:00-13:00:00</span>
-                  <span col="1">检测中</span>
+                <div v-for="obj in hostInspectList"
+                     :class="['t__tr', obj.normal === '2' ? 'state-success' : '', obj.normal === '3' ? 'state-loading' : '']"
+                     flex>
+                  <span col="2">{{obj.name}}</span>
+                  <span col="4">{{obj.url}}</span>
+                  <span col="3">{{obj.start_time}}</span>
+                  <span col="1">{{obj.typeName}}</span>
                 </div>
               </div>
             </div>
@@ -271,42 +201,44 @@
       <div class="todo-summary" col="1" flex-column center>
         <div>当前未处理安全事件</div>
         <div>
-          <span class="num">108</span>
+          <span class="num">{{unsolved_events.total_count}}</span>
           <span>/件</span>
         </div>
       </div>
       <div class="todo-type" col="1" flex center>
         <div class="todo-type-item" col="1" flex center>
           <span col="3" class="item-name">安全漏洞</span>
-          <span col="2" :class="['num', false ? '' : 'warning']">28</span>
+          <span col="2" :class="['num', unsolved_events.safetybug && 'warning']">{{unsolved_events.safetybug}}</span>
         </div>
         <div class="todo-type-item" col="1" flex center>
           <span col="3" class="item-name">篡改</span>
-          <span col="2" :class="['num', false ? '' : 'warning']">28</span>
+          <span col="2" :class="['num', unsolved_events.modified && 'warning']">{{unsolved_events.modified}}</span>
         </div>
         <div class="todo-type-item" col="1" flex center>
           <span col="3" class="item-name">木马</span>
-          <span col="2" :class="['num', false ? '' : 'warning']">28</span>
+          <span col="2" :class="['num', unsolved_events.trojan && 'warning']">{{unsolved_events.trojan}}</span>
         </div>
         <div class="todo-type-item" col="1" flex center>
           <span col="3" class="item-name">敏感内容</span>
-          <span col="2" :class="['num', true ? '' : 'warning']">0</span>
+          <span col="2" :class="['num', unsolved_events.sensitive && 'warning']">{{unsolved_events.sensitive}}</span>
         </div>
         <div class="todo-type-item" col="1" flex center>
           <span col="3" class="item-name">暗链</span>
-          <span col="2" :class="['num', true ? '' : 'warning']">0</span>
+          <span col="2" :class="['num', unsolved_events.hidden_link && 'warning']">{{unsolved_events.hidden_link}}</span>
         </div>
         <div class="todo-type-item" col="1" flex center>
           <span col="3" class="item-name">组件版本</span>
-          <span col="2" :class="['num', false ? '' : 'warning']">28</span>
+          <span col="2" :class="['num', unsolved_events.component && 'warning']">{{unsolved_events.component}}</span>
         </div>
       </div>
     </div>
-    <Card class="running__apps" col="1" title="使用组件分布" :date="date" :row="false">
-      <PieChart :cols="1" :column="false" :outer="0.9" :color="['#27A6F6', '#3AC868', '#ECB045']" :data="providerPvDistribute" />
+    <Card class="running__apps" col="1" title="使用系统分布">
+      <PieChart :cols="1" :column="false" :outer="0.9" :color="['#27A6F6', '#3AC868', '#ECB045']"
+                :data="operationSystem"/>
     </Card>
-    <Card class="running__apps" col="1" title="使用组件分布" :date="date" :row="false">
-      <PieChart :cols="1" :column="false" :outer="0.9" :color="['#27A6F6', '#3AC868', '#ECB045']" :data="providerPvDistribute" />
+    <Card class="running__apps" col="1" title="使用组件分布">
+      <PieChart :cols="1" :column="false" :outer="0.9" :color="['#27A6F6', '#3AC868', '#ECB045']"
+                :data="componentUsage"/>
     </Card>
   </aside>
 </div>

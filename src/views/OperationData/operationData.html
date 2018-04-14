@@ -142,7 +142,7 @@
       <div class="todo-type" col="3" flex>
         <div class="todo-type-item" col="1" flex center v-for="obj in problemStatisc">
           <span col="1" class="item-name">{{obj.probleType}}</span>
-          <span col="1" :class="['num', obj.problemNum === 0 ? '' : 'warning']">{{obj.problemNum}}</span>
+          <span col="1" :class="['num', obj.problemNum && 'warning']">{{obj.problemNum}}</span>
         </div>
       </div>
     </div>
