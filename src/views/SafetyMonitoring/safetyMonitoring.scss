@@ -2,21 +2,21 @@
 
 .monitoring {
   .monitoring__leftaside {
-
+    //flex: 0 0 80em;
     .monitoring__leftaside-inspect {
-      padding: 1em;
       .app_inspect-wrap {
+        flex: 0 0 18em !important;
+        margin-bottom: 1em;
         .pic {
           display: inline-block;
-          width: 11.6em;
-          height: 11.6em;
-          margin-right: 2.4em;
+          width: 11.5em;
+          height: 11.5em;
+          margin: 0 2em;
         }
         .app_inspect {
-          position: relative;
-          flex: 0 0 22.5em;
+          //flex: 0 0 22.5em;
           height: 12.2em;
-          margin-right: 4em;
+          margin: 0 2em;
           background-image: linear-gradient(-179deg, #0086E3 0%, rgba(0, 113, 221, 0.91) 31%, rgba(0, 89, 214, 0.54) 59%, rgba(0, 70, 209, 0.06) 96%);
           box-shadow: 0 1em 2em 0 rgba(1, 19, 37, 0.30);
           border-radius: 0.2em;
@@ -76,7 +76,7 @@
               height: 2.8em;
             }
             .inspect-content-info {
-              margin: 0 1em 0 4em;
+              //margin: 0 1em 0 4em;
               .title {
                 font-size: 1em;
                 > span {
@@ -95,7 +95,7 @@
             .line {
               width: 100%;
               height: 1px;
-              margin: 0.3em 0;
+              margin: 0.5em 0;
               background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.80) 20%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.80) 80%, rgba(255, 255, 255, 0) 100%);
             }
             .inspect-content-record {
@@ -131,122 +131,259 @@
               }
             }
           }
-        }
-        .app_inspect.current {
-          position: relative;
-          flex: 0 0 30.8em;
-          height: 15.8em;
-          margin-right: 4em;
-          background-image: linear-gradient(-179deg, #0086E3 0%, rgba(0, 113, 221, 0.91) 31%, rgba(0, 89, 214, 0.54) 59%, rgba(0, 70, 209, 0.06) 96%);
-          box-shadow: 0 1em 2em 0 rgba(1, 19, 37, 0.30);
-          border-radius: 0.2em;
-          .arrow {
-            display: block;
-            position: absolute;
-            z-index: -1;
-            width: 4.5em;
-            height: 5em;
-            &:nth-of-type(1) {
-              left: -0.6em;
-              top: -0.6em;
-              background: url(~@assets/images/arrow_lt.png) no-repeat center center;
-            }
-            &:nth-of-type(2) {
-              right: -0.6em;
-              top: -0.6em;
-              background: url(~@assets/images/arrow_rt.png) no-repeat center center;
-            }
-            &:nth-of-type(3) {
-              right: -0.6em;
-              bottom: -0.6em;
-              background: url(~@assets/images/arrow_rb.png) no-repeat center center;
-            }
-            &:nth-of-type(4) {
-              left: -0.6em;
-              bottom: -0.6em;
-              background: url(~@assets/images/arrow_lb.png) no-repeat center center;
-            }
-          }
-          .inspect-header {
-            height: 3.6em;
-            background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.50) 100%);
-            border-radius: 0.2em 0.2em 0 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-            text-align: center;
-            .inspect-header-icon {
-              display: inline-block;
-              width: 1.8em;
-              height: 1.8em;
-              margin-right: 0.5em;
-            }
-            .inspect-header-title {
-              font-size: 1.5em;
-              font-weight: bold;
-              @include gradient(#FFFFFF, #D1D1D1);
-            }
-          }
-          .inspect-content {
+          &.current {
+            //flex: 0 0 30.8em;
             position: relative;
-            margin: 0.8em 2.5em;
-            .inspect-content-icon {
-              position: absolute;
-              top: -2.6em;
-              left: 2em;
-              width: 3.5em;
-              height: 3.5em;
+            height: 15.8em;
+            .arrow {
+              display: block;
             }
-            .inspect-content-info {
-              margin: 0 3em 0 6em;
+            .inspect-header {
+              height: 3.6em;
+              .inspect-header-icon {
+                width: 1.8em;
+                height: 1.8em;
+              }
+              .inspect-header-title {
+                font-size: 1.5em;
+              }
+            }
+            .inspect-content {
+              margin: 0.8em 2.5em;
+              .inspect-content-icon {
+                top: -2.6em;
+                left: 2em;
+                width: 3.5em;
+                height: 3.5em;
+              }
+              .inspect-content-info {
+                //margin: 0 3em 0 6em;
+                .title {
+                  font-size: 1.1em;
+                  > span {
+                    font-size: 1.2em;
+                  }
+                }
+                .duration {
+                  font-size: 1.1em;
+                  .num {
+                    margin-left: 0.3em;
+                  }
+                }
+              }
+              .line {
+                margin: 0.8em 0;
+              }
+              .inspect-content-record {
+                .total {
+                  font-size: 1.1em;
+                  .num {
+                    font-size: 2.8em;
+                  }
+                }
+                .progress {
+                  font-size: 1.1em;
+                  .normal {
+                    .num {
+                      font-size: 2.8em;
+                    }
+                  }
+                  .error {
+                    .num {
+                      font-size: 2.8em;
+                    }
+                  }
+                  .tobe {
+                    .num {
+                      font-size: 2.8em;
+                    }
+                  }
+                  .percentbar__bar {
+                    height: 0.2em;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .abnormal_app-wrap {
+
+        .abnormal_app {
+          margin: 0 1em;
+          .abnormal_app-info {
+            .abnormal_app-number {
+              flex: 0 0 4em;
+              height: 8em;
+              margin-right: 0.5em;
+              background-image: linear-gradient(-180deg, #ED5854 0%, #B82F2B 100%);
+              border-radius: 0.3em;
               .title {
+                margin: 0 0.6em;
                 font-size: 1.1em;
-                > span {
-                  margin-left: 0.3em;
+              }
+              > div {
+                align-items: baseline;
+                .num {
+                  font-size: 3em;
+                }
+                sub {
+                  display: none;
                   font-size: 1.2em;
-                  font-weight: bold;
-                }
-              }
-              .duration {
-                font-size: 1.1em;
-                .num {
-                  margin-left: 0.3em;
                 }
               }
             }
-            .line {
+            .abnormal_app-list {
+              height: 14.8em;
+              .list-item {
+                width: 0;
+                margin-right: 0.5em;
+                padding: 0.6em;
+                background-image: linear-gradient(-180deg, rgba(243, 120, 115, 0.22) 0%, rgba(242, 115, 111, 0.06) 38%, rgba(237, 88, 84, 0.03) 100%);
+                box-shadow: 0 3px 7px 0 rgba(4, 8, 45, 0.29);
+                border: 2px solid #ED5854;
+                border-radius: 4px;
+                .app-name {
+                  font-size: 1.2em;
+                  @include truncate(100%);
+                }
+                .app-url, .app-event {
+                  margin-top: 0.6em;
+                  .title {
+                    color: rgba(255, 255, 255, 0.7);
+                  }
+                  .value {
+                    display: -webkit-box;
+                    height: 3.2em;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    word-break: break-all;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                  }
+                }
+                .app-abnormal-type {
+                  flex-wrap: wrap;
+                  height: 1.8em;
+                  margin-top: 0.6em;
+                  overflow: hidden;
+                  .type-name {
+                    height: 1.6em;
+                    margin-right: 0.4em;
+                    margin-bottom: 0.4em;
+                    padding: 0 0.2em;
+                    border: 1px solid #ED5854;
+                    border-radius: 0.2em;
+                    color: #ED5854;
+                    white-space: nowrap;
+                  }
+                }
+              }
+            }
+          }
+          .abnormal_app-content {
+            margin-top: 2em;
+            .t__wrap {
+              @include breakpoint(min-width 1440px) {
+                font-size: $fontSizeSmaller;
+              }
               width: 100%;
-              height: 1px;
-              margin: 0.8em 0;
-              background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.80) 20%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 0.80) 80%, rgba(255, 255, 255, 0) 100%);
-            }
-            .inspect-content-record {
-              .total {
-                font-size: 1.1em;
-                .num {
-                  font-size: 2.8em;
+              height: 100%;
+              table-layout: fixed;
+              white-space: nowrap;
+              text-align: left;
+              border-spacing: 0;
+              color: rgba(255, 255, 255, 0.8);
+              .t__head {
+                > span {
+                  padding: 0.5em 0;
+                  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                  color: rgba(255, 255, 255, 0.8);
+                  @include truncate(100%);
+                  &:last-of-type {
+                    text-align: right;
+                  }
                 }
               }
-              .progress {
-                font-size: 1.1em;
-                .normal {
-                  .num {
-                    @include gradient(#51EC75, #028550);
-                    font-size: 2.8em;
+              .t__body {
+                margin-top: 0.6em;
+                .t__tr {
+                  margin: 0.4em 0;
+                  > span {
+                    width: 0;
+                    @include truncate(100%);
+                    &:first-of-type {
+                      padding-left: 1.4em;
+                    }
+                    &:last-of-type {
+                      text-align: right;
+                    }
+                  }
+                  &.state-success {
+                    > span {
+                      &:first-of-type {
+                        background: url(~@assets/images/icon_success.png) no-repeat left center;
+                      }
+                      &:last-of-type {
+                        color: #3AC868;
+                      }
+                    }
+                  }
+                  &.state-loading {
+                    position: relative;
+                    > span {
+                      &:first-of-type {
+                        background: url(~@assets/images/icon_loading.png) no-repeat left center;
+                      }
+                      &:last-of-type {
+                        color: #27A6F6;
+                      }
+                    }
+                    &::after {
+                      position: absolute;
+                      left: -0.3em;
+                      top: -0.1em;
+                      content: '';
+                      width: calc(100% + 0.6em);
+                      height: calc(100% + 0.2em);
+                      background-image: linear-gradient(-180deg, rgba(89, 192, 255, 0.49) 0%, rgba(19, 56, 182, 0.20) 98%);
+                      border: 1px solid #5BB0FF;
+                      border-radius: 0.2em;
+                    }
                   }
                 }
-                .error {
+              }
+            }
+          }
+
+          &.current {
+            .abnormal_app-info {
+              .abnormal_app-number {
+                flex: 0 0 7.6em;
+                height: 8em;
+                margin-right: 0.5em;
+                background-image: linear-gradient(-180deg, #ED5854 0%, #B82F2B 100%);
+                border-radius: 0.3em;
+                .title {
+                  font-size: 1.2em;
+                }
+                > div {
+                  align-items: baseline;
                   .num {
-                    @include gradient(#FF6864, #C80A05);
-                    font-size: 2.8em;
+                    font-size: 4em;
+                  }
+                  sub {
+                    display: block;
+                    font-size: 1.2em;
                   }
                 }
-                .tobe {
-                  .num {
-                    @include gradient(#61E2FA, #1C5DF7);
-                    font-size: 2.8em;
+              }
+              .abnormal_app-list {
+                .list-item {
+                  .app-name {
+                    font-size: 1.3em;
+                    @include truncate(100%);
                   }
-                }
-                .percentbar__bar {
-                  height: 0.2em;
                 }
               }
             }

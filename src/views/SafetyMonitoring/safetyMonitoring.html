@@ -1,10 +1,10 @@
 <div class="monitoring height100" flex>
-  <aside class="monitoring__leftaside" col="6" flex-column>
+  <aside class="monitoring__leftaside" col="7" flex-column>
     <Card class="monitoring__leftaside-inspect" col="1" :row="false">
       <div class="app_inspect-wrap" flex colcenter>
         <img class="pic" src="~@assets/images/radar.gif" alt=""/>
-        <div col="1" flex colcenter spacebetween>
-          <div :class="['app_inspect', false ? 'current' : '']" flex-column>
+        <div class="app_inspect-list" col="1" flex colcenter spacebetween>
+          <div col="4" :class="['app_inspect', true ? 'current' : '']" flex-column>
             <span class="arrow"></span>
             <span class="arrow"></span>
             <span class="arrow"></span>
@@ -15,9 +15,12 @@
             </div>
             <div class="inspect-content" flex-column>
               <img class="inspect-content-icon" src="~@assets/images/icon_search.png" alt=""/>
-              <div class="inspect-content-info" flex-column>
-                <div class="title">当前检测应用为<span>信息门户平台</span></div>
-                <div class="duration">历时<span class="num">1h 23m 45s</span></div>
+              <div class="inspect-content-info" flex>
+                <div col="1"></div>
+                <div col="4" flex-column>
+                  <div class="title">当前检测应用为<span>信息门户平台</span></div>
+                  <div class="duration">历时<span class="num">1h 23m 45s</span></div>
+                </div>
               </div>
               <div class="line"></div>
               <div class="inspect-content-record" flex spacebetween>
@@ -46,7 +49,7 @@
               </div>
             </div>
           </div>
-          <div :class="['app_inspect', true ? 'current' : '']" flex-column>
+          <div col="3" :class="['app_inspect', false ? 'current' : '']" flex-column>
             <span class="arrow"></span>
             <span class="arrow"></span>
             <span class="arrow"></span>
@@ -57,9 +60,12 @@
             </div>
             <div class="inspect-content" flex-column>
               <img class="inspect-content-icon" src="~@assets/images/icon_search.png" alt=""/>
-              <div class="inspect-content-info" flex-column>
-                <div class="title">当前检测应用为<span>信息门户平台</span></div>
-                <div class="duration">历时<span class="num">1h 23m 45s</span></div>
+              <div class="inspect-content-info" flex>
+                <div col="1"></div>
+                <div col="4" flex-column>
+                  <div class="title">当前检测应用为<span>信息门户平台</span></div>
+                  <div class="duration">历时<span class="num">1h 23m 45s</span></div>
+                </div>
               </div>
               <div class="line"></div>
               <div class="inspect-content-record" flex spacebetween>
@@ -90,7 +96,173 @@
           </div>
         </div>
       </div>
-      <div col="2" flex>
+      <div class="abnormal_app-wrap" flex spacearound>
+        <div col="5" :class="['abnormal_app', true ? 'current' : '']">
+          <div class="abnormal_app-info" flex>
+            <div class="abnormal_app-number" flex-column center>
+              <span class="title">异常应用</span>
+              <div flex center>
+                <span class="num">3</span>
+                <sub>个</sub>
+              </div>
+            </div>
+            <div class="abnormal_app-list" col="1" flex>
+              <div class="list-item" col="1" flex-column>
+                <span class="app-name">信息门户平台</span>
+                <div class="app-url" flex-column>
+                  <span class="title">URL：</span>
+                  <span class="value">http://my.wisedu.com/edc/ID/6.Operation/</span>
+                </div>
+                <div class="app-event" flex-column>
+                  <span class="title">检测起止时间：</span>
+                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
+                </div>
+                <div class="app-abnormal-type" flex>
+                  <span class="type-name">异常类型</span>
+                  <span class="type-name">异常类型</span>
+                  <span class="type-name">异常类型</span>
+                  <span class="type-name">异常类型</span>
+                </div>
+              </div>
+              <div class="list-item" col="1" flex-column>
+                <span class="app-name">信息门户平台</span>
+                <div class="app-url" flex-column>
+                  <span class="title">URL：</span>
+                  <span class="value">http://my.wisedu.com/edc/ID/6.Operation/</span>
+                </div>
+                <div class="app-event" flex-column>
+                  <span class="title">检测起止时间：</span>
+                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
+                </div>
+                <div class="app-abnormal-type" flex>
+                  <span class="type-name">异常类型</span>
+                  <span class="type-name">异常类型</span>
+                </div>
+              </div>
+              <div class="list-item" col="1" flex-column>
+                <span class="app-name">信息门户平台</span>
+                <div class="app-url" flex-column>
+                  <span class="title">URL：</span>
+                  <span class="value">http://my.wisedu.com/edc/ID/6.Operation/</span>
+                </div>
+                <div class="app-event" flex-column>
+                  <span class="title">检测起止时间：</span>
+                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
+                </div>
+                <div class="app-abnormal-type" flex>
+                  <span class="type-name">异常类型</span>
+                  <span class="type-name">异常类型</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="abnormal_app-content">
+            <div class="t__wrap" flex-column>
+              <div class="t__head" flex>
+                <span col="2">应用名称</span>
+                <span col="4">URL</span>
+                <span col="3">检测起止时间</span>
+                <span col="1">状态</span>
+              </div>
+              <div class="t__body" flex-column>
+                <div :class="['t__tr', true ? 'state-success' : '', false ? 'state-loading' : '']" flex>
+                  <span col="2">信息门户平台信息门户平台信息门户平台</span>
+                  <span col="4">http://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operation</span>
+                  <span col="3">2018.11.12 12:00:00-13:00:00</span>
+                  <span col="1">正常</span>
+                </div>
+                <div :class="['t__tr', false ? 'state-success' : '', true ? 'state-loading' : '']" flex>
+                  <span col="2">信息门户平台信息门户平台信息门户平台</span>
+                  <span col="4">http://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operation</span>
+                  <span col="3">2018.11.12 12:00:00-13:00:00</span>
+                  <span col="1">检测中</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div col="3" :class="['abnormal_app', false ? 'current' : '']">
+          <div class="abnormal_app-info" flex>
+            <div class="abnormal_app-number" flex-column center>
+              <span class="title">异常应用</span>
+              <div flex center>
+                <span class="num">3</span>
+                <sub>个</sub>
+              </div>
+            </div>
+            <div class="abnormal_app-list" col="1" flex>
+              <div class="list-item" col="1" flex-column>
+                <span class="app-name">172.16.0.8</span>
+                <div class="app-url" flex-column>
+                  <span class="title">服务器用途：</span>
+                  <span class="value">数据库服务器</span>
+                </div>
+                <div class="app-event" flex-column>
+                  <span class="title">监测时间：</span>
+                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
+                </div>
+                <div class="app-abnormal-type" flex>
+                  <span class="type-name">异常类型</span>
+                  <span class="type-name">异常类型</span>
+                </div>
+              </div>
+              <div class="list-item" col="1" flex-column>
+                <span class="app-name">172.16.0.8</span>
+                <div class="app-url" flex-column>
+                  <span class="title">服务器用途：</span>
+                  <span class="value">数据库服务器</span>
+                </div>
+                <div class="app-event" flex-column>
+                  <span class="title">监测时间：</span>
+                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
+                </div>
+                <div class="app-abnormal-type" flex>
+                  <span class="type-name">异常类型</span>
+                  <span class="type-name">异常类型</span>
+                </div>
+              </div>
+              <div class="list-item" col="1" flex-column>
+                <span class="app-name">172.16.0.8</span>
+                <div class="app-url" flex-column>
+                  <span class="title">服务器用途：</span>
+                  <span class="value">数据库服务器</span>
+                </div>
+                <div class="app-event" flex-column>
+                  <span class="title">监测时间：</span>
+                  <span class="value">2018.11.12 12:00:00-13:00:00</span>
+                </div>
+                <div class="app-abnormal-type" flex>
+                  <span class="type-name">异常类型</span>
+                  <span class="type-name">异常类型</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="abnormal_app-content">
+            <div class="t__wrap" flex-column>
+              <div class="t__head" flex>
+                <span col="2">应用名称</span>
+                <span col="4">URL</span>
+                <span col="3">检测起止时间</span>
+                <span col="1">状态</span>
+              </div>
+              <div class="t__body" flex-column>
+                <div :class="['t__tr', true ? 'state-success' : '', false ? 'state-loading' : '']" flex>
+                  <span col="2">信息门户平台信息门户平台信息门户平台</span>
+                  <span col="4">http://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operation</span>
+                  <span col="3">2018.11.12 12:00:00-13:00:00</span>
+                  <span col="1">正常</span>
+                </div>
+                <div :class="['t__tr', false ? 'state-success' : '', true ? 'state-loading' : '']" flex>
+                  <span col="2">信息门户平台信息门户平台信息门户平台</span>
+                  <span col="4">http://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operationhttp://my.wisedu.com/edc/ID/6.Operation</span>
+                  <span col="3">2018.11.12 12:00:00-13:00:00</span>
+                  <span col="1">检测中</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </Card>
   </aside>
