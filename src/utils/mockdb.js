@@ -1813,7 +1813,7 @@ Mock.mock(new RegExp('/topic/schoolUserStatisc/'), {
 });
 
 // 系统运行分析
-Mock.mock(new RegExp('/axsh_new/sendapdex_getSystemAnalysisScreenNew'), {
+Mock.mock(new RegExp('/cldPortal_new/eventopen/getSystemAnalysisScreenNew'), {
   //业务系统概览
   'system_overview': {
     'system_count': 200,
@@ -2313,7 +2313,7 @@ Mock.mock(new RegExp('/topic/schoolDataStatisc/'), {
 });
 
 // 安全防护
-Mock.mock(new RegExp('/cldPortal_new/event/getSafetyProtectBigScreenNew'), {
+Mock.mock(new RegExp('/cldPortal_new/eventopen/getSafetyProtectBigScreenNew'), {
   //累计攻击来源top5/次
   'foreignAttack': [
     {
@@ -2506,7 +2506,7 @@ Mock.mock(new RegExp('/cldPortal_new/event/getSafetyProtectBigScreenNew'), {
 });
 
 // 安全监测
-Mock.mock(new RegExp('/cldPortal_new/event/getSafetyInspectScreenNew'), {
+Mock.mock(new RegExp('/cldPortal_new/eventopen/getSafetyInspectScreenNew'), {
   //应用监测
   'app_inspect': {
     'total_app': 89,

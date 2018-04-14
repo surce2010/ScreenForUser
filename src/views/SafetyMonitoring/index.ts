@@ -92,7 +92,7 @@ export default class SafetyMonitoring extends Vue {
   }
 
   async getSafetyInspectScreenNew() {
-    const {data} = await axios.get('/cldPortal_new/event/getSafetyInspectScreenNew', {
+    const {data} = await axios.get('/cldPortal_new/eventopen/getSafetyInspectScreenNew', {
       params: {
         schoolCode: this.$route.query.schoolCode
       }

@@ -74,7 +74,7 @@ export default class SafetyProtection extends Vue {
   }
 
   async getSafetyProtectBigScreenNew() {
-    const {data} = await axios.get('/cldPortal_new/event/getSafetyProtectBigScreenNew', {
+    const {data} = await axios.get('/cldPortal_new/eventopen/getSafetyProtectBigScreenNew', {
       params: {
         schoolCode: this.$route.query.schoolCode
       }

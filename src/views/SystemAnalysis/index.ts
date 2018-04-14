@@ -93,7 +93,7 @@ export default class SystemAnalysis extends Vue {
   }
 
   async getSystemAnalysisScreenNew() {
-    const {data} = await axios.get('/axsh_new/sendapdex_getSystemAnalysisScreenNew', {
+    const {data} = await axios.get('/cldPortal_new/eventopen/getSystemAnalysisScreenNew', {
       params: {
         schoolCode: this.$route.query.schoolCode
       }
