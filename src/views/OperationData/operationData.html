@@ -3,11 +3,11 @@
     <div class="operation__leftaside-summary" flex>
       <div class="summary__item" col="1" flex-column rowcenter>
         <div class="summary__item-title">集成系统数</div>
-        <div class="summary__item-info" flex colcenter>
-          <div col="3" class="summary__item-icon">
-            <img src="~@assets/images/active_app.png" alt=""/>
+        <div class="summary__item-info" flex center>
+          <div class="summary__item-icon">
+            <img src="~@assets/images/icon_share.png" alt=""/>
           </div>
-          <div col="7" class="summary__item-value" flex>
+          <div class="summary__item-value" flex>
             <div class="num">{{systemNum}}</div>
             <div class="unit">/个</div>
           </div>
@@ -15,11 +15,11 @@
       </div>
       <div class="summary__item" col="1" flex-column rowcenter>
         <div class="summary__item-title">集成接口数</div>
-        <div class="summary__item-info" flex colcenter>
-          <div col="3" class="summary__item-icon">
-            <img src="~@assets/images/active_app.png" alt=""/>
+        <div class="summary__item-info" flex center>
+          <div class="summary__item-icon">
+            <img src="~@assets/images/icon_wire.png" alt=""/>
           </div>
-          <div col="7" class="summary__item-value" flex>
+          <div class="summary__item-value" flex>
             <div class="num">{{apiNum}}</div>
             <div class="unit">/个</div>
           </div>
@@ -27,11 +27,11 @@
       </div>
       <div class="summary__item" col="1" flex-column rowcenter>
         <div class="summary__item-title">异常接口数</div>
-        <div class="summary__item-info" flex colcenter>
-          <div col="3" class="summary__item-icon">
-            <img src="~@assets/images/active_app.png" alt=""/>
+        <div class="summary__item-info" flex center>
+          <div class="summary__item-icon">
+            <img src="~@assets/images/icon_notice.png" alt=""/>
           </div>
-          <div col="7" class="summary__item-value" flex>
+          <div class="summary__item-value" flex>
             <div class="num error">{{wrongApiNum}}</div>
             <div class="unit">/个</div>
           </div>
@@ -39,11 +39,11 @@
       </div>
       <div class="summary__item" col="1" flex-column rowcenter>
         <div class="summary__item-title">数据体积</div>
-        <div class="summary__item-info" flex colcenter>
-          <div col="3" class="summary__item-icon">
-            <img src="~@assets/images/active_app.png" alt=""/>
+        <div class="summary__item-info" flex center>
+          <div class="summary__item-icon">
+            <img src="~@assets/images/icon_folder.png" alt=""/>
           </div>
-          <div col="7" class="summary__item-value" flex>
+          <div class="summary__item-value" flex>
             <div class="num">{{dataVolume}}</div>
             <div class="unit">/GB</div>
           </div>
@@ -132,9 +132,9 @@
       <LineBarChart col="1" :color="color" :x="dataConsLatest30DaysX" :data="dataConsLatest30Days"></LineBarChart>
     </Card>
     <div class="operation__rightaside-todo" flex>
-      <div class="todo-summary" col="2" flex colcenter>
-        <div col="6">待处理问题</div>
-        <div col="7">
+      <div class="todo-summary" col="2" flex center>
+        <div>待处理问题</div>
+        <div>
           <span class="num">{{problemTotalNum}}</span>
           <span>/件</span>
         </div>

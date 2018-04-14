@@ -2,7 +2,6 @@
 
 .monitoring {
   .monitoring__leftaside {
-    //flex: 0 0 80em;
     .monitoring__leftaside-inspect {
       .app_inspect-wrap {
         flex: 0 0 18em !important;
@@ -208,9 +207,8 @@
         }
       }
       .abnormal_app-wrap {
-
         .abnormal_app {
-          margin: 0 1em;
+          margin: 0 0.6em;
           .abnormal_app-info {
             .abnormal_app-number {
               flex: 0 0 4em;
@@ -254,7 +252,7 @@
                   }
                   .value {
                     display: -webkit-box;
-                    height: 3.2em;
+                    height: 3.0em;
                     -webkit-box-orient: vertical;
                     -webkit-line-clamp: 2;
                     word-break: break-all;
@@ -355,7 +353,6 @@
               }
             }
           }
-
           &.current {
             .abnormal_app-info {
               .abnormal_app-number {
@@ -389,6 +386,59 @@
             }
           }
         }
+      }
+    }
+  }
+  .monitoring__rightaside {
+
+    .operation__rightaside-todo {
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.2);
+      margin: $paddingHalf / 2;
+      .todo-summary {
+        background-image: linear-gradient(-180deg, rgba(227, 0, 0, 0.6) 0%, rgba(221, 0, 0, 0.54) 21%, rgba(214, 0, 0, 0.32) 51%, rgba(209, 0, 0, 0) 100%);
+        box-shadow: 0 1em 2em 0 rgba(90, 4, 4, 0.30);
+        > div:nth-of-type(1) {
+          font-size: 1.2em;
+        }
+        > div:nth-of-type(2) {
+          margin-left: 1em;
+          .num {
+            @include gradient(#FFFFFF, #B3B3B3);
+            font-size: 4em;
+          }
+          > span:nth-of-type(2) {
+            margin-left: 0.2em;
+            font-size: 1.2em;
+          }
+        }
+      }
+      .todo-type {
+        flex-wrap: wrap;
+        .todo-type-item {
+          width: 33.3333%;
+          min-width: 33.3333%;
+          max-width: 33.3333%;
+          .item-name {
+            text-align: right;
+          }
+          .num {
+            margin-left: 0.2em;
+            @include gradient(#FFFFFF, #B3B3B3);
+            font-size: 2.4em;
+            text-align: left;
+            &.warning {
+              @include gradient(#FF6864, #C80A05);
+            }
+          }
+        }
+      }
+    }
+
+    .legendpie__legend {
+      padding: 2em 0;
+      .legendpie__row {
+        border-bottom: none;
       }
     }
   }

@@ -267,6 +267,46 @@
     </Card>
   </aside>
   <aside class="monitoring__rightaside" col="2" flex-column>
-    <Card class="running__apps" col="3" title="校园应用统计" :date="date" :row="false" :detail="true"></Card>
+    <div class="operation__rightaside-todo" col="1" flex-column>
+      <div class="todo-summary" col="1" flex-column center>
+        <div>当前未处理安全事件</div>
+        <div>
+          <span class="num">108</span>
+          <span>/件</span>
+        </div>
+      </div>
+      <div class="todo-type" col="1" flex center>
+        <div class="todo-type-item" col="1" flex center>
+          <span col="3" class="item-name">安全漏洞</span>
+          <span col="2" :class="['num', false ? '' : 'warning']">28</span>
+        </div>
+        <div class="todo-type-item" col="1" flex center>
+          <span col="3" class="item-name">篡改</span>
+          <span col="2" :class="['num', false ? '' : 'warning']">28</span>
+        </div>
+        <div class="todo-type-item" col="1" flex center>
+          <span col="3" class="item-name">木马</span>
+          <span col="2" :class="['num', false ? '' : 'warning']">28</span>
+        </div>
+        <div class="todo-type-item" col="1" flex center>
+          <span col="3" class="item-name">敏感内容</span>
+          <span col="2" :class="['num', true ? '' : 'warning']">0</span>
+        </div>
+        <div class="todo-type-item" col="1" flex center>
+          <span col="3" class="item-name">暗链</span>
+          <span col="2" :class="['num', true ? '' : 'warning']">0</span>
+        </div>
+        <div class="todo-type-item" col="1" flex center>
+          <span col="3" class="item-name">组件版本</span>
+          <span col="2" :class="['num', false ? '' : 'warning']">28</span>
+        </div>
+      </div>
+    </div>
+    <Card class="running__apps" col="1" title="使用组件分布" :date="date" :row="false">
+      <PieChart :cols="1" :column="false" :outer="0.9" :color="['#27A6F6', '#3AC868', '#ECB045']" :data="providerPvDistribute" />
+    </Card>
+    <Card class="running__apps" col="1" title="使用组件分布" :date="date" :row="false">
+      <PieChart :cols="1" :column="false" :outer="0.9" :color="['#27A6F6', '#3AC868', '#ECB045']" :data="providerPvDistribute" />
+    </Card>
   </aside>
 </div>

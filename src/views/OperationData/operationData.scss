@@ -10,18 +10,20 @@
     .operation__leftaside-summary {
       padding: 1.5em 1em;
       .summary__item {
+        width: 0;
         margin-left: 0.8em;
         margin-right: 0.8em;
         text-align: center;
+        overflow: hidden;
         .summary__item-title {
           font-size: 1.1em;
         }
         .summary__item-info {
           .summary__item-icon {
-            margin-right: 1em;
+            margin-right: 0.8em;
             text-align: right;
             img {
-              width: 1.8em;
+              width: 1.5em;
               margin-top: -1.4em;
             }
           }
@@ -128,13 +130,12 @@
       .todo-summary {
         height: 100%;
         background-image: linear-gradient(-180deg, rgba(227, 0, 0, 0.6) 0%, rgba(221, 0, 0, 0.54) 21%, rgba(214, 0, 0, 0.32) 51%, rgba(209, 0, 0, 0) 100%);
-        box-shadow: 0 12px 25px 0 rgba(90, 4, 4, 0.30);
+        box-shadow: 0 1em 2em 0 rgba(90, 4, 4, 0.30);
         > div:nth-of-type(1) {
           font-size: 1.2em;
-          text-align: right;
         }
         > div:nth-of-type(2) {
-          padding-left: 2em;
+          margin-left: 1em;
           .num {
             @include gradient(#FFFFFF, #B3B3B3);
             font-size: 4em;

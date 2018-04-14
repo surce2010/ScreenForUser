@@ -16,8 +16,8 @@
       box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.30);
       .total-apps-wrap {
         height: 100%;
-        background: url(~@assets/images/shield.png) no-repeat center 0.6em;
-        background-size: 11em 10em;
+        background: url(~@assets/images/icon_shield.png) no-repeat center center;
+        background-size: 10em 9em;
         .total-apps-title {
           font-size: 1.2em;
         }
@@ -36,7 +36,9 @@
       margin-left: 18em + $paddingHalf * 1.5;
       .prevented-attacked-times_item {
         position: relative;
+        width: 0;
         padding-left: 5em;
+        overflow: hidden;
         &:nth-of-type(1) {
           .item-flag {
             background: #27A6F6;

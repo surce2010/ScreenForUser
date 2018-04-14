@@ -6,6 +6,7 @@ import Card from '@components/Card';
 import NumCardGroup from '@components/NumCardGroup';
 import LineChart from '@components/LineChart';
 import Legend from '@components/Legend';
+import PieChartWithLegend from '@components/PieChartWithLegend';
 import NoProblem from '@components/NoProblem';
 import PercentBar from '@components/PercentBar';
 import Top5 from '@components/Top5';
@@ -20,12 +21,25 @@ import '@utils/mockdb';
     NumCardGroup,
     LineChart,
     vLegend: Legend,
+    PieChart: PieChartWithLegend,
     PercentBar,
     NoProblem,
     Top5
   }
 })
 export default class SafetyMonitoring extends Vue {
+
+  providerPvDistribute = [{
+    name: 'Windows',
+    value: 65
+  }, {
+    name: 'Linux',
+    value: 15
+  }, {
+    name: 'Mac OS',
+    value: 20
+  }];
+
   date = new Date();
   preventedAttackedTimes = {
     visitToday: '',

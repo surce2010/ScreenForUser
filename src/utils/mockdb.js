@@ -2430,15 +2430,15 @@ Mock.mock(new RegExp('/cldPortal_new/event/getSafetyProtectBigScreenNew'), {
   //汇总数据
   'preventedAttackedTimes': {
     //今日正常访问数
-    'visitToday': 100,
+    'visitToday': 1000,
     //累计出流量
     'output': 300,
     //累计进流量
     'input': 100,
     //今日防护攻击数
-    'preventedToday': 626,
+    'preventedToday': 629612,
     //累计防护攻击数
-    'preventedTotal': 3942,
+    'preventedTotal': 11232708,
     //近七日防护攻击次数
     'preventedCountLast7Days': [
       {
