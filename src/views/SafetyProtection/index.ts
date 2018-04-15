@@ -11,9 +11,7 @@ import ProgressBarGroup from '@components/ProgressBarGroup';
 import Top5 from '@components/Top5';
 import Attack from '@components/Attack.vue';
 import create from '@utils/websocket';
-import axios from "@utils/axios";
 import {formatNumber} from "@utils/dataFormat";
-// import '@utils/mockdb';
 
 @WithRender @Component({
   components: {
@@ -57,12 +55,44 @@ export default class SafetyProtection extends Vue {
   foreignAttack = [];
 
   created() {
-    //默认查询一次
-    this.getSafetyProtectBigScreenNewLoop();
+    create().subscribe('/getCoreAppsBigScreen', {
+      login: this.$route.query.schoolCode,
+      token: this.$route.query.token,
+      interfaceName: 'bigScreen-getSafetyProtectBigScreen'
+    }, json => {
+      if (!json) {
+        return;
+      }
+      this.date = new Date();
 
-    setInterval(() => {
-      this.getSafetyProtectBigScreenNewLoop();
-    }, 5000);
+      //守护应用总数
+      this.totalApps = formatNumber(json.totalApps || 0);
+
+      //汇总数据
+      const preventedAttackedTimesOrigin = json.preventedAttackedTimes;
+      this.preventedAttackedTimes = {
+        visitToday: formatNumber(preventedAttackedTimesOrigin.visitToday || 0),
+        output: formatNumber(preventedAttackedTimesOrigin.output || 0),
+        input: formatNumber(preventedAttackedTimesOrigin.input || 0),
+        preventedToday: formatNumber(preventedAttackedTimesOrigin.preventedToday || 0),
+        preventedTotal: formatNumber(preventedAttackedTimesOrigin.preventedTotal || 0),
+        preventedCountLast7Days: preventedAttackedTimesOrigin.preventedCountLast7Days,
+        visitTotal: formatNumber(preventedAttackedTimesOrigin.visitTotal || 0)
+      };
+
+      //实时攻击明细
+      this.attackedDetail = json.attackedDetail;
+      this.scrollShow();
+
+      //被攻击top5应用/次
+      this.attackedApps = json.attackedApps;
+
+      //累计攻击方式top5/次
+      this.attackMode = json.attackMode;
+
+      //累计攻击来源top5/次
+      this.foreignAttack = json.foreignAttack;
+    });
 
     this.timer = setTimeout(() => {
       if (this.displayDate === 'today') {
@@ -71,54 +101,6 @@ export default class SafetyProtection extends Vue {
         this.toggleDisplayDate('total')
       }
     }, this.intervalTime);
-  }
-
-  async getSafetyProtectBigScreenNew() {
-    const {data} = await axios.get('http://axsh.campusphere.cn/cldPortal_new/eventopen/getSafetyProtectBigScreenNew', {
-      params: {
-        schoolCode: this.$route.query.schoolCode
-      }
-    });
-    if (data) {
-      return data;
-    }
-  }
-
-  async getSafetyProtectBigScreenNewLoop() {
-    //用户分析接口信息
-    const json = await this.getSafetyProtectBigScreenNew();
-    if (!json) {
-      return;
-    }
-    this.date = new Date();
-
-    //守护应用总数
-    this.totalApps = formatNumber(json.totalApps || 0);
-
-    //汇总数据
-    const preventedAttackedTimesOrigin = json.preventedAttackedTimes;
-    this.preventedAttackedTimes = {
-      visitToday: formatNumber(preventedAttackedTimesOrigin.visitToday || 0),
-      output: formatNumber(preventedAttackedTimesOrigin.output || 0),
-      input: formatNumber(preventedAttackedTimesOrigin.input || 0),
-      preventedToday: formatNumber(preventedAttackedTimesOrigin.preventedToday || 0),
-      preventedTotal: formatNumber(preventedAttackedTimesOrigin.preventedTotal || 0),
-      preventedCountLast7Days: preventedAttackedTimesOrigin.preventedCountLast7Days,
-      visitTotal: formatNumber(preventedAttackedTimesOrigin.visitTotal || 0)
-    };
-
-    //实时攻击明细
-    this.attackedDetail = json.attackedDetail;
-    this.scrollShow();
-
-    //被攻击top5应用/次
-    this.attackedApps = json.attackedApps;
-
-    //累计攻击方式top5/次
-    this.attackMode = json.attackMode;
-
-    //累计攻击来源top5/次
-    this.foreignAttack = json.foreignAttack;
   }
 
   get closeTime() {

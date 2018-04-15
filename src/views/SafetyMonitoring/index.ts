@@ -80,7 +80,7 @@ export default class SafetyMonitoring extends Vue {
 
     setInterval(() => {
       this.getSafetyInspectScreenNewLoop();
-    }, 5000);
+    }, 600000);
 
     this.timer = setTimeout(() => {
       if (this.inspectSource === 'app') {
