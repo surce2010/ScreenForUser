@@ -12,7 +12,6 @@ import PercentBar from '@components/PercentBar';
 import Top5 from '@components/Top5';
 import create from '@utils/websocket';
 import axios from "@utils/axios";
-import {formatNumber} from "@utils/dataFormat";
 // import '@utils/mockdb';
 
 @WithRender @Component({

@@ -47,8 +47,6 @@
           font-size: 1.1em;
         }
         .system__overview-info {
-          //align-items: center;
-          //justify-items: center;
           .system_count-icon {
             margin-right: 1em;
             text-align: right;
@@ -257,9 +255,10 @@
       }
       .system__browser_pv {
         > div {
-          //padding: 1em;
           .progressbar {
-            margin-bottom: 0.8em;
+            .progressbar__text {
+              margin-bottom: 0;
+            }
             .progressbar__bar {
               height: 0.8em;
             }
