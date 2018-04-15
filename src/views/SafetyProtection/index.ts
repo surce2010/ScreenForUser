@@ -13,7 +13,7 @@ import Attack from '@components/Attack.vue';
 import create from '@utils/websocket';
 import axios from "@utils/axios";
 import {formatNumber} from "@utils/dataFormat";
-import '@utils/mockdb';
+// import '@utils/mockdb';
 
 @WithRender @Component({
   components: {
@@ -74,7 +74,7 @@ export default class SafetyProtection extends Vue {
   }
 
   async getSafetyProtectBigScreenNew() {
-    const {data} = await axios.get('/cldPortal_new/eventopen/getSafetyProtectBigScreenNew', {
+    const {data} = await axios.get('http://axsh.campusphere.cn/cldPortal_new/eventopen/getSafetyProtectBigScreenNew', {
       params: {
         schoolCode: this.$route.query.schoolCode
       }

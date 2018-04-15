@@ -83,7 +83,7 @@ export default new Router({
       path: '/SafetyProtection',
       name: 'safetyProtection',
       meta: {
-        title: '安全守护'
+        title: '安全防护'
       },
       component: view('SafetyProtection')
     }, {

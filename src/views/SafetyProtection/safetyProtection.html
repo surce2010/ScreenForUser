@@ -80,12 +80,12 @@
     </div>
   </main>
   <aside col="3" flex-column>
-    <div class="safety__outattack" col="5" flex-column>
+    <div class="safety__outattack" col="1" flex-column>
       <div class="safety__outattack-header">近7日防护攻击次数/次</div>
       <LineChart col="1" class="safety__outattack-chart" :color="['#E9B042']" :x="preventedCountLast7DaysX"
                  :data="[{name: '近7日阻止攻击次数', value: preventedCountLast7DaysData}]"/>
     </div>
-    <div class="safety__attacked-apps" col="7" flex-column>
+    <div class="safety__attacked-apps" col="1" flex-column>
       <div class="attacked-apps-header" flex>
         <div class="title" col="1" flex>
           <span>被攻击Top5应用</span>
@@ -97,19 +97,26 @@
         <a :class="['device__btn', displayDate === 'today' ? 'current' : '']" @click="toggleDisplayDate('today')">当日</a><a
         :class="['device__btn', displayDate === 'total' ? 'current' : '']" @click="toggleDisplayDate('total')">累计</a>
       </div>
-      <div class="attacked-apps-num">
-        <table>
+      <div class="attacked-apps-num" col="1">
+        <table v-if="displayDate === 'today'">
           <tr>
             <th width="50%">应用方式</th>
             <th width="20%">攻击次数</th>
             <th width="30%">正常访问次数</th>
           </tr>
-          <tr v-if="displayDate === 'today'" v-for="item in attackedAppsToday">
+          <tr v-for="item in attackedAppsToday">
             <td>{{item.app_name}}</td>
             <td>{{item.count}}</td>
             <td>{{item.normal_count}}</td>
           </tr>
-          <tr v-if="displayDate === 'total'" v-for="item in attackedAppsTotal">
+        </table>
+        <table v-if="displayDate === 'total'">
+          <tr>
+            <th width="50%">应用方式</th>
+            <th width="20%">攻击次数</th>
+            <th width="30%">正常访问次数</th>
+          </tr>
+          <tr v-for="item in attackedAppsTotal">
             <td>{{item.app_name}}</td>
             <td>{{item.count}}</td>
             <td>{{item.normal_count}}</td>
@@ -117,7 +124,7 @@
         </table>
       </div>
     </div>
-    <div class="safety__attacked-mode" col="6" flex>
+    <div class="safety__attacked-mode" col="1" flex>
       <div class="attack-mode" col="1" flex-column>
         <div class="attacked-mode-header" flex>
           <div class="title" col="1" flex>
