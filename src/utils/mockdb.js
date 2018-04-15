@@ -2709,58 +2709,58 @@ Mock.mock(new RegExp('/topic/schoolApiStatisc/'), {
     'dataSet': [
       {
         //调用次数
-        'callNum': 10000,
+        'callNum': 1100,
         //失败调用次数
-        'failCallNum': 320,
+        'failCallNum': 32,
         'statiscDate': '2018-03-05'
       },
       {
         //调用次数
-        'callNum': 10000,
+        'callNum': 2304,
         //失败调用次数
-        'failCallNum': 320,
+        'failCallNum': 972,
         'statiscDate': '2018-03-06'
       },
       {
         //调用次数
-        'callNum': 10000,
+        'callNum': 978,
         //失败调用次数
-        'failCallNum': 320,
+        'failCallNum': 142,
         'statiscDate': '2018-03-07'
       },
       {
         //调用次数
-        'callNum': 10000,
+        'callNum': 324,
         //失败调用次数
-        'failCallNum': 320,
+        'failCallNum': 19,
         'statiscDate': '2018-03-08'
       },
       {
         //调用次数
-        'callNum': 10000,
+        'callNum': 9752,
         //失败调用次数
-        'failCallNum': 320,
+        'failCallNum': 726,
         'statiscDate': '2018-03-09'
       },
       {
         //调用次数
-        'callNum': 10000,
+        'callNum': 9127,
         //失败调用次数
-        'failCallNum': 320,
+        'failCallNum': 561,
         'statiscDate': '2018-03-10'
       },
       {
         //调用次数
-        'callNum': 10000,
+        'callNum': 12452,
         //失败调用次数
-        'failCallNum': 320,
+        'failCallNum': 1882,
         'statiscDate': '2018-03-05'
       },
       {
         //调用次数
-        'callNum': 10000,
+        'callNum': 12383,
         //失败调用次数
-        'failCallNum': 320,
+        'failCallNum': 872,
         'statiscDate': '2018-03-05'
       }]
   },

@@ -7,7 +7,7 @@
             <img src="~@assets/images/icon_graph.png" alt=""/>
           </div>
           <div class="summary__item-value" flex>
-            <div class="num">62</div>
+            <div class="num">{{apiNum}}</div>
             <div class="unit">/个</div>
           </div>
         </div>
@@ -19,7 +19,7 @@
             <img src="~@assets/images/icon_wire.png" alt=""/>
           </div>
           <div class="summary__item-value" flex>
-            <div class="num">157</div>
+            <div class="num">{{normalApiNum}}</div>
             <div class="unit">/个</div>
           </div>
         </div>
@@ -31,7 +31,7 @@
             <img src="~@assets/images/icon_notice.png" alt=""/>
           </div>
           <div class="summary__item-value" flex>
-            <div class="num error">28</div>
+            <div class="num error">{{wrongApiNum}}</div>
             <div class="unit">/个</div>
           </div>
         </div>
@@ -55,7 +55,7 @@
       </div>
     </Card>
     <Card class="api__app-statisc" col="3" title="接口归属分布">
-      <PieChart :data="componentPipeDate" :inner="0.5" :outer="0.9" :cols="1" :showValue="true" :showHeader="true"
+      <PieChart :data="apiAppStatisc" :inner="0.5" :outer="0.9" :cols="1" :showValue="true" :showHeader="true"
                 :column="false"/>
     </Card>
   </aside>
@@ -69,14 +69,14 @@
           <div class="use-statisc-item" col="1" flex colcenter spacebetween>
             <div class="title">今日总调用</div>
             <div flex colcenter>
-              <span class="num">1,280</span>
+              <span class="num">{{todayCallNum}}</span>
               <sub class="unit">/次</sub>
             </div>
           </div>
           <div class="use-statisc-item error" col="1" flex colcenter spacebetween>
             <div class="title">今日失败调用</div>
             <div flex colcenter>
-              <span class="num">703</span>
+              <span class="num">{{todayfailCallNum}}</span>
               <sub class="unit">/次</sub>
             </div>
           </div>
@@ -85,14 +85,14 @@
           <div class="use-statisc-item" col="1" flex colcenter spacebetween>
             <div class="title">累计总调用</div>
             <div flex colcenter>
-              <span class="num">132,584</span>
+              <span class="num">{{callNum}}</span>
               <sub class="unit">/次</sub>
             </div>
           </div>
           <div class="use-statisc-item error" col="1" flex colcenter spacebetween>
             <div class="title">累计失败调用</div>
             <div flex colcenter>
-              <span class="num">85,921</span>
+              <span class="num">{{failCallNum}}</span>
               <sub class="unit">/次</sub>
             </div>
           </div>
@@ -106,8 +106,7 @@
           <span><span class="running__legend" style="background:linear-gradient(90deg, #05C180, #008E32);"></span><span>成功调用</span></span>
           <span><span class="running__legend" style="background:linear-gradient(90deg, #5FF2F8, #0979B9);"></span><span>失败调用</span></span>
         </div>
-        <LineChart :color="color" :x="last30DaysPvuvX"
-                   :data="[{name: '成功调用',value: [1, 10]}, {name: '失败调用',value: [100, 108]}]"/>
+        <LineChart :color="color" :x="last30DaysApiUseStatiscX" :data="last30DaysApiUseStatisc"/>
       </div>
     </section>
     <div class="behavior__stuff" col="3" flex>
@@ -118,8 +117,7 @@
             <span>调用次数/个</span>
           </div>
           <RowProgressBarGroup col="1" flex-column spacearound :real="true" :color="['#05C180', '#008E32']"
-                               :data="[{name: '1', value: 100}, {name: '2', value: 10}, {name: '2', value: 10}, {name: '2', value: 10}, {name: '2', value: 10}]"
-                               showValue="false"/>
+                               :data="callNumApiTop5" showValue="false"/>
         </div>
       </Card>
       <Card class="call-num-api" col="1" title="今日活跃接口Top5">
@@ -129,15 +127,14 @@
             <span>调用次数/个</span>
           </div>
           <RowProgressBarGroup col="1" flex-column spacearound :real="true" :color="['#05C180', '#008E32']"
-                               :data="[{name: '1', value: 100}, {name: '2', value: 10}, {name: '2', value: 10}, {name: '2', value: 10}, {name: '2', value: 10}]"
-                               showValue="false"/>
+                               :data="todayCallNumApiTop5" showValue="false"/>
         </div>
       </Card>
     </div>
   </main>
   <aside class="api__rightaside" flex-column col="2">
     <Card class="last30DayTimeCostApiTop5" col="5" title="性能耗时接口Top5" subtitle="(近30日)">
-      <Top5 :data="eventsReasonTop5"
+      <Top5 :data="todayCallNumApiTop5"
             :showKey="[{name: 'API名称', value: 'name', flex: 2}, {name: '平均耗时/ms', value: 'value', align: 'right', flex:1}]"/>
     </Card>
     <div class="callApiWrongInfos-wrap" col="3" flex>
@@ -148,25 +145,9 @@
             <span col="4">发生时间</span>
           </div>
           <div class="t__body" col="1" flex-column>
-            <div class="t__tr" flex>
-              <span col="6">获取人员基本信息</span>
-              <span col="4">2018.01.01 12:00</span>
-            </div>
-            <div class="t__tr" flex>
-              <span col="6">获取人员基本信息</span>
-              <span col="4">2018.01.01 12:00</span>
-            </div>
-            <div class="t__tr" flex>
-              <span col="6">获取人员基本信息</span>
-              <span col="4">2018.01.01 12:00</span>
-            </div>
-            <div class="t__tr" flex>
-              <span col="6">获取人员基本信息</span>
-              <span col="4">2018.01.01 12:00</span>
-            </div>
-            <div class="t__tr" flex>
-              <span col="6">获取人员基本信息</span>
-              <span col="4">2018.01.01 12:00</span>
+            <div class="t__tr" flex v-for="item in callApiWrongInfos">
+              <span col="6">{{item.apiName}}</span>
+              <span col="4">{{item.callTime}}</span>
             </div>
           </div>
         </div>

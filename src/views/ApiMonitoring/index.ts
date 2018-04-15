@@ -10,6 +10,9 @@ import Top5 from '@components/Top5';
 import NoProblem from '@components/NoProblem';
 import LineChart from '@components/LineChart';
 import create from '@utils/websocket';
+import format, {formatNumber} from '@utils/dataFormat';
+import axios from '@utils/axios';
+import '@utils/mockdb';
 
 @WithRender
 @Component({
@@ -24,171 +27,120 @@ import create from '@utils/websocket';
   }
 })
 export default class ApiMonitoring extends Vue {
-
   date = new Date();
-  lastDate = "";
-  stompClient = null;
-  chartData = [];
-  hostRunningStatus = {};
-  eventsCountTop = [];
-  eventsReasonTop = [];
-  operationSystem = [];
-  osPipeData = [];
-  hostException = {};
-  hostResource = {busyHost: [], idleHost: []};
-  componentUsage = [];
-  componentPipeDate = [];
-  pieSize = 6;
-  exceptionList = [];
-  scroolIntevel = null;
+  apiNum = '';
+  normalApiNum = '';
+  wrongApiNum = '';
+  todayCallNum = '';
+  todayfailCallNum = '';
+  callNum = '';
+  failCallNum = '';
+  last30DaysApiUseStatiscX = [];
+  last30DaysApiUseStatisc = [];
+  callNumApiTop5 = [];
+  todayCallNumApiTop5 = [];
+  last30DayTimeCostApiTop5 = [];
+  callApiWrongInfos = [];
+  apiAppStatisc = [];
+  apiTypeStatisc = [];
 
-  get busyHostChart() {
-    return this.hostResource.busyHost.map(item => {
-      return {
-        value: item.busy_degree,
-        ip: item.host_ip,
-        name: item.host_name
-      }
-    })
-  }
-
-  get idleHostChart() {
-    return this.hostResource.idleHost.map(item => {
-      return {
-        value: item.busy_degree,
-        ip: item.host_ip,
-        name: item.host_name
-      }
-    })
-  }
-
-  get eventsCountTop5() {
-    return this.eventsCountTop.map(item => {
-      return {
-        ...item,
-        purpose2: item.purpose.replace(`(${item.ip})`, ''),
-        value: item.event_count,
-        name: item.purpose
-      }
-    })
-  }
-
-  get eventsReasonTop5() {
-    return this.eventsReasonTop.map(item => {
-      return {
-        ...item,
-        value: item.event_count,
-        name: item.event_reason
+  async schoolApiStatisc() {
+    const {data} = await axios.get('/topic/schoolApiStatisc/', {
+      params: {
+        schoolCode: this.$route.query.schoolCode
       }
     });
+    if (data) {
+      return data;
+    }
+  }
+
+  async schoolApiStatiscLoop() {
+    //API运行监测
+    const json = await this.schoolApiStatisc();
+    if (!json) {
+      return;
+    }
+
+    //接口基本信息
+    const apiBaseInfoOrigin = format(json.apiBaseInfo)[0];
+    this.apiNum = formatNumber(apiBaseInfoOrigin.apiNum || 0);
+    this.normalApiNum = formatNumber(apiBaseInfoOrigin.normalApiNum || 0);
+    this.wrongApiNum = formatNumber(apiBaseInfoOrigin.wrongApiNum || 0);
+
+    //接口调用情况
+    const apiUseStatiscOrigin = format(json.apiUseStatisc)[0];
+    this.todayCallNum = formatNumber(apiUseStatiscOrigin.todayCallNum || 0);
+    this.todayfailCallNum = formatNumber(apiUseStatiscOrigin.todayfailCallNum || 0);
+    this.callNum = formatNumber(apiUseStatiscOrigin.callNum || 0);
+    this.failCallNum = formatNumber(apiUseStatiscOrigin.failCallNum || 0);
+
+    //近30日接口调用量
+    const last30DaysApiUseStatiscOrigin = format(json.last30DaysApiUseStatisc) || [];
+    const x = [];
+    const arr1 = [];
+    const arr2 = [];
+    last30DaysApiUseStatiscOrigin.forEach(d => {
+      x.push((d.statiscDate || '').substr(5));
+      arr1.push(d.callNum);
+      arr2.push(d.failCallNum);
+    });
+    this.last30DaysApiUseStatiscX = x;
+    this.last30DaysApiUseStatisc = [{
+      name: '成功调用',
+      value: arr1
+    }, {
+      name: '失败调用',
+      value: arr2
+    }];
+
+    //累计高频调用接口Top5
+    const callNumApiTop5Origin = format(json.callNumApiTop5) || [];
+    this.callNumApiTop5 = callNumApiTop5Origin.map(item => {
+      return {
+        name: item.apiName,
+        value: item.callNum
+      }
+    });
+
+    //今日高频调用接口Top5
+    const todayCallNumApiTop5Origin = format(json.callNumApiTop5) || [];
+    this.todayCallNumApiTop5 = todayCallNumApiTop5Origin.map(item => {
+      return {
+        name: item.apiName,
+        value: item.callNum
+      }
+    });
+
+    //近30日耗时接口Top5
+    const last30DayTimeCostApiTop5Origin = format(json.callNumApiTop5) || [];
+    this.last30DayTimeCostApiTop5 = last30DayTimeCostApiTop5Origin.map(item => {
+      return {
+        name: item.apiName,
+        value: item.timeCost
+      }
+    });
+
+    //异常接口列表
+    this.callApiWrongInfos = (format(json.callApiWrongInfos) || []).slice(0, 5);
+
+    //接口归属统计
+    const apiAppStatiscOrigin = (format(json.apiAppStatisc) || []).slice(0, 6);
+    this.apiAppStatisc = apiAppStatiscOrigin.map(item => {
+      return {
+        name: item.appName,
+        value: item.apiNum
+      }
+    });
+
+    //接口归属统计
+    this.apiTypeStatisc = (format(json.apiTypeStatisc) || []).slice(0, 2);
   }
 
   created() {
-    create().subscribe('/getCoreAppsBigScreen', {
-      login: this.$route.query.schoolCode,
-      token: this.$route.query.token,
-      interfaceName: 'bigScreen-getHostsMonitorBigScreen'
-    }, result => {
-      this.hostRunningStatus = result.hostRunningStatus;
-      this.eventsCountTop = result.eventsCountTop;
-      this.initChartData();
-
-      this.eventsReasonTop = result.eventsReasonTop;
-      this.eventsReasonTop.sort(function (a, b) {
-        return parseInt(b.event_count) - parseInt(a.event_count);
-      });
-
-
-      this.operationSystem = result.operationSystem;
-      this.osPipeData = this.getPipeData(this.operationSystem, 'os_name', 'os_count');
-
-      this.hostException = result.hostException;
-      this.hostResource = result.hostResource;
-      this.componentUsage = result.componentUsage;
-      this.componentPipeDate = this.getPipeData(this.componentUsage, 'component_name', 'component_count');
-
-      this.screelShow();
-    });
-
-  }
-
-  screelShow() {
-    var that = this;
-    var exceptions = this.hostException.exception_list;
-    var start = 0;
-    var pageSize = 5;
-    if (this.scroolIntevel) {
-      clearInterval(this.scroolIntevel);
-    }
-    var showFun = function () {
-      that.exceptionList = [];
-      for (let i = 0; i < pageSize && start < exceptions.length; i++ , start++) {
-        that.exceptionList.push(exceptions[start]);
-      }
-
-      if (start >= exceptions.length) {
-        start = 0;
-      }
-    }
-    showFun();
-    this.scroolIntevel = setInterval(function () {
-      showFun();
-    }, 10000);
-  }
-
-  initChartData() {
-    let exception_count = this.hostRunningStatus.exception_count;
-    let normal_count = this.hostRunningStatus.normal_count;
-    let total = this.hostRunningStatus.total;
-
-    var temp = [{name: '正常'}, {name: '异常'}];
-    temp[0].value = parseInt(normal_count / total * 100);
-    temp[1].value = parseInt(exception_count / total * 100);
-
-    this.chartData = temp;
-
-  }
-
-  getPipeData(arr, nameKey, valKey) {
-    var arrData = [];
-    let total = this.getTotal(arr, valKey);
-    var that = this;
-    arr.forEach(function (e, i) {
-      if (i >= that.pieSize) {
-        return;
-      }
-      var item = {};
-
-      item.name = e[nameKey];
-      item.value = e[valKey];
-
-      arrData.push(item);
-    });
-
-    return arrData;
-  }
-
-  getTotal(arr, valKey) {
-    var total = 0;
-    var size = this.pieSize;
-    arr.forEach(function (e, i) {
-      if (i < size) {
-        total = total + parseInt(e[valKey]);
-      }
-    });
-
-    return total;
-  }
-
-  getMax(arr, key) {
-    var max = 0;
-    arr.forEach(function (element) {
-      var val = parseInt(element[key]);
-      if (val > max) {
-        max = val;
-      }
-    });
-
-    return max;
+    this.schoolApiStatiscLoop();
+    setTimeout(() => {
+      this.schoolApiStatiscLoop();
+    }, 60000);
   }
 }
