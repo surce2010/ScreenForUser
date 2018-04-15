@@ -13,7 +13,7 @@ import Top5 from '@components/Top5';
 import create from '@utils/websocket';
 import axios from "@utils/axios";
 import {formatNumber} from "@utils/dataFormat";
-import '@utils/mockdb';
+// import '@utils/mockdb';
 
 @WithRender @Component({
   components: {
@@ -189,7 +189,7 @@ export default class SafetyMonitoring extends Vue {
   }
 
   get operationSystem() {
-    return this.operationSystemOrigin.map(item => {
+    return this.operationSystemOrigin.slice(0, 5).map(item => {
       return {
         name: item.os_name,
         value: item.os_count
@@ -198,7 +198,7 @@ export default class SafetyMonitoring extends Vue {
   }
 
   get componentUsage() {
-    return this.componentUsageOrigin.map(item => {
+    return this.componentUsageOrigin.slice(0, 5).map(item => {
       return {
         name: item.component_name,
         value: item.component_count
