@@ -1,6 +1,6 @@
 <div class="api height100" flex>
   <aside class="api__leftaside" col="3" flex-column>
-    <Card class="api__summary" col="3" title="接口基本信息" :date="date" :detail="true">
+    <Card class="api__summary" col="2" title="接口基本信息" :date="date" :detail="true">
       <div class="summary__item" col="1" flex-column rowcenter>
         <div class="summary__item-info" flex center>
           <div class="summary__item-icon">
@@ -38,7 +38,7 @@
         <div class="summary__item-title">异常接口</div>
       </div>
     </Card>
-    <Card class="api__type-statisc" col="4" title="接口类型分布">
+    <Card class="api__type-statisc" col="3" title="接口类型分布">
       <div flex center>
         <div class="type-statisc-item" flex-column center>
           <span class="name">SOAP</span>
@@ -54,13 +54,13 @@
         </div>
       </div>
     </Card>
-    <Card class="api__app-statisc" col="4" title="接口归属分布">
+    <Card class="api__app-statisc" col="3" title="接口归属分布">
       <PieChart :data="componentPipeDate" :inner="0.5" :outer="0.9" :cols="1" :showValue="true" :showHeader="true"
                 :column="false"/>
     </Card>
   </aside>
-  <aside class="api__main" col="4" flex-column>
-    <section class="system__overview" col="7" flex-column>
+  <main class="api__main" col="4" flex-column>
+    <section class="system__overview" col="5" flex-column>
       <h3 class="system__overview-heading">
         <span class="heading__title">接口调用情况</span>
       </h3>
@@ -110,7 +110,7 @@
                    :data="[{name: '成功调用',value: [1, 10]}, {name: '失败调用',value: [100, 108]}]"/>
       </div>
     </section>
-    <div col="4" flex>
+    <div class="behavior__stuff" col="3" flex>
       <Card class="call-num-api" col="1" title="高频调用接口Top5" subtitle="(近30日)">
         <div flex-column>
           <div class="t__header">
@@ -134,39 +134,43 @@
         </div>
       </Card>
     </div>
-  </aside>
+  </main>
   <aside class="api__rightaside" flex-column col="2">
-    <Card class="last30DayTimeCostApiTop5" col="7" title="性能耗时接口Top5" subtitle="(近30日)">
+    <Card class="last30DayTimeCostApiTop5" col="5" title="性能耗时接口Top5" subtitle="(近30日)">
       <Top5 :data="eventsReasonTop5"
-            :showKey="[{name: 'API名称', value: 'name', flex: 3}, {name: '平均耗时/ms', value: 'value', align: 'center', flex:1}]"/>
+            :showKey="[{name: 'API名称', value: 'name', flex: 2}, {name: '平均耗时/ms', value: 'value', align: 'right', flex:1}]"/>
     </Card>
-    <Card class="callApiWrongInfos" col="4" title="事件原因Top5">
-      <table>
-        <tr>
-          <th width="60%">接口名称</th>
-          <th width="40%">发生时间</th>
-        </tr>
-        <tr :key="index">
-          <td>获取人员基本信息</td>
-          <td>2018.01.01 12:00</td>
-        </tr>
-        <tr :key="index">
-          <td>获取人员基本信息</td>
-          <td>2018.01.01 12:00</td>
-        </tr>
-        <tr :key="index">
-          <td>获取人员基本信息</td>
-          <td>2018.01.01 12:00</td>
-        </tr>
-        <tr :key="index">
-          <td>获取人员基本信息</td>
-          <td>2018.01.01 12:00</td>
-        </tr>
-        <tr :key="index">
-          <td>获取人员基本信息</td>
-          <td>2018.01.01 12:00</td>
-        </tr>
-      </table>
-    </Card>
+    <div class="callApiWrongInfos-wrap" col="3" flex>
+      <Card class="callApiWrongInfos" col="1" title="事件原因Top5">
+        <div class="t__wrap" flex-column>
+          <div class="t__head" flex>
+            <span col="6">接口名称</span>
+            <span col="4">发生时间</span>
+          </div>
+          <div class="t__body" col="1" flex-column>
+            <div class="t__tr" flex>
+              <span col="6">获取人员基本信息</span>
+              <span col="4">2018.01.01 12:00</span>
+            </div>
+            <div class="t__tr" flex>
+              <span col="6">获取人员基本信息</span>
+              <span col="4">2018.01.01 12:00</span>
+            </div>
+            <div class="t__tr" flex>
+              <span col="6">获取人员基本信息</span>
+              <span col="4">2018.01.01 12:00</span>
+            </div>
+            <div class="t__tr" flex>
+              <span col="6">获取人员基本信息</span>
+              <span col="4">2018.01.01 12:00</span>
+            </div>
+            <div class="t__tr" flex>
+              <span col="6">获取人员基本信息</span>
+              <span col="4">2018.01.01 12:00</span>
+            </div>
+          </div>
+        </div>
+      </Card>
+    </div>
   </aside>
 </div>

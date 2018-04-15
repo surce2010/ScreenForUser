@@ -16,7 +16,7 @@
     <div class="top5__line" />
     <div v-for="(d, idx) in data" flex spacearound class="top5__list">
       <div class="top5__list-legend" :style="{background: color[idx%color.length]}"></div>
-      <div v-for="k in showKey" :col="k.flex ? k.flex : ''" :style="{textAlign: k.align ? k.align : 'left'}" class="num">{{d[k.value]}}</div>
+      <div v-for="k in showKey" :col="k.flex ? k.flex : ''" :style="{textAlign: k.align ? k.align : 'left'}">{{d[k.value]}}</div>
     </div>
   </div>
 </div>
