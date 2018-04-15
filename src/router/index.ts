@@ -93,6 +93,13 @@ export default new Router({
         title: '安全监测'
       },
       component: view('SafetyMonitoring')
+    }, {
+      path: '/ApiMonitoring',
+      name: 'ApiMonitoring',
+      meta: {
+        title: 'API运行监测'
+      },
+      component: view('ApiMonitoring')
     }]
   }]
 });

@@ -2612,3 +2612,376 @@ Mock.mock(new RegExp('/cldPortal_new/eventopen/getSafetyInspectScreenNew'), {
     }
   ]
 });
+
+//API运行监测
+Mock.mock(new RegExp('/topic/schoolApiStatisc/'), {
+  //接口基本信息
+  'apiBaseInfo': {
+    //返回状态，1：成功，0：失败
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    //错误描述
+    'errorMsg': '',
+    //分页信息
+    'pageInfo': {
+      //页码
+      'pageNum': 1,
+      //每页记录数据
+      'pageSize': 1000,
+      //开始行号
+      'startRow': 0,
+      //结束行号
+      'endRow': 1000,
+      //总记录数据
+      'total': 1,
+      //总页数
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //接口数
+        'apiNum': 132,
+        //正常接口数
+        'normalApiNum': 100,
+        //异常接口数
+        'wrongApiNum': 32
+      }]
+  },
+  //接口调用情况
+  'apiUseStatisc': {
+    //返回状态，1：成功，0：失败
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    //错误描述
+    'errorMsg': '',
+    //分页信息
+    'pageInfo': {
+      //页码
+      'pageNum': 1,
+      //每页记录数据
+      'pageSize': 1000,
+      //开始行号
+      'startRow': 0,
+      //结束行号
+      'endRow': 1000,
+      //总记录数据
+      'total': 1,
+      //总页数
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //今日总调用次数
+        'todayCallNum': 132,
+        //今日失败调用次数
+        'todayfailCallNum': 100,
+        //累计调用次数
+        'callNum': 100000000,
+        //累计失败调用次数
+        'failCallNum': 320000
+      }]
+  },
+  //近30日接口调用量
+  'last30DaysApiUseStatisc': {
+    //返回状态，1：成功，0：失败
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    //错误描述
+    'errorMsg': '',
+    //分页信息
+    'pageInfo': {
+      //页码
+      'pageNum': 1,
+      //每页记录数据
+      'pageSize': 1000,
+      //开始行号
+      'startRow': 0,
+      //结束行号
+      'endRow': 1000,
+      //总记录数据
+      'total': 1,
+      //总页数
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //调用次数
+        'callNum': 10000,
+        //失败调用次数
+        'failCallNum': 320,
+        'statiscDate': '2018-03-05'
+      },
+      {
+        //调用次数
+        'callNum': 10000,
+        //失败调用次数
+        'failCallNum': 320,
+        'statiscDate': '2018-03-06'
+      },
+      {
+        //调用次数
+        'callNum': 10000,
+        //失败调用次数
+        'failCallNum': 320,
+        'statiscDate': '2018-03-07'
+      },
+      {
+        //调用次数
+        'callNum': 10000,
+        //失败调用次数
+        'failCallNum': 320,
+        'statiscDate': '2018-03-08'
+      },
+      {
+        //调用次数
+        'callNum': 10000,
+        //失败调用次数
+        'failCallNum': 320,
+        'statiscDate': '2018-03-09'
+      },
+      {
+        //调用次数
+        'callNum': 10000,
+        //失败调用次数
+        'failCallNum': 320,
+        'statiscDate': '2018-03-10'
+      },
+      {
+        //调用次数
+        'callNum': 10000,
+        //失败调用次数
+        'failCallNum': 320,
+        'statiscDate': '2018-03-05'
+      },
+      {
+        //调用次数
+        'callNum': 10000,
+        //失败调用次数
+        'failCallNum': 320,
+        'statiscDate': '2018-03-05'
+      }]
+  },
+  //累计高频调用接口Top5
+  'callNumApiTop5': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 1,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //接口名称
+        'apiName': '接口1',
+        //调用次数
+        'callNum': 100
+      },
+      {
+        'apiName': '接口1',
+        'callNum': 100
+      },
+      {
+        'apiName': '接口1',
+        'callNum': 100
+      },
+      {
+        'apiName': '接口1',
+        'callNum': 100
+      },
+      {
+        'apiName': '接口1',
+        'callNum': 100
+      }]
+  },
+  //今日高频调用接口Top5
+  'todayCallNumApiTop5': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 1,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //接口名称
+        'apiName': '接口1',
+        //调用次数
+        'callNum': 100
+      },
+      {
+        'apiName': '接口1',
+        'callNum': 100
+      },
+      {
+        'apiName': '接口1',
+        'callNum': 100
+      },
+      {
+        'apiName': '接口1',
+        'callNum': 100
+      },
+      {
+        'apiName': '接口1',
+        'callNum': 100
+      }]
+  },
+  //近30日耗时接口Top5
+  'last30DayTimeCostApiTop5': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 1,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //接口名称
+        'apiName': '接口1',
+        //耗时
+        'timeCost': 100
+      },
+      {
+        'apiName': '接口1',
+        'timeCost': 100
+      },
+      {
+        'apiName': '接口1',
+        'timeCost': 100
+      },
+      {
+        'apiName': '接口1',
+        'timeCost': 100
+      },
+      {
+        'apiName': '接口1',
+        'timeCost': 100
+      }]
+  },
+  //异常接口列表
+  'callApiWrongInfos': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 1000,
+      'startRow': 0,
+      'endRow': 1000,
+      'total': 1,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //接口名称
+        'apiName': '接口1',
+        //发生时间
+        'callTime': '2018.01.01 00:00'
+      },
+      {
+        'apiName': '接口1',
+        'callTime': '2018.01.01 00:00'
+      },
+      {
+        'apiName': '接口1',
+        'callTime': '2018.01.01 00:00'
+      },
+      {
+        'apiName': '接口1',
+        'callTime': '2018.01.01 00:00'
+      },
+      {
+        'apiName': '接口1',
+        'callTime': '2018.01.01 00:00'
+      }]
+  },
+  //接口归属统计
+  'apiAppStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 10,
+      'startRow': 0,
+      'endRow': 10,
+      'total': 6,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //应用名称
+        'appName': 'ids',
+        //接口数据
+        'apiNum': 3
+      },
+      {
+        'appName': 'message',
+        'apiNum': 6
+      },
+      {
+        'appName': '任务中心',
+        'apiNum': 1
+      },
+      {
+        'appName': '公共应用',
+        'apiNum': 9
+      },
+      {
+        'appName': '消息中心',
+        'apiNum': 6
+      },
+      {
+        'appName': '综合服务库',
+        'apiNum': 74
+      }]
+  },
+  //接口类别统计
+  'apiTypeStatisc': {
+    'returnStatus': '1',
+    'returnId': '',
+    'errorCode': '',
+    'errorMsg': '',
+    'pageInfo': {
+      'pageNum': 1,
+      'pageSize': 10,
+      'startRow': 0,
+      'endRow': 10,
+      'total': 2,
+      'pages': 1
+    },
+    'dataSet': [
+      {
+        //类型
+        'typeName': 'SOAP',
+        //名称
+        'apiNum': 24
+      },
+      {
+        'typeName': 'RESTFUL',
+        'apiNum': 76
+      }]
+  }
+});

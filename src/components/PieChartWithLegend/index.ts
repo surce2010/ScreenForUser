@@ -17,6 +17,7 @@ export default class PieChartWithLegend extends Vue {
   @Prop({default: 1}) outer: number;
   @Prop({default: () => ['#A085D3', '#27A6F6', '#F25B58', '#3AC868', '#ECB045', '#F90042', '#ED5854']}) color: string[];
   @Prop({default: true}) column: boolean;
+  @Prop({default: false}) showHeader: boolean;
   @Prop({default: 2}) chartFlex: number;
   @Prop({default: 2}) cols: number;
 

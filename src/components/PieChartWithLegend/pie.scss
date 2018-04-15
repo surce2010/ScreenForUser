@@ -3,6 +3,15 @@
   .legendpie__legend {
     padding-bottom: 1.5em;
   }
+  .legendpie__header {
+    margin-bottom: 0.4em;
+    padding-bottom: 0.6em;
+    color: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    > span:nth-of-type(2) {
+      float: right;
+    }
+  }
   .legendpie__row {
     margin: 0 2em;
     border-bottom: 1px solid rgba(242, 242, 242, 0.2);

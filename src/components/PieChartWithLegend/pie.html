@@ -3,6 +3,10 @@
     <PieChart :height="height" :not-merge="notMerge" :data="data" :showValue="showReal" :inner="inner" :outer="outer" :color="color" />
   </div>
   <div col="1" flex-column class="legendpie__legend">
+    <div class="legendpie__header" v-if="showHeader">
+      <span>应用名称</span>
+      <span>接口数/个</span>
+    </div>
     <div class="legendpie__row" v-for="row in rows" :key="'row'+row" flex center col="1">
       <div :key="(row - 1) * cols" col="1">
         <span class="legendpie__item" :style="{background: legends[(row - 1) * cols] ? legends[(row - 1) * cols].color : ''}"></span>
