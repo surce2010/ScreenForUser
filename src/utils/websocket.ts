@@ -1,6 +1,6 @@
 import SockJS from 'sockjs-client';
 import Stomp from "@utils/stomp";
-import {WS} from '@utils/context';
+import {WS_CLDPORTAL, WS_ENDPOINT} from '@utils/context';
 
 class WebSocketWrap {
   private sock = null;
@@ -10,11 +10,11 @@ class WebSocketWrap {
   private topic = null;
   private timer = null;
   private login = null;
-  constructor(private url) {
-  }
-  subscribe(topic, login={}, callback: (res) => void) {
+
+  subscribe(topic, login = {}, callback: (res) => void) {
+    const url = login && login.flag ? WS_ENDPOINT : WS_CLDPORTAL;
     if (!this.sock) {
-      this.sock = new SockJS(this.url + (login && login.login ? topic : ''));
+      this.sock = new SockJS(url + (login && login.login ? topic : ''));
     }
     this.login = login;
     if (!this.client) {
@@ -29,7 +29,8 @@ class WebSocketWrap {
         if (login && login.login) {
           this.client.send(`/app/${topic}`, {}, JSON.stringify({
             interfaceName: login.interfaceName,
-            text: login.login, schoolCode: login.login}));
+            text: login.login, schoolCode: login.login
+          }));
         }
         this.sub();
       });
@@ -37,6 +38,7 @@ class WebSocketWrap {
       this.sub();
     }
   }
+
   private sub() {
     this.downtime();
     this.subscription = this.client.subscribe(this.topic, response => {
@@ -52,6 +54,7 @@ class WebSocketWrap {
       this.downtime();
     })
   }
+
   private downtime() {
     this.timer = setTimeout(() => {
       if (this.subscription) {
@@ -66,7 +69,7 @@ class WebSocketWrap {
 }
 
 
-export default function create (url = WS) {
-  const ws = new WebSocketWrap(url);
+export default function create() {
+  const ws = new WebSocketWrap();
   return ws;
 };

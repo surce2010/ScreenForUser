@@ -80,12 +80,12 @@
     </div>
   </main>
   <aside col="3" flex-column>
-    <div class="safety__outattack" col="1" flex-column>
+    <div class="safety__outattack" col="5" flex-column>
       <div class="safety__outattack-header">近7日防护攻击次数/次</div>
       <LineChart col="1" class="safety__outattack-chart" :color="['#E9B042']" :x="preventedCountLast7DaysX"
                  :data="[{name: '近7日阻止攻击次数', value: preventedCountLast7DaysData}]"/>
     </div>
-    <div class="safety__attacked-apps" col="1" flex-column>
+    <div class="safety__attacked-apps" col="7" flex-column>
       <div class="attacked-apps-header" flex>
         <div class="title" col="1" flex>
           <span>被攻击Top5应用</span>
@@ -138,7 +138,7 @@
         </table>
       </div>
     </div>
-    <div class="safety__attacked-mode" col="1" flex>
+    <div class="safety__attacked-mode" col="6" flex>
       <div class="attack-mode" col="1" flex-column>
         <div class="attacked-mode-header" flex>
           <div class="title" col="1" flex>
