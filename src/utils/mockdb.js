@@ -2285,27 +2285,27 @@ Mock.mock(new RegExp('/topic/schoolDataStatisc/'), {
     },
     'dataSet': [
       {
-        'probleType': '问题类型', //问题类型
+        'problemType': '问题类型', //问题类型
         'problemNum': 5 //问题数量
       },
       {
-        'probleType': '问题类型',
+        'problemType': '问题类型',
         'problemNum': 0
       },
       {
-        'probleType': '问题类型',
+        'problemType': '问题类型',
         'problemNum': 28
       },
       {
-        'probleType': '问题类型',
+        'problemType': '问题类型',
         'problemNum': 32
       },
       {
-        'probleType': '问题类型',
+        'problemType': '问题类型',
         'problemNum': 51
       },
       {
-        'probleType': '问题类型',
+        'problemType': '问题类型',
         'problemNum': 0
       }
     ]
