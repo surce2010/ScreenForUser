@@ -40,16 +40,16 @@
     </Card>
     <Card class="api__type-statisc" col="3" title="接口类型分布">
       <div flex center>
-        <div class="type-statisc-item" flex-column center>
+        <div class="type-statisc-item" :style="{transform: 'scale('+leftScale+')'}" flex-column center>
           <span class="name">SOAP</span>
           <div class="ball" flex center>
-            <span class="num">100%</span>
+            <span class="num">{{leftPercent}}</span>
           </div>
         </div>
-        <div class="type-statisc-item" :style="{transform: 'scale(0.5)'}" flex-column center>
+        <div class="type-statisc-item" :style="{transform: 'scale('+rightScale+')'}" flex-column center>
           <span class="name">RESTFUL</span>
           <div class="ball" flex center>
-            <span class="num">0%</span>
+            <span class="num">{{rightPercent}}</span>
           </div>
         </div>
       </div>

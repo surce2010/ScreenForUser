@@ -43,6 +43,10 @@ export default class ApiMonitoring extends Vue {
   callApiWrongInfos = [];
   apiAppStatisc = [];
   apiTypeStatisc = [];
+  leftScale = 1;
+  rightScale = 1;
+  leftPercent = '';
+  rightPercent = '';
 
   async schoolApiStatisc() {
     const {data} = await axios.get('/topic/schoolApiStatisc/', {
@@ -135,6 +139,13 @@ export default class ApiMonitoring extends Vue {
 
     //接口归属统计
     this.apiTypeStatisc = (format(json.apiTypeStatisc) || []).slice(0, 2);
+    const leftApiNum = this.apiTypeStatisc[0].apiNum || 0;
+    const rightApiNum = this.apiTypeStatisc[1].apiNum || 0;
+    const total = leftApiNum + rightApiNum;
+    this.leftPercent = leftApiNum / total * 100 + '%';
+    this.rightPercent = rightApiNum / total * 100 + '%';
+    this.leftScale = leftApiNum > rightApiNum ? 1 : (1 - (rightApiNum - leftApiNum) / 2 / total);
+    this.rightScale = rightApiNum > leftApiNum ? 1 : (1 - (leftApiNum - rightApiNum) / 2 / total);
   }
 
   created() {
