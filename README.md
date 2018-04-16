@@ -1,10 +1,10 @@
 ###安心守护
 
-* **重点关注应用** _CoreApp_ (done)
-* **安全防护** _SafetyProtection_ (done)
-* **安全监测** _SafetyMonitoring_ (done)
-* **应用运行监控** _AppAnalysis_ (done)
-* **系统运行分析** _SystemAnalysis_ (done)
-* **运行数据分析** _OperationData_ (done)
-* **API运行监测** _ApiMonitoring_ (done)
-* **用户分析** _UserAction_ (done)
+* **重点关注应用** _CoreApp?schoolCode=NBU&token=i2RePbbandA0HU955JLkobLdEgnP05_
+* **安全防护** _SafetyProtection?schoolCode=NBU&token=i2RePbbandA0HU955JLkobLdEgnP05_
+* **安全监测** _SafetyMonitoring?schoolCode=WISEDU&token=i2RePbbandA0HU955JLkobLdEgnP05_
+* **应用运行监控** _AppAnalysis?schoolCode=NJAU&token=i2RePbbandA0HU955JLkobLdEgnP05_
+* **系统运行分析** _SystemAnalysis?schoolCode=NJAU&token=i2RePbbandA0HU955JLkobLdEgnP05_
+* **运行数据分析** _OperationData?schoolCode=NJAU&token=i2RePbbandA0HU955JLkobLdEgnP05_
+* **API运行监测** _ApiMonitoring?schoolCode=NJAU&token=i2RePbbandA0HU955JLkobLdEgnP05_
+* **用户分析** _UserAction?schoolCode=NJAU&token=i2RePbbandA0HU955JLkobLdEgnP05_

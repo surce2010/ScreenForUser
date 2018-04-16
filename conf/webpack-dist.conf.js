@@ -134,7 +134,7 @@ module.exports = {
   output: {
     path: path.join(process.cwd(), conf.paths.dist),
     filename: '[name]-[hash].js',
-    publicPath: '/screen_new/'
+    publicPath: '/bigscreen/'
   },
   resolve: {
     extensions: ['.ts', '.js', '.json', '.scss'],
