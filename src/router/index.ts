@@ -24,12 +24,19 @@ export default new Router({
       },
       component: view('CoreApps')
     }, {
-      path: '/VisitStastics',
-      name: 'visit',
+      path: '/SafetyProtection',
+      name: 'safetyProtection',
       meta: {
-        title: '应用访问统计'
+        title: '安全防护'
       },
-      component: view('Visit')
+      component: view('SafetyProtection')
+    }, {
+      path: '/SafetyMonitoring',
+      name: 'SafetyMonitoring',
+      meta: {
+        title: '安全监测'
+      },
+      component: view('SafetyMonitoring')
     }, {
       path: '/AppAnalysis',
       name: 'running',
@@ -37,34 +44,6 @@ export default new Router({
         title: '应用运行监控'
       },
       component: view('Running')
-    }, {
-      path: '/DataAnalysis',
-      name: 'data',
-      meta: {
-        title: '数据运行监控'
-      },
-      component: view('Data')
-    }, {
-      path: '/UserAction',
-      name: 'behavior',
-      meta: {
-        title: '用户分析'
-      },
-      component: view('Behavior')
-    }, {
-      path: '/SecureDefend',
-      name: 'secure',
-      meta: {
-        title: '安全防护态势'
-      },
-      component: view('Secure')
-    }, {
-      path: '/HostStatus',
-      name: 'host',
-      meta: {
-        title: '主机运行监测'
-      },
-      component: view('Host')
     }, {
       path: '/SystemAnalysis',
       name: 'system',
@@ -80,26 +59,19 @@ export default new Router({
       },
       component: view('OperationData')
     }, {
-      path: '/SafetyProtection',
-      name: 'safetyProtection',
-      meta: {
-        title: '安全防护'
-      },
-      component: view('SafetyProtection')
-    }, {
-      path: '/SafetyMonitoring',
-      name: 'SafetyMonitoring',
-      meta: {
-        title: '安全监测'
-      },
-      component: view('SafetyMonitoring')
-    }, {
       path: '/ApiMonitoring',
       name: 'ApiMonitoring',
       meta: {
         title: 'API运行监测'
       },
       component: view('ApiMonitoring')
+    }, {
+      path: '/UserAction',
+      name: 'behavior',
+      meta: {
+        title: '用户分析'
+      },
+      component: view('Behavior')
     }]
   }]
 });
