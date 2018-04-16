@@ -1789,24 +1789,24 @@ Mock.mock(new RegExp('/topic/schoolUserStatisc/'), {
     'dataSet': [
       {
         //用户数
-        'user_num': 2.0,
+        'userNum': 2.0,
         //省份
         'country': '国家1'
       },
       {
-        'user_num': 2.0,
+        'userNum': 2.0,
         'country': '国家2'
       },
       {
-        'user_num': 99.0,
+        'userNum': 99.0,
         'country': '国家3'
       },
       {
-        'user_num': 99.0,
+        'userNum': 99.0,
         'country': '国家4'
       },
       {
-        'user_num': 99.0,
+        'userNum': 99.0,
         'country': '国家5'
       }]
   }
