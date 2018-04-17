@@ -137,10 +137,10 @@
                 <div v-for="obj in appInspectList"
                      :class="['t__tr', obj.normal === '2' ? 'state-success' : '', obj.normal === '3' ? 'state-loading' : '']"
                      flex>
-                  <span col="2">{{obj.name}}</span>
+                  <span col="2">{{obj.NAME}}</span>
                   <span col="4">{{obj.url}}</span>
                   <span col="3">{{obj.start_time}} - {{obj.end_time}}</span>
-                  <span col="1">{{obj.typeName}}</span>
+                  <span col="1">{{obj.normal}}</span>
                 </div>
               </div>
             </div>
@@ -184,10 +184,10 @@
                 <div v-for="obj in hostInspectList"
                      :class="['t__tr', obj.normal === '2' ? 'state-success' : '', obj.normal === '3' ? 'state-loading' : '']"
                      flex>
-                  <span col="2">{{obj.name}}</span>
+                  <span col="2">{{obj.NAME}}</span>
                   <span col="4">{{obj.url}}</span>
                   <span col="3">{{obj.start_time}}</span>
-                  <span col="1">{{obj.typeName}}</span>
+                  <span col="1">{{obj.normal}}</span>
                 </div>
               </div>
             </div>
