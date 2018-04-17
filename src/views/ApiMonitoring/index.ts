@@ -11,6 +11,7 @@ import NoProblem from '@components/NoProblem';
 import LineChart from '@components/LineChart';
 import create from '@utils/websocket';
 import format, {formatNumber} from '@utils/dataFormat';
+import NumCardGroup from '@components/NumCardGroup';
 import axios from '@utils/axios';
 // import '@utils/mockdb';
 
@@ -23,7 +24,8 @@ import axios from '@utils/axios';
     vLegend: Legend,
     Top5,
     NoProblem,
-    LineChart
+    LineChart,
+    NumCardGroup
   }
 })
 export default class ApiMonitoring extends Vue {
@@ -31,10 +33,10 @@ export default class ApiMonitoring extends Vue {
   apiNum = '';
   normalApiNum = '';
   wrongApiNum = '';
-  todayCallNum = '';
-  todayfailCallNum = '';
-  callNum = '';
-  failCallNum = '';
+  todayCallNum = 0;
+  todayfailCallNum = 0;
+  callNum = 0;
+  failCallNum = 0;
   last30DaysApiUseStatiscX = [];
   last30DaysApiUseStatisc = [];
   callNumApiTop5 = [];
@@ -63,10 +65,10 @@ export default class ApiMonitoring extends Vue {
 
       //接口调用情况
       const apiUseStatiscOrigin = format(json.apiUseStatisc)[0];
-      this.todayCallNum = formatNumber(apiUseStatiscOrigin.todayCallNum || 0);
-      this.todayfailCallNum = formatNumber(apiUseStatiscOrigin.todayfailCallNum || 0);
-      this.callNum = formatNumber(apiUseStatiscOrigin.callNum || 0);
-      this.failCallNum = formatNumber(apiUseStatiscOrigin.failCallNum || 0);
+      this.todayCallNum = apiUseStatiscOrigin.todayCallNum || 0;
+      this.todayfailCallNum = apiUseStatiscOrigin.todayfailCallNum || 0;
+      this.callNum = apiUseStatiscOrigin.callNum || 0;
+      this.failCallNum = apiUseStatiscOrigin.failCallNum || 0;
 
       //近30日接口调用量
       const last30DaysApiUseStatiscOrigin = format(json.last30DaysApiUseStatisc) || [];
@@ -118,7 +120,7 @@ export default class ApiMonitoring extends Vue {
       this.callApiWrongInfos = (format(json.callApiWrongInfos) || []).slice(0, 5);
 
       //接口归属统计
-      const apiAppStatiscOrigin = (format(json.apiAppStatisc) || []).slice(0, 6);
+      const apiAppStatiscOrigin = (format(json.apiAppStatisc) || []).slice(0, 5);
       this.apiAppStatisc = apiAppStatiscOrigin.map(item => {
         return {
           name: item.appName,

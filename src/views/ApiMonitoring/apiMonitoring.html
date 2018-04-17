@@ -56,7 +56,7 @@
     </Card>
     <Card class="api__app-statisc" col="3" title="接口归属分布">
       <PieChart :data="apiAppStatisc" :inner="0.5" :outer="0.9" :cols="1" :showValue="true" :showHeader="true"
-                :column="false"/>
+                :column="false"  :color="['#27A6F6', '#3AC868', '#ECB045', '#E85650', '#9D81D2']"/>
     </Card>
   </aside>
   <main class="api__main" col="4" flex-column>
@@ -69,15 +69,13 @@
           <div class="use-statisc-item" col="1" flex colcenter spacebetween>
             <div class="title">今日总调用</div>
             <div flex colcenter>
-              <span class="num">{{todayCallNum}}</span>
-              <sub class="unit">/次</sub>
+              <NumCardGroup :color="['#FFFFFF', '#B3B3B3']" :num="todayCallNum" :count="1" :size="2.5" :bgColor="'rgba(0, 0, 0, 0)'" unit="/次" />
             </div>
           </div>
           <div class="use-statisc-item error" col="1" flex colcenter spacebetween>
             <div class="title">今日失败调用</div>
             <div flex colcenter>
-              <span class="num">{{todayfailCallNum}}</span>
-              <sub class="unit">/次</sub>
+              <NumCardGroup :color="['#ED5854', '#ED5854']" :num="todayfailCallNum" :count="1" :size="2.5" :bgColor="'rgba(0, 0, 0, 0)'" unit="/次" />
             </div>
           </div>
         </div>
@@ -85,15 +83,13 @@
           <div class="use-statisc-item" col="1" flex colcenter spacebetween>
             <div class="title">累计总调用</div>
             <div flex colcenter>
-              <span class="num">{{callNum}}</span>
-              <sub class="unit">/次</sub>
+              <NumCardGroup :color="['#FFFFFF', '#B3B3B3']" :num="callNum" :count="1" :size="2.5" :bgColor="'rgba(0, 0, 0, 0)'" unit="/次" />
             </div>
           </div>
           <div class="use-statisc-item error" col="1" flex colcenter spacebetween>
             <div class="title">累计失败调用</div>
             <div flex colcenter>
-              <span class="num">{{failCallNum}}</span>
-              <sub class="unit">/次</sub>
+              <NumCardGroup :color="['#ED5854', '#ED5854']" :num="failCallNum" :count="1" :size="2.5" :bgColor="'rgba(0, 0, 0, 0)'" unit="/次" />
             </div>
           </div>
         </div>
@@ -139,7 +135,7 @@
     </Card>
     <div class="callApiWrongInfos-wrap" col="3" flex>
       <Card class="callApiWrongInfos" col="1" title="事件原因Top5">
-        <div class="t__wrap" flex-column>
+        <div v-if="callApiWrongInfos.length > 0" class="t__wrap" flex-column>
           <div class="t__head" flex>
             <span col="6">接口名称</span>
             <span col="4">发生时间</span>
@@ -149,8 +145,13 @@
               <span col="6">{{item.apiName}}</span>
               <span col="4">{{item.callTime}}</span>
             </div>
+            <div class="t__tr" flex v-for="it in (5 - callApiWrongInfos.length)">
+              <span col="6"></span>
+              <span col="4"></span>
+            </div>
           </div>
         </div>
+        <NoProblem v-else/>
       </Card>
     </div>
   </aside>

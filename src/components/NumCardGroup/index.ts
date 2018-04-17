@@ -11,6 +11,7 @@ export default class NumCardGroup extends Vue {
   @Prop() num: number;
   @Prop() unit: string;
   @Prop({default: 0}) count: number;
+  @Prop({default: 5}) size: number;
   @Prop({default: 'rgba(0, 0, 0, 0.4)'}) bgColor: string;
   @Prop({default: () => ['#f1f1f1', '#adadad']}) color: string[];
 
