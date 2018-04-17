@@ -1,5 +1,5 @@
 <div class="api height100" flex>
-  <aside class="api__leftaside" col="3" flex-column>
+  <aside class="api__leftaside" col="5" flex-column>
     <Card class="api__summary" col="2" title="接口基本信息" :date="date" :detail="true">
       <div class="summary__item" col="1" flex-column rowcenter>
         <div class="summary__item-info" flex center>
@@ -59,7 +59,7 @@
                 :column="false"  :color="['#27A6F6', '#3AC868', '#ECB045', '#E85650', '#9D81D2']"/>
     </Card>
   </aside>
-  <main class="api__main" col="4" flex-column>
+  <main class="api__main" col="8" flex-column>
     <section class="system__overview" col="5" flex-column>
       <h3 class="system__overview-heading">
         <span class="heading__title">接口调用情况</span>
@@ -112,8 +112,8 @@
             <span>接口名称</span>
             <span>调用次数/个</span>
           </div>
-          <RowProgressBarGroup col="1" flex-column spacearound :real="true" :color="['#05C180', '#008E32']"
-                               :data="callNumApiTop5" showValue="false"/>
+          <RowProgressBarGroup col="1" flex-column spacearound :color="['#05C180', '#008E32']"
+                               :data="callNumApiTop5" showValue="true"/>
         </div>
       </Card>
       <Card class="call-num-api" col="1" title="今日活跃接口Top5">
@@ -122,13 +122,13 @@
             <span>接口名称</span>
             <span>调用次数/个</span>
           </div>
-          <RowProgressBarGroup col="1" flex-column spacearound :real="true" :color="['#05C180', '#008E32']"
-                               :data="todayCallNumApiTop5" showValue="false"/>
+          <RowProgressBarGroup col="1" flex-column spacearound :color="['#05C180', '#008E32']"
+                               :data="todayCallNumApiTop5" showValue="true"/>
         </div>
       </Card>
     </div>
   </main>
-  <aside class="api__rightaside" flex-column col="2">
+  <aside class="api__rightaside" flex-column col="4">
     <Card class="last30DayTimeCostApiTop5" col="5" title="性能耗时接口Top5" subtitle="(近30日)">
       <Top5 :data="todayCallNumApiTop5"
             :showKey="[{name: 'API名称', value: 'name', flex: 2}, {name: '平均耗时/ms', value: 'value', align: 'right', flex:1}]"/>
