@@ -125,7 +125,7 @@ export default class OperationData extends Vue {
           color = colors[1];
         } else if (jksl > 10) {
           color = colors[2];
-          size += 10;
+          size = Number(size) + Number(jksl);
         }
         data.push({
           x: Math.round(360 + Math.sin(tick * i) * 100),
@@ -204,25 +204,25 @@ export default class OperationData extends Vue {
       this.dataCenterStatisc = {
         validTableNum: formatNumber(dataCenterStatiscOrigin.validTableNum || 0),
         tableNum: formatNumber(dataCenterStatiscOrigin.tableNum || 0),
-        rowNum: formatNumber(dataCenterStatiscOrigin.rowNum || 0),
+        rowNum: formatNumber(Number((dataCenterStatiscOrigin.rowNum / 10000).toFixed(2)) || 0),
       };
       //学校标准统计
       const schoolStandardStatiscOrigin = format(json.schoolStandardStatisc)[0];
       this.schoolStandardStatisc = {
         validTableNum: formatNumber(schoolStandardStatiscOrigin.validTableNum || 0),
         tableNum: formatNumber(schoolStandardStatiscOrigin.tableNum || 0),
-        rowNum: formatNumber(schoolStandardStatiscOrigin.rowNum || 0),
+        rowNum: formatNumber(Number((schoolStandardStatiscOrigin.rowNum / 10000).toFixed(2)) || 0),
       };
       //数据备份统计
       const dataBackStatiscOrigin = format(json.dataBackStatisc)[0];
       this.dataBackStatisc = {
         backTableNum: formatNumber(dataBackStatiscOrigin.backTableNum || 0),
-        backRowNum: formatNumber(dataBackStatiscOrigin.backRowNum || 0),
+        backRowNum: formatNumber(Number((dataBackStatiscOrigin.backRowNum / 10000).toFixed(2)) || 0),
       };
 
       //待处理问题总数
       const problemTotalNumStatisc = format(json.problemTotalNumStatisc)[0];
-      this.problemTotalNum = formatNumber(problemTotalNumStatisc.problemTotalNum || 0);
+      this.problemTotalNum = formatNumber(Number((problemTotalNumStatisc.problemTotalNum / 10000).toFixed(2)) || 0);
 
       //待处理问题总数
       this.problemStatisc = format(json.problemStatisc);
@@ -234,8 +234,8 @@ export default class OperationData extends Vue {
       const s = [];
       dataConsLatest30DaysOrigin.forEach(data => {
         x.push(data.statisc_time.slice(5));
-        t.push(data.total_added);
-        s.push(data.through_put);
+        t.push(((data.total_added || 0) / 10000).toFixed(2));
+        s.push(((data.through_put || 0) / 10000).toFixed(2));
       });
       this.dataConsLatest30DaysX = x;
       this.dataConsLatest30Days = [{

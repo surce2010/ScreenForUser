@@ -61,5 +61,5 @@ export function gradient(start, end, steps, gamma = 1) {
 }
 
 export function formatNumber(num: number) {
-  return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+  return (num || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }

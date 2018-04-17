@@ -81,7 +81,7 @@ export default class LineChart extends Vue {
       yAxis: [
         {
           type: 'value',
-          name: '总记录数日增量/条',
+          name: '总记录数日增量/万条',
           position: 'left',
           // boundaryGap: [0, '50%'],
           nameTextStyle: {
@@ -106,7 +106,7 @@ export default class LineChart extends Vue {
           }
         }, {
           type: 'value',
-          name: '数据吞吐量/条',
+          name: '数据吞吐量/万条',
           position: 'right',
           // boundaryGap: [0, '50%'],
           nameTextStyle: {
