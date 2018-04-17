@@ -40,7 +40,7 @@ class WebSocketWrap {
   }
 
   private sub() {
-    this.downtime();
+    // this.downtime();
     this.subscription = this.client.subscribe(this.topic, response => {
       const json = JSON.parse(response.body);
       if (json.data) {
@@ -48,10 +48,10 @@ class WebSocketWrap {
       } else {
         this.callback(json);
       }
-      if (this.timer) {
-        clearTimeout(this.timer);
-      }
-      this.downtime();
+      // if (this.timer) {
+      //   clearTimeout(this.timer);
+      // }
+      // this.downtime();
     })
   }
 

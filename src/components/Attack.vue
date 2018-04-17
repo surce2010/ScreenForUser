@@ -214,7 +214,7 @@
             itemStyle: {
               normal: {
                 areaColor: '#1B78DD',
-                borderColor: '#ffffff'
+                borderColor: 'rgba(255, 255, 255, 0.5)'
               },
               emphasis: {
                 areaColor: '#2a333d'

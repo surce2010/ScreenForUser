@@ -76,7 +76,7 @@ export default class Running extends Vue {
   loop = 0;
   loopList = [];
   color = ['#4BC969', '#3B8EF0'];
-  intervalTime = 60000; //切换设备的间隔时间
+  intervalTime = 300000; //切换设备的间隔时间
 
   get appCategoryTopChart() {
     let sum = 0;

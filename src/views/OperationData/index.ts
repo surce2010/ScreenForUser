@@ -225,7 +225,7 @@ export default class OperationData extends Vue {
       this.problemTotalNum = formatNumber(Number((problemTotalNumStatisc.problemTotalNum / 10000).toFixed(2)) || 0);
 
       //待处理问题总数
-      this.problemStatisc = format(json.problemStatisc);
+      this.problemStatisc = format(json.problemStatisc).slice(0, 6);
 
       //近30天数据量
       const dataConsLatest30DaysOrigin = format(json.dataConsLatest30Days);

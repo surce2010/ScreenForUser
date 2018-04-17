@@ -50,7 +50,7 @@ export default class SafetyProtection extends Vue {
   timer = null;
   intervalIndex = null;
   displayDate = 'today';
-  intervalTime = 5000;
+  intervalTime = 300000;
   attackMode = [];
   foreignAttack = [];
 
@@ -125,7 +125,7 @@ export default class SafetyProtection extends Vue {
     return this.attackedApps.today_statis.map(item => ({
       app_name: item.app_name,
       count: item.count,
-      normal_count: item.normal_count
+      normal_count: item.normal
     }))
   }
 
@@ -133,7 +133,7 @@ export default class SafetyProtection extends Vue {
     return this.attackedApps.total_statis.map(item => ({
       app_name: item.app_name,
       count: item.count,
-      normal_count: item.normal_count
+      normal_count: item.normal
     }))
   }
 

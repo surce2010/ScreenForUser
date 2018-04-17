@@ -107,7 +107,7 @@
           <tr v-for="(item, index) in attackedAppsToday" :key="index">
             <td>{{item.app_name}}</td>
             <td>{{item.count}}</td>
-            <td>{{item.normal}}</td>
+            <td>{{item.normal_count}}</td>
           </tr>
           <tr v-for="i in (5 - attackedAppsToday.length)" :key="index">
             <td>&nbsp;</td>
@@ -126,7 +126,7 @@
           <tr v-for="(item, index) in attackedAppsTotal" :key="index">
             <td>{{item.app_name}}</td>
             <td>{{item.count}}</td>
-            <td>{{item.normal}}</td>
+            <td>{{item.normal_count}}</td>
           </tr>
           <tr v-for="i in (5 - attackedAppsTotal.length)" :key="index">
             <td>&nbsp;</td>
@@ -178,7 +178,7 @@
         <div class="attacked-mode-content" col="1">
           <table>
             <tr>
-              <th width="60%">方式</th>
+              <th width="60%">来源</th>
               <th width="40%">攻击数</th>
             </tr>
             <tr v-for="(item, index) in foreignAttack" :key="index">
