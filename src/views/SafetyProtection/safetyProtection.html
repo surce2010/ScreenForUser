@@ -107,7 +107,7 @@
           <tr v-for="(item, index) in attackedAppsToday" :key="index">
             <td>{{item.app_name}}</td>
             <td>{{item.count}}</td>
-            <td>{{item.normal_count}}</td>
+            <td>{{item.normal}}</td>
           </tr>
           <tr v-for="i in (5 - attackedAppsToday.length)" :key="index">
             <td>&nbsp;</td>
@@ -126,7 +126,7 @@
           <tr v-for="(item, index) in attackedAppsTotal" :key="index">
             <td>{{item.app_name}}</td>
             <td>{{item.count}}</td>
-            <td>{{item.normal_count}}</td>
+            <td>{{item.normal}}</td>
           </tr>
           <tr v-for="i in (5 - attackedAppsTotal.length)" :key="index">
             <td>&nbsp;</td>

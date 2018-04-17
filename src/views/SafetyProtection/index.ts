@@ -58,7 +58,7 @@ export default class SafetyProtection extends Vue {
     create().subscribe('/getCoreAppsBigScreen', {
       login: this.$route.query.schoolCode,
       token: this.$route.query.token,
-      interfaceName: 'bigScreen-getSafetyProtectBigScreen'
+      interfaceName: 'bigScreen-getSafetyProtectBigScreenNew'
     }, json => {
       if (!json) {
         return;
