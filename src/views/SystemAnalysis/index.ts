@@ -123,7 +123,7 @@ export default class SystemAnalysis extends Vue {
     const pv = [];
     const uv = [];
     last_30_days_pvuv.forEach(d => {
-      x.push((d.date || '').substr(5));
+      x.push((d.statis_date || '').substr(5));
       pv.push(d.pv);
       uv.push(d.uv);
     });
