@@ -75,16 +75,16 @@
           align-items: baseline;
           > span:nth-of-type(1) {
             @include gradient(#51EC75, #028550);
-            font-size: 3em;
+            font-size: 2.6em;
           }
           > span:nth-of-type(2) {
             margin: 0 0.2em;
-            font-size: 3em;
+            font-size: 2.6em;
             opacity: 0.8;
           }
           > span:nth-of-type(3) {
             @include gradient(#61E2FA, #1C5DF7);
-            font-size: 3em;
+            font-size: 2.6em;
           }
           > span:nth-of-type(4) {
             margin-left: 0.2em;

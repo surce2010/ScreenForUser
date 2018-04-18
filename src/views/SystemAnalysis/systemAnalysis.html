@@ -53,7 +53,7 @@
         <LineChart :color="color" :x="last30DaysPvuvX" :data="last30DaysPvuv"/>
       </div>
     </section>
-    <Card class="provider__distribute" col="2" title="来访用户运营商分布" subtitle="(近30日)" :row="false">
+    <Card class="provider__distribute" col="2" title="访问量高的业务系统Top5" subtitle="(近30日)" :row="false">
       <div class="provider__distribute-top2" flex>
         <div col="1" flex colcenter v-for="item in pvAppTop2">
           <div col="5">
@@ -110,7 +110,7 @@
           <sub>(近30日)</sub>
         </h3>
         <div col="1" flex-column>
-          <RowProgressBarGroup col="1" flex-column spacearound :real="true" :color="['#05C180', '#008E32']" :data="browserPvDistribute" showValue="false" />
+          <RowProgressBarGroup col="1" flex-column spacearound :real="false" :color="['#05C180', '#008E32']" :data="browserPvDistribute" showValue="true" />
         </div>
       </div>
     </div>

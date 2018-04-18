@@ -27,7 +27,7 @@ export default new Router({
       path: '/SafetyProtection',
       name: 'safetyProtection',
       meta: {
-        title: '安全防护'
+        title: '安全防护态势'
       },
       component: view('SafetyProtection')
     }, {
@@ -41,7 +41,7 @@ export default new Router({
       path: '/AppAnalysis',
       name: 'running',
       meta: {
-        title: '应用运行监控'
+        title: '应用运行监测'
       },
       component: view('Running')
     }, {
@@ -55,7 +55,7 @@ export default new Router({
       path: '/OperationData',
       name: 'operation',
       meta: {
-        title: '运行数据分析'
+        title: '数据运行监测'
       },
       component: view('OperationData')
     }, {
@@ -69,7 +69,7 @@ export default new Router({
       path: '/UserAction',
       name: 'behavior',
       meta: {
-        title: '用户分析'
+        title: '用户行为监测'
       },
       component: view('Behavior')
     }]
