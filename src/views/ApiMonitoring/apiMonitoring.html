@@ -100,9 +100,9 @@
       <div class="system__overview-pvuv" col="2">
         <div class="running__outattack-legend">
           <span><span class="running__legend" style="background:linear-gradient(90deg, #05C180, #008E32);"></span><span>成功调用</span></span>
-          <span><span class="running__legend" style="background:linear-gradient(90deg, #5FF2F8, #0979B9);"></span><span>失败调用</span></span>
+          <span><span class="running__legend" style="background:linear-gradient(90deg, #FF2A2A, #E30000 );"></span><span>失败调用</span></span>
         </div>
-        <LineChart :color="color" :x="last30DaysApiUseStatiscX" :data="last30DaysApiUseStatisc"/>
+        <LineChart :color="['#05C180', '#FF2A2A']" :x="last30DaysApiUseStatiscX" :data="last30DaysApiUseStatisc"/>
       </div>
     </section>
     <div class="behavior__stuff" col="3" flex>

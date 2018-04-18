@@ -290,7 +290,10 @@ export default class Behavior extends Vue {
       const teacherNetworkStatisc = format(json.teacherNetworkStatisc);
       temp = [];
       sum = 0;
-      studentNetworkStatisc.forEach(d => sum += d.user_num);
+      for (let i = 0; i < networkX.length; i++) {
+        const finded = studentNetworkStatisc.find(d => d.network_provider === networkX[i]);
+        sum += finded ? finded.user_num : 0;
+      }
       for (let i = 0; i < networkX.length; i++) {
         const finded = studentNetworkStatisc.find(d => d.network_provider === networkX[i]);
         temp.push({
@@ -302,7 +305,10 @@ export default class Behavior extends Vue {
 
       temp = [];
       sum = 0;
-      teacherNetworkStatisc.forEach(d => sum += d.user_num);
+      for (let i = 0; i < networkX.length; i++) {
+        const finded = teacherNetworkStatisc.find(d => d.network_provider === networkX[i]);
+        sum += finded ? finded.user_num : 0;
+      }
       for (let i = 0; i < networkX.length; i++) {
         const finded = teacherNetworkStatisc.find(d => d.network_provider === networkX[i]);
         temp.push({

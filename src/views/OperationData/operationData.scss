@@ -154,6 +154,7 @@
           min-width: 33.3333%;
           max-width: 33.3333%;
           .item-name {
+            font-size: 0.8em;
             text-align: right;
             white-space: nowrap;
             //text-overflow: ellipsis;
@@ -162,7 +163,7 @@
           .num {
             margin-left: 0.4em;
             @include gradient(#FFFFFF, #B3B3B3);
-            font-size: 2.4em;
+            font-size: 2em;
             text-align: left;
             white-space: nowrap;
             //text-overflow: ellipsis;
