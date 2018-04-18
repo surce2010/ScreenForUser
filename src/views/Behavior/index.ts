@@ -114,45 +114,43 @@ export default class Behavior extends Vue {
       let total = this.accountActive.student + this.accountActive.teacher;
       this.accountActive.total = formatNumber(total);
 
-      const x = ['<0.5h', '0.5-1h', '1-2h', '2-3h', '>3h'];
-
-      const studentOnlineTimeStatisc = format(json.studentOnlineTimeStatisc);
+      const x = ['<5次', '5-10次', '10-15次', '15-20次', '>20次'];
+      const studentOnlineTimeStatisc = format(json.studentLoginCountStatisc);
       let sum = 0;
       let temp = [];
       const student = [];
       studentOnlineTimeStatisc.forEach(d => sum += d.user_num);
       for (let i = 0; i < x.length; i++) {
-        let filter = studentOnlineTimeStatisc.filter(d => d.online_time_grade === x[i])
+        let filter = studentOnlineTimeStatisc.filter(d => d.login_count_level === x[i])
         if (filter.length === 0) {
-          filter = [{online_time_grade: x[i], user_num: 0}];
+          filter = [{login_count_level: x[i], user_num: 0}];
         }
         temp = temp.concat(filter)
       }
       for (let i = 0; i < temp.length; i++) {
-        const index = x.indexOf(temp[i].online_time_grade);
         student.push({
           value: parseFloat((temp[i].user_num / (sum || 1) * 100).toFixed(1)),
-          name: temp[i].online_time_grade
+          name: temp[i].login_count_level
         })
       }
       this.onlineStudent = student;
 
-      const teacherOnlineTimeStatisc = format(json.teacherOnlineTimeStatisc);
+      const teacherOnlineTimeStatisc = format(json.teacherLoginCountStatisc);
       sum = 0;
       temp = [];
       let teacher = []
       teacherOnlineTimeStatisc.forEach(d => sum += d.user_num);
       for (let i = 0; i < x.length; i++) {
-        let filter = teacherOnlineTimeStatisc.filter(d => d.online_time_grade === x[i])
+        let filter = teacherOnlineTimeStatisc.filter(d => d.login_count_level === x[i])
         if (filter.length === 0) {
-          filter = [{online_time_grade: x[i], user_num: 0}];
+          filter = [{login_count_level: x[i], user_num: 0}];
         }
         temp = temp.concat(filter)
       }
       for (let i = 0; i < temp.length; i++) {
         teacher.push({
           value: parseFloat((temp[i].user_num / (sum || 1) * 100).toFixed(1)),
-          name: temp[i].online_time_grade
+          name: temp[i].login_count_level
         })
       }
       this.onlineTeacher = teacher;
@@ -287,16 +285,9 @@ export default class Behavior extends Vue {
       }
 
       //用户常用运营商
-      let networkX = [];
-      const studentNetworkStatisc = format(json.studentNetworkStatisc).slice(0, 3);
-      networkX = studentNetworkStatisc.map(d => d.network_provider);
-      const teacherNetworkStatisc = format(json.teacherNetworkStatisc).slice(0, 3);
-      teacherNetworkStatisc.forEach(d => {
-        if (networkX.indexOf(d.network_provider) === -1) {
-          networkX.push(d.network_provider)
-        }
-      });
-      this.network.x = networkX; //所有常用运行商名称
+      let networkX = ['移动', '电信', '联通'];
+      const studentNetworkStatisc = format(json.studentNetworkStatisc);
+      const teacherNetworkStatisc = format(json.teacherNetworkStatisc);
       temp = [];
       sum = 0;
       studentNetworkStatisc.forEach(d => sum += d.user_num);

@@ -28,7 +28,7 @@ import axios from "@utils/axios";
 })
 export default class SafetyMonitoring extends Vue {
   timer = null;
-  intervalTime = 5000;
+  intervalTime = 300000;
   inspectSource = 'app';
   app_inspect = {
     total_app: 0,

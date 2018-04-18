@@ -17,7 +17,7 @@
       </div>
     </Card>
     <Card class="behavior__online" col="3" title="活跃用户访问次数分布" subtitle="(近30日)">
-      <TwoPieChart :outer="0.9" :inner="0.55" :legend="['< 0.5h', '0.5-1h', '1-2h', '2-3h', '> 3h']"
+      <TwoPieChart :outer="0.9" :inner="0.55" :legend="['<5次', '5-10次', '10-15次', '15-20次', '>20次']"
                    :data="onlineStudent" :data2="onlineTeacher"/>
     </Card>
     <Card class="behavior__type" col="3" title="用户常用登录方式">
@@ -104,7 +104,7 @@
       </div>
     </Card>
     <Card class="behavior__platform" col="3" title="用户常用运营商">
-      <TwoPieChart :outer="0.9" :inner="0.55" :color="['#9A7DD1', '#419EF8', '#42c66c']" :legend="network.x"
+      <TwoPieChart :outer="0.9" :inner="0.55" :color="['#9A7DD1', '#419EF8', '#42c66c']" :legend="['移动', '电信', '联通']"
                    :data="network.student" :data2="network.teacher"/>
     </Card>
   </aside>

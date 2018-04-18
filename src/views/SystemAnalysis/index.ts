@@ -192,7 +192,7 @@ export default class SystemAnalysis extends Vue {
     const browser_pv_distribute = json.browser_pv_distribute;
     this.browserPvDistribute = browser_pv_distribute.map(d => {
       return {
-        name: d.name,
+        name: d.browser,
         value: d.count
       }
     });
