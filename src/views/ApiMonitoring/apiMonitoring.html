@@ -134,7 +134,7 @@
             :showKey="[{name: 'API名称', value: 'name', flex: 2}, {name: '平均耗时/ms', value: 'value', align: 'right', flex:1}]"/>
     </Card>
     <div class="callApiWrongInfos-wrap" col="3" flex>
-      <Card class="callApiWrongInfos" col="1" title="事件原因Top5">
+      <Card class="callApiWrongInfos" col="1" title="异常接口Top5">
         <div v-if="callApiWrongInfos.length > 0" class="t__wrap" flex-column>
           <div class="t__head" flex>
             <span col="6">接口名称</span>

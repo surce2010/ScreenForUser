@@ -33,6 +33,7 @@ export default class LineChart extends Vue {
         name: d.name,
         type: d.type,
         data: d.value,
+        barWidth: 8,
         yAxisIndex: d.yAxisIndex
       });
     });
