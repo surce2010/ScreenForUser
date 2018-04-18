@@ -100,7 +100,7 @@
       </div>
       <div class="abnormal_app-wrap" flex spacearound>
         <div :class="['abnormal_app', inspectSource === 'app' ? 'current' : '']">
-          <div class="abnormal_app-info" flex>
+          <div class="abnormal_app-info" flex v-if="appAbnormalList.length">
             <div class="abnormal_app-number" flex-column center>
               <span class="title">异常应用</span>
               <div flex center>
@@ -147,7 +147,7 @@
           </div>
         </div>
         <div :class="['abnormal_app', inspectSource === 'host' ? 'current' : '']">
-          <div class="abnormal_app-info" flex>
+          <div class="abnormal_app-info" flex v-if="hostAbnormalList.length">
             <div class="abnormal_app-number" flex-column center>
               <span class="title">异常应用</span>
               <div flex center>

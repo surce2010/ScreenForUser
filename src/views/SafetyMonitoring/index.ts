@@ -154,7 +154,7 @@ export default class SafetyMonitoring extends Vue {
   }
 
   get appInspectList() {
-    return this.app_inspect.inspect_list.slice(0, 8).map(item => {
+    return this.app_inspect.inspect_list.map(item => {
       if (item.normal === '1') {
         item.typeName = '异常'
       } else if (item.normal === '2') {
@@ -173,7 +173,7 @@ export default class SafetyMonitoring extends Vue {
   }
 
   get hostInspectList() {
-    return this.host_inspect.inspect_list.slice(0, 8).map(item => {
+    return this.host_inspect.inspect_list.map(item => {
       if (item.normal === '1') {
         item.typeName = '异常'
       } else if (item.normal === '2') {

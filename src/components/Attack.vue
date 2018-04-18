@@ -213,7 +213,7 @@
             silent: true,
             itemStyle: {
               normal: {
-                areaColor: '#1B78DD',
+                areaColor: '#0E4078',
                 borderColor: 'rgba(255, 255, 255, 0.5)'
               },
               emphasis: {

@@ -132,14 +132,14 @@
       <LineBarChart col="1" :color="color" :x="dataConsLatest30DaysX" :data="dataConsLatest30Days"></LineBarChart>
     </Card>
     <div class="operation__rightaside-todo" flex>
-      <div class="todo-summary" col="2" flex center>
+      <div class="todo-summary" col="3" flex center>
         <div>待处理问题</div>
         <div>
           <span class="num">{{problemTotalNum}}</span>
           <span>/万件</span>
         </div>
       </div>
-      <div class="todo-type" col="3" flex>
+      <div class="todo-type" col="5" flex>
         <div class="todo-type-item" col="1" flex center v-for="obj in problemStatisc">
           <span col="1" class="item-name">{{obj.problemType}}</span>
           <span col="1" :class="['num', obj.problemNum && 'warning']">{{obj.problemNum}}</span>
