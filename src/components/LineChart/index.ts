@@ -25,7 +25,7 @@ export default class LineChart extends Vue {
       return {
         name: data.name,
         type: 'line',
-        stack: 'one',
+        // stack: 'one',
         showSymbol: false,
         smooth: this.smooth,
         areaStyle: { normal: {opacity: 0.2} },
