@@ -130,7 +130,7 @@
   </main>
   <aside class="api__rightaside" flex-column col="4">
     <Card class="last30DayTimeCostApiTop5" col="5" title="性能耗时接口Top5" subtitle="(近30日)">
-      <Top5 :data="todayCallNumApiTop5"
+      <Top5 :data="last30DayTimeCostApiTop5"
             :showKey="[{name: 'API名称', value: 'name', flex: 2}, {name: '平均耗时/ms', value: 'value', align: 'right', flex:1}]"/>
     </Card>
     <div class="callApiWrongInfos-wrap" col="3" flex>

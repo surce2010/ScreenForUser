@@ -99,7 +99,7 @@ export default class ApiMonitoring extends Vue {
       });
 
       //今日高频调用接口Top5
-      const todayCallNumApiTop5Origin = format(json.callNumApiTop5) || [];
+      const todayCallNumApiTop5Origin = format(json.todayCallNumApiTop5) || [];
       this.todayCallNumApiTop5 = todayCallNumApiTop5Origin.map(item => {
         return {
           name: item.apiName,
@@ -108,7 +108,7 @@ export default class ApiMonitoring extends Vue {
       });
 
       //近30日耗时接口Top5
-      const last30DayTimeCostApiTop5Origin = format(json.callNumApiTop5) || [];
+      const last30DayTimeCostApiTop5Origin = format(json.last30DayTimeCostApiTop5) || [];
       this.last30DayTimeCostApiTop5 = last30DayTimeCostApiTop5Origin.map(item => {
         return {
           name: item.apiName,
