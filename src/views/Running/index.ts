@@ -138,14 +138,14 @@ export default class Running extends Vue {
       this.studentAppTop4PC = pc.studentAppTop4.map(d => {
         return {
           name: d.APP_NAME,
-          url: `http://www.campusphere.cn/appcenter_2.2/umanager/getImg144?appID=${d.APP_ID}&version=${d.VERSION}&schoolID=${d.schoolid}`
+          url: d.iconUrl
         }
       });
       pc.teacherAppTop4 = format(json.pc.teacherAppTop4);//累计教师应用Top5
       this.teacherAppTop4PC = pc.teacherAppTop4.map(d => {
         return {
           name: d.APP_NAME,
-          url: `http://www.campusphere.cn/appcenter_2.2/umanager/getImg144?appID=${d.APP_ID}&version=${d.VERSION}&schoolID=${d.schoolid}`
+          url: d.iconUrl
         }
       });
       pc.todayAccessStatisc = format(json.pc.todayAccessStatisc)[0];//今日访问统计
@@ -212,14 +212,14 @@ export default class Running extends Vue {
       this.studentAppTop4Mobile = mobile.studentAppTop4.map(d => {
         return {
           name: d.APP_NAME,
-          url: `http://www.campusphere.cn/appcenter_2.2/umanager/getImg144?appID=${d.APP_ID}&version=${d.VERSION}&schoolID=${d.schoolid}`
+          url: d.iconUrl
         }
       });
       mobile.teacherAppTop4 = format(json.mobile.teacherAppTop4);//累计教师应用Top5
       this.teacherAppTop4Mobile = mobile.teacherAppTop4.map(d => {
         return {
           name: d.APP_NAME,
-          url: `http://www.campusphere.cn/appcenter_2.2/umanager/getImg144?appID=${d.APP_ID}&version=${d.VERSION}&schoolID=${d.schoolid}`
+          url: d.iconUrl
         }
       });
       mobile.todayAccessStatisc = format(json.mobile.todayAccessStatisc)[0];//今日访问统计

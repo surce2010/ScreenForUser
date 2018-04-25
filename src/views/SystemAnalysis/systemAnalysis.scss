@@ -265,12 +265,12 @@
             .num {
               font-size: 1em;
             }
-            @include breakpoint(max-width 1560px) {
-              margin-bottom: 0.2em;
-            }
           }
           .progressbarrowgroup__title {
             text-align: right;
+            > div {
+              font-size: 1em;
+            }
           }
         }
       }

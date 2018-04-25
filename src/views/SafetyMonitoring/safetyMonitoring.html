@@ -129,8 +129,8 @@
             <div class="t__wrap" flex-column>
               <div class="t__head" flex>
                 <span col="2">应用名称</span>
-                <span col="4">URL</span>
-                <span col="3">检测起止时间</span>
+                <span col="3">URL</span>
+                <span col="5">检测起止时间</span>
                 <span col="1">状态</span>
               </div>
               <div class="t__body" flex-column>
@@ -138,8 +138,8 @@
                      :class="['t__tr', obj.normal === '2' ? 'state-success' : '', obj.normal === '3' ? 'state-loading' : '']"
                      flex>
                   <span col="2">{{obj.NAME}}</span>
-                  <span col="4">{{obj.url}}</span>
-                  <span col="3">{{obj.start_time}} - {{obj.end_time}}</span>
+                  <span col="3">{{obj.url}}</span>
+                  <span col="5">{{obj.start_time}} - {{obj.end_time}}</span>
                   <span col="1">{{obj.normal}}</span>
                 </div>
               </div>
