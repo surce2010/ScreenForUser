@@ -163,7 +163,7 @@ export default class SystemAnalysis extends Vue {
         value: china_pv_distribute[i].count
       })
     }
-    this.opts.visualMap.max = max || 100;
+    this.opts.visualMap.max = 100;
     this.opts.series[0].data = temp;
 
     //境外访问量分布
