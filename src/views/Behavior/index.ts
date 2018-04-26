@@ -265,7 +265,7 @@ export default class Behavior extends Vue {
         val4 = 0;
       } else {
         this.accountSafe.student = [
-          val1, val2, val3, 100 - val1 - val2 - val3
+          100 - val1 - val2 - val3, val3, val2, val1
           // Math.floor(none.user_num / sum * 100) || 0,
         ]
       }
@@ -285,7 +285,7 @@ export default class Behavior extends Vue {
         val4 = 0;
       } else {
         this.accountSafe.teacher = [
-          val1, val2, val3, 100 - val1 - val2 - val3
+          100 - val1 - val2 - val3, val3, val2, val1
           // Math.floor(none.user_num / sum * 100) || 0,
         ]
       }

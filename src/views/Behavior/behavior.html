@@ -4,7 +4,7 @@
       <div col="4" flex colcenter style="margin-top: -1.5em;">
         <div col="2" class="title">累计账号</div>
         <div col="3" class="total-num"><span class="num">{{accountActive.total}}</span><span col="1"
-                                                                                             class="unit">条</span></div>
+                                                                                             class="unit">个</span></div>
       </div>
       <div col="3" flex-column>
         <div col="1">
@@ -83,16 +83,16 @@
     <Card class="behavior__secure" col="3" title="账号密码安全">
       <div flex-column rowcenter>
         <vLegend col="1" :data="[{
-          name: '强',
+          name: '无',
           value: safeLegendColor[0]
         }, {
-          name: '中',
+          name: '弱',
           value: safeLegendColor[1]
         }, {
-          name: '弱',
+          name: '中',
           value: safeLegendColor[2]
         }, {
-          name: '无安全等级',
+          name: '强',
           value: safeLegendColor[3]
         }]"/>
         <div col="1">
