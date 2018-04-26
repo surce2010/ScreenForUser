@@ -74,6 +74,11 @@
             width: 0.6em;
             height: 0.6em;
           }
+          .legendpie__item-value {
+            font-size: 1.5em;
+            font-family: DINCondensed;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          }
         }
       }
     }
