@@ -167,8 +167,8 @@
           <span><span class="running__legend"
                       style="background:linear-gradient(90deg, #5FF2F8, #0979B9);"></span><span>老师</span></span>
         </div>
-        <ProgressBarGroup :data="todayTop5AppForS" :color="['#05C180', '#008E32']"/>
-        <ProgressBarGroup :data="todayTop5AppForT" :color="['#5FF2F8', '#0979B9']"/>
+        <ProgressBarGroup col="1" :data="todayTop5AppForS" :color="['#05C180', '#008E32']"/>
+        <ProgressBarGroup col="1" :data="todayTop5AppForT" :color="['#5FF2F8', '#0979B9']"/>
       </div>
       <NoProblem title="暂无活跃应用" v-else/>
     </Card>

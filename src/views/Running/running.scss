@@ -239,4 +239,13 @@
       }
     }
   }
+  .running__rightaside {
+    .progressbargroup {
+      display: flex;
+      flex-direction: column;
+      .progressbar {
+        flex: 1 0 0;
+      }
+    }
+  }
 }
