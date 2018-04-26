@@ -159,28 +159,36 @@
     }
   }
   .behavior__browser {
-    .progressbargroup {
-      margin: 0 0.5em;
-    }
-    @include breakpoint($big) {
+    .behavior__browser-item {
+      display: flex;
+      flex-direction: column;
       .progressbargroup {
-        margin-top: 1.5em;
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 0;
+        margin: 0 0.5em;
       }
-    }
-    .progressbar {
-      margin-bottom: 0;
-      margin-top: 0.5em;
-      .progressbar__bar {
-        height: 0.8em;
-      }
-      @include breakpoint($medium) {
-        margin-top: 0.3em;
-        .progressbar__bar {
-          height: 0.6em;
+      @include breakpoint($big) {
+        .progressbargroup {
+          margin-top: 1.5em;
         }
       }
-      .num {
-        display: none;
+      .progressbar {
+        flex: 1 0 0;
+        margin-bottom: 0;
+        margin-top: 0.5em;
+        .progressbar__bar {
+          height: 0.8em;
+        }
+        @include breakpoint($medium) {
+          margin-top: 0.3em;
+          .progressbar__bar {
+            height: 0.6em;
+          }
+        }
+        .num {
+          display: none;
+        }
       }
     }
   }

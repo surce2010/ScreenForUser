@@ -48,11 +48,11 @@
                      :data="clientStudent" :data2="clientTeacher"/>
       </Card>
       <Card class="behavior__browser" col="1" title="用户常用浏览器Top5">
-        <div>
+        <div class="behavior__browser-item">
           <IconItem role="student" :column="false"/>
           <ProgressBarGroup :data="browserTop5.student" :color="['#05C180', '#008E32']"/>
         </div>
-        <div>
+        <div class="behavior__browser-item">
           <IconItem role="teacher" :column="false"/>
           <ProgressBarGroup :data="browserTop5.teacher" :color="['#5FF2F8', '#0979B9']"/>
         </div>
@@ -104,7 +104,7 @@
       </div>
     </Card>
     <Card class="behavior__platform" col="3" title="用户常用运营商">
-      <TwoPieChart :outer="0.9" :inner="0.55" :color="['#9A7DD1', '#419EF8', '#42c66c']" :legend="['移动', '电信', '联通']"
+      <TwoPieChart :outer="0.9" :inner="0.55" :color="['#9A7DD1', '#419EF8', '#42C66C', '#E3544C', '#E6B03F']" :legend="['移动', '电信', '联通', '校内', '其他']"
                    :data="network.student" :data2="network.teacher"/>
     </Card>
   </aside>

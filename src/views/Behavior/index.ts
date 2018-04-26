@@ -30,8 +30,14 @@ export default class Behavior extends Vue {
     },
     visualMap: {
       show: false,
+      min: 0,
       max: 100,
-      color: ['#1D4ADC', '#C1CDDD']
+      text:['High','Low'],
+      realtime: false,
+      calculable: true,
+      inRange: {
+        color: ['#C1CDDD', '#1D4ADC']
+      }
     },
     series: [{
       name: '用户地域分布',
@@ -285,14 +291,19 @@ export default class Behavior extends Vue {
       }
 
       //用户常用运营商
-      let networkX = ['移动', '电信', '联通'];
+      let other;
+      let networkX = ['移动', '电信', '联通', '校内地址'];
       const studentNetworkStatisc = format(json.studentNetworkStatisc);
       const teacherNetworkStatisc = format(json.teacherNetworkStatisc);
       temp = [];
       sum = 0;
-      for (let i = 0; i < networkX.length; i++) {
-        const finded = studentNetworkStatisc.find(d => d.network_provider === networkX[i]);
-        sum += finded ? finded.user_num : 0;
+      other = 0;
+      for (let i = 0; i < studentNetworkStatisc.length; i++) {
+        sum += studentNetworkStatisc[i].user_num;
+        const flag = networkX.some(d => d === studentNetworkStatisc[i].network_provider);
+        if (!flag) {
+          other += studentNetworkStatisc[i].user_num;
+        }
       }
       for (let i = 0; i < networkX.length; i++) {
         const finded = studentNetworkStatisc.find(d => d.network_provider === networkX[i]);
@@ -301,13 +312,21 @@ export default class Behavior extends Vue {
           value: finded ? Math.round(finded.user_num / (sum || 1) * 100) : 0
         })
       }
+      temp.push({
+        name: '其他',
+        value: Math.round(other / (sum || 1) * 100)
+      });
       this.network.student = temp;
 
       temp = [];
       sum = 0;
-      for (let i = 0; i < networkX.length; i++) {
-        const finded = teacherNetworkStatisc.find(d => d.network_provider === networkX[i]);
-        sum += finded ? finded.user_num : 0;
+      other = 0;
+      for (let i = 0; i < teacherNetworkStatisc.length; i++) {
+        sum += teacherNetworkStatisc[i].user_num;
+        const flag = networkX.some(d => d === teacherNetworkStatisc[i].network_provider);
+        if (!flag) {
+          other += teacherNetworkStatisc[i].user_num;
+        }
       }
       for (let i = 0; i < networkX.length; i++) {
         const finded = teacherNetworkStatisc.find(d => d.network_provider === networkX[i]);
@@ -316,6 +335,10 @@ export default class Behavior extends Vue {
           value: finded ? Math.round(finded.user_num / (sum || 1) * 100) : 0
         })
       }
+      temp.push({
+        name: '其他',
+        value: Math.round(other / (sum || 1) * 100)
+      });
       this.network.teacher = temp;
 
       const userAreaStatisc = format(json.userAreaStatisc);
@@ -331,7 +354,7 @@ export default class Behavior extends Vue {
           value: userAreaStatisc[i].user_num
         })
       }
-      this.opts.visualMap.max = max || 100;
+      this.opts.visualMap.max = 100;
       this.opts.series[0].data = temp;
 
       const userForeignAreaTop5Statisc = format(json.userForeignAreaTop5Statisc).slice(0, 5);
